@@ -8,6 +8,8 @@ export const THEME_MODES: ThemeMode[] = ['system', 'light', 'dark'];
 
 // Die Struktur der Settings
 export interface AppSettings {
+  // Legacy: the folder for the activity file could be chosen in older versions. A path saved then
+  // stays in use (no UI to change it any more) so that data in that folder never disappears.
   activityStoreDirPath: string | null; // null = Standard (userData)
   allowPrerelease: boolean;
   autoLaunchEnabled: boolean; // Neue Eigenschaft für Auto-Start
@@ -96,22 +98,6 @@ export class SettingsManager {
     } catch (error) {
       console.error('[Settings] Fehler beim Speichern der Einstellungen:', error);
     }
-  }
-
-  /**
-   * Gibt den aktuellen Wert für activityStoreDirPath zurück
-   */
-  getActivityStoreDirPath(): string | null {
-    return this.settings.activityStoreDirPath;
-  }
-
-  /**
-   * Setzt einen neuen Wert für activityStoreDirPath
-   * @param dirPath Der neue Verzeichnispfad (oder null für Standard)
-   */
-  setActivityStoreDirPath(dirPath: string | null): void {
-    this.settings.activityStoreDirPath = dirPath;
-    this.saveSettings();
   }
 
   /**

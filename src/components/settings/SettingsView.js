@@ -6,7 +6,6 @@ import Button from '../ui/Button';
 import Toggle from '../ui/Toggle';
 import SegmentedControl from '../ui/SegmentedControl';
 import SettingRow from './SettingRow';
-import StoreLocationSetting from './StoreLocationSetting';
 import './SettingsView.css';
 
 /**
@@ -15,7 +14,6 @@ import './SettingsView.css';
  */
 export default function SettingsView({ onBack }) {
   const { t } = useTranslation();
-  const [activityStorePath, setActivityStorePath] = useState(null);
   const [allowPrerelease, setAllowPrerelease] = useState(false);
   const [autoLaunchEnabled, setAutoLaunchEnabled] = useState(false);
   const [loading, setLoading] = useState(true);
@@ -31,7 +29,6 @@ export default function SettingsView({ onBack }) {
       try {
         setLoading(true);
         const settings = await ipcRenderer.invoke('get-settings');
-        setActivityStorePath(settings.activityStoreDirPath);
         setAllowPrerelease(settings.allowPrerelease);
         setIsWindowsStore(settings.isWindowsStore === true);
 
@@ -160,11 +157,6 @@ export default function SettingsView({ onBack }) {
                   ]}
                 />
               }
-            />
-            <StoreLocationSetting
-              path={activityStorePath}
-              onPathChange={setActivityStorePath}
-              onError={setErrorMessage}
             />
           </>
         )}

@@ -64,7 +64,6 @@ Missing Hours is an Electron-based desktop application designed to track and ana
 
 - Manages and persists activity data/heartbeats
 - Cleans up outdated records
-- Supports customizable data storage location for synchronization across devices
 - Creates and updates the Day Summary
 - Aggregates heartbeat data into aggregated timeline events based on user-selected interval (5, 10, or 15 minutes)
 - Ensures proper event ordering and overlap handling based on priority
@@ -213,7 +212,7 @@ src/components/
   timeline/          Timeline, TimelineHourGrid, TimelineEvent, timelineGeometry.js (pure functions),
                      eventColors.js, useAppIcon, useCurrentActivity, useColorScheme
   footer/            Footer, DaySummary
-  settings/          SettingsView, SettingRow, StoreLocationSetting
+  settings/          SettingsView, SettingRow
   ui/                Button, Toggle, Icon, TrackingDot
 ```
 
@@ -316,7 +315,7 @@ OS Events -> Watcher -> Heartbeat -> ActivityStore-heartbeats -> ActivityStore-a
 
 ### 4.1 Persistence
 
-- Stored as a JSON file inside `app.getPath('userData')` (storage location is configurable)
+- Stored as a JSON file inside `app.getPath('userData')`. The location can no longer be changed; older versions could, and a folder saved then in `settings.json` (`activityStoreDirPath`) stays in use so its data is not hidden
 - The app was called Workmory before, so its old data folder is named `Workmory`. On start, `migrateLegacyUserData` (`src/store/UserDataMigration.ts`) copies `settings.json` and `chronflow-activity-store.json` from that folder into the new one, but only while the new folder has neither file; it never overwrites and leaves the old folder as a backup. If copying fails, the app keeps using the old folder so no tracked data is hidden.
 - JSON with 2-space indentation
 - Autosave every 5 minutes

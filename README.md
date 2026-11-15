@@ -193,7 +193,7 @@ Beta testers need to opt-in to receive beta updates:
 
 ## Data Storage
 
-By default, activity data is stored in the app's user data directory. You can change this location to use a shared folder (like Google Drive or Dropbox) for synchronization across devices.
+Activity data is stored in the app's user data directory. The location can no longer be changed in the settings; a folder chosen in an older version stays in use.
 
 Data is automatically cleaned up after 30 days to avoid excessive storage usage.
 
