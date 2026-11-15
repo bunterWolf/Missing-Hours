@@ -17,24 +17,9 @@ const ipc = {
     return ipcRenderer.invoke('get-tracking-status');
   },
   
-  // Update data storage location
-  updateStorageLocation: async (newLocation) => {
-    return ipcRenderer.invoke('update-activity-store-path', newLocation);
-  },
-  
-  // Confirm using existing activity store file
-  confirmUseExistingStore: async (dirPath) => {
-    return ipcRenderer.invoke('confirm-use-existing-activity-store', dirPath);
-  },
-  
   // Update beta release setting
   updateBetaReleaseSetting: async (allowPrerelease) => {
     return ipcRenderer.invoke('update-beta-release-setting', allowPrerelease);
-  },
-  
-  // Open directory selection dialog
-  openDirectoryDialog: async () => {
-    return ipcRenderer.invoke('open-directory-dialog');
   },
   
   // Get current settings

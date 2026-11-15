@@ -133,11 +133,9 @@ Pfade relativ zu `src/components/`. Jede Komponente hat `.js` und (falls vorhand
 | Footer | `2005:845` | `footer/Footer` | `wm-footer*` |
 | Status Bar (Active · Inactive · Tracked) | `2052:157` | `footer/DaySummary` | |
 | Settings (Toolbar `84699:2887`) | `84705:4120` / `84705:4351` | `settings/SettingsView` | `wm-settings*` |
-| SettingRow | `84699:2276` | `settings/SettingRow`, `settings/StoreLocationSetting` | `wm-setting-row*` |
+| SettingRow | `84699:2276` | `settings/SettingRow` | `wm-setting-row*` |
 
-Ohne Figma-Vorlage: **Speicherort der Aktivitätsdatei** (`settings/StoreLocationSetting`, aus dem
-Zeilenmuster abgeleitet, Figma wird später nachgezogen) die **Intervall-Pille** und die
-**Darstellungs-Zeile** (beide aus vorhandenen Tokens gebaut, Figma-Komponenten fehlen noch).
+Ohne Figma-Vorlage: die **Intervall-Pille** und die **Darstellungs-Zeile** (beide aus vorhandenen Tokens gebaut, Figma-Komponenten fehlen noch).
 
 ### Figma-only-Konstanten (benannte Custom Properties, Kopf der Komponenten-CSS)
 

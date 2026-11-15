@@ -20,8 +20,8 @@ Alle Daten werden ausschließlich lokal auf deinem Computer gespeichert. Missing
 aufgezeichneten Daten an Server, weder an uns noch an Dritte. Es gibt keine Analyse- oder Telemetriedienste,
 keine Werbung und kein Benutzerkonto.
 
-Wenn du in den Einstellungen einen eigenen Speicherort wählst (zum Beispiel einen synchronisierten Ordner
-wie OneDrive oder Dropbox), liegen die Daten dort. Für diesen Dienst gelten dann dessen Bedingungen.
+Hast du in einer älteren Version einen eigenen Speicherort gewählt (zum Beispiel einen synchronisierten Ordner
+wie OneDrive oder Dropbox), liegen die Daten weiterhin dort. Für diesen Dienst gelten dann dessen Bedingungen.
 
 **Wie lange die Daten bleiben**
 Missing Hours löscht aufgezeichnete Tage automatisch nach 30 Tagen. Wenn du die Microsoft-Store-Version

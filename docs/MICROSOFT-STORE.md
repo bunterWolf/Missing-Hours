@@ -24,8 +24,7 @@ alle Tage. Nach dem Entfernen des Pakets war die Datei unverändert da.
 Nicht getestet: eine frische Installation ohne vorhandenen Ordner. Dann legt Windows neue Dateien
 voraussichtlich im Paketordner an (`%LOCALAPPDATA%\Packages\<Paketname>\LocalCache\Roaming\missing-hours`),
 und eine Deinstallation löscht sie. Das ist bewusst so entschieden (keine Sonderfreigabe für
-unvirtualisierte Dateien). Wer sicher gehen will, wählt in den Einstellungen einen eigenen Speicherort,
-zum Beispiel unter Dokumente. Dort leitet Windows nichts um.
+unvirtualisierte Dateien). Einen eigenen Speicherort kann man in den Einstellungen nicht mehr wählen.
 
 ## Einmalige Einrichtung im Partner Center
 
