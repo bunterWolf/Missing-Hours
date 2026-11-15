@@ -5,12 +5,17 @@
   --tl-event-tracking-border: 2px;     /* Figma 84722:2213, inner stroke */
   /* Inactive hatch (spec §6.4), Figma 84653:1248. Measured on the hatch image
      442f5.png (546x327, 9 px horizontal period, 45 degrees) at its placement of
-     103.21% width: 1 px stripes, 3 px perpendicular period, rising to the right.
-     Black at 9% in Figma; drawn in --ink so it turns light in dark mode. */
-  --tl-hatch-angle: 135deg;
-  --tl-hatch-stripe: 1px;
-  --tl-hatch-period: 3px;
-  --tl-hatch-opacity: 9%;
+     103.21% width: 1 px stripes, 3 px perpendicular period (4.24 px horizontal),
+     rising to the right. Black at 9% in Figma; drawn in --ink so it turns light
+     in dark mode.
+     A 45-degree gradient with a 3 px period repeats every 4.24 px, which no pixel
+     grid divides: stripes alternate between 2 and 3 device pixels and the gaps
+     wobble. The hatch is therefore a tile with a whole-pixel size (4 px, the
+     nearest to 4.24 px) and a 1 px wide stripe, drawn with crisp edges. The stripe
+     covers 1/4 of the area instead of 1/3, so the opacity is raised from 9% to 12%
+     to keep Figma's overall tone. */
+  --tl-hatch-tile: 4px;
+  --tl-hatch-opacity: 12%;
 
   --tl-event-outer-stroke: 1px;        /* Figma 2007:199, stroke in --surface */
   --tl-event-inner-stroke: 1px;        /* Figma 2067:853, hidden under the outer stroke */
@@ -106,12 +111,22 @@
 /* Inactive: --surface plus the theme-aware hatch (Figma 84653:1248) */
 .wm-timeline-event--inactive {
   background-color: var(--surface);
-  background-image: repeating-linear-gradient(
-    var(--tl-hatch-angle),
-    color-mix(in srgb, var(--ink) var(--tl-hatch-opacity), transparent) 0 var(--tl-hatch-stripe),
-    transparent var(--tl-hatch-stripe) var(--tl-hatch-period)
-  );
   color: var(--ink-2);
+}
+/* The hatch is the stripe color shown through a mask tile, so it follows --ink in
+   both themes. The tile (4x4 units) holds the band where x + y lies within
+   [3.25, 4.25] modulo 4: one stripe 1 px wide horizontally. Its edges sit between
+   pixel centers at 100%, 125%, 150% and 200% scaling, so crisp edges give the
+   same stripe on every row. Sits under .wm-timeline-event-inner (positioned, later
+   in the tree) and under the ::after stroke. */
+.wm-timeline-event--inactive::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background-color: color-mix(in srgb, var(--ink) var(--tl-hatch-opacity), transparent);
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' shape-rendering='crispEdges'%3E%3Cpath d='M0 0H.25L0 .25ZM3.25 0H4V.25L.25 4H0V3.25ZM4 3.25V4H3.25Z'/%3E%3C/svg%3E")
+    0 0 / var(--tl-hatch-tile) var(--tl-hatch-tile) repeat;
+  pointer-events: none;
 }
 
 .wm-timeline-event--tracking {

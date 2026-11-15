@@ -161,7 +161,7 @@ Ohne Figma-Vorlage: die **Intervall-Pille** und die **Darstellungs-Zeile** (beid
 | | `--tl-event-header-max-height` | 32 px | `2007:151` |
 | | `--tl-event-title-gap` | 6 px | `2007:152` |
 | | `--tl-event-tracking-border` | 2 px | `84722:2213` (innerer Rand; sichtbar 1 px, das äußere Pixel liegt unter dem `--surface`-Rand) |
-| | `--tl-hatch-angle` / `-stripe` / `-period` / `-opacity` | 135deg / 1px / 3px / 9% | `84653:1248` (am Bild `442f5.png` abgemessen; Streifen in `--ink`) |
+| | `--tl-hatch-tile` / `-opacity` | 4 px / 12% | `84653:1248` (am Bild `442f5.png` abgemessen: 45°, 1 px Streifen, 3 px Abstand senkrecht = 4,24 px waagerecht, 9%; als Masken-Kachel mit ganzen Pixeln umgesetzt, damit die Streifen gleichmäßig sind: 4 px waagerecht, 1 px Streifen, Deckkraft 12% für den gleichen Gesamtton; Streifen in `--ink`, `::before`) |
 | `ui/Button.css` | `--wm-button-hover-opacity` | 0.15 | `84734:3056` |
 | | `--wm-button-pressed-opacity` | 0.3 | `84734:3051` |
 | | `--wm-button-radius` | 100 px | `84658:1616` |
