@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2-beta.11](https://github.com/bunterWolf/Missing-Hours/compare/v0.0.2-beta.10...v0.0.2-beta.11) (2026-11-15)
+
+
+### Features
+
+* remove the storage location setting ([b7394eb](https://github.com/bunterWolf/Missing-Hours/commit/b7394ebb4ceb89843526273bdcfd449d052157e3))
+
+
+### Bug Fixes
+
+* draw the inactive hatch as a whole-pixel tile so the stripes are even ([3bf5084](https://github.com/bunterWolf/Missing-Hours/commit/3bf50843b95d054a58081f6d83a135ea60230200))
+
 ### [0.0.2-beta.10](https://github.com/bunterWolf/Missing-Hours/compare/v0.0.2-beta.9...v0.0.2-beta.10) (2026-11-13)
 
 
