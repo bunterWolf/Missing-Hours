@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.2-beta.12](https://github.com/bunterWolf/Missing-Hours/compare/v0.0.2-beta.11...v0.0.2-beta.12) (2026-11-15)
+
+
+### Features
+
+* replace the ring app icon with the tick dial icon ([b1084b0](https://github.com/bunterWolf/Missing-Hours/commit/b1084b0329abd4f08b0e4f0d8b29b40805a3f0ce))
+
 ### [0.0.2-beta.11](https://github.com/bunterWolf/Missing-Hours/compare/v0.0.2-beta.10...v0.0.2-beta.11) (2026-11-15)
 
 
