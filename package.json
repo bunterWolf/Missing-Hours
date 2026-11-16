@@ -140,9 +140,9 @@
       "differentialPackage": true
     },
     "appx": {
-      "identityName": "PLACEHOLDER.MissingHours",
-      "publisher": "CN=00000000-0000-0000-0000-000000000000",
-      "publisherDisplayName": "PLACEHOLDER",
+      "identityName": "SebastianWolf.MissingHours",
+      "publisher": "CN=3A692FC6-BC33-4654-8104-600699CDE817",
+      "publisherDisplayName": "Sebastian Wolf",
       "applicationId": "MissingHours",
       "displayName": "Missing Hours",
       "backgroundColor": "transparent",
