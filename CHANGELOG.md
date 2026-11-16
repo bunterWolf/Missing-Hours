@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com/bunterWolf/Missing-Hours/compare/v0.0.2-beta.12...v1.0.0) (2026-11-16)
+
+
+### Maintenance
+
+* set the Microsoft Store package identity ([6f14347](https://github.com/bunterWolf/Missing-Hours/commit/6f1434741ee638d8e98a7ffe413016dfa4ef132f))
+
 ### [0.0.2-beta.12](https://github.com/bunterWolf/Missing-Hours/compare/v0.0.2-beta.11...v0.0.2-beta.12) (2026-11-15)
 
 
