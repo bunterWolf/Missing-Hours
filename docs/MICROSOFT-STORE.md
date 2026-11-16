@@ -38,8 +38,17 @@ unvirtualisierte Dateien). Einen eigenen Speicherort kann man in den Einstellung
    | `Package/Identity/Publisher` (beginnt mit `CN=`) | `publisher` |
    | `Package/Properties/PublisherDisplayName` | `publisherDisplayName` |
 
-   Bis dahin stehen dort Platzhalter (`PLACEHOLDER…`). Ein Paket mit Platzhaltern lehnt der Store ab.
    Die Werte sind nicht geheim, sie stehen in jedem installierten Paket.
+
+   Eingetragen seit 2026-11-16 (Name „Missing Hours“ reserviert):
+
+   | Wert | |
+   | --- | --- |
+   | Package/Identity/Name | `SebastianWolf.MissingHours` |
+   | Package/Identity/Publisher | `CN=3A692FC6-BC33-4654-8104-600699CDE817` |
+   | PublisherDisplayName | `Sebastian Wolf` |
+   | Package Family Name | `SebastianWolf.MissingHours_rk0eqn2pf5bat` |
+   | Store-ID | `9P2JR2B30DG4` (Deep-Link und Webstore-URL gibt es erst, wenn die App live ist) |
 
 ## Pro Store-Release
 
