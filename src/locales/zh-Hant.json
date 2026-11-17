@@ -2,9 +2,9 @@
   "tracking": "記錄",
   "paused": "已暫停",
   "summaryActive": "活躍",
-  "summaryInactive": "非活躍",
-  "summaryTracked": "已記錄",
-  "inactive": "非活躍",
+  "summaryInactive": "閒置",
+  "summaryTracked": "總計",
+  "inactive": "閒置",
   "teamsMeeting": "Teams 會議",
   "noActivity": "沒有記錄到活動",
   "mockData": "範例資料",
@@ -53,7 +53,7 @@
     "weekday": "{{date, weekday}}",
     "dateShort": "{{date, dateShort}}",
     "time": "{{time, time}}",
-    "durationHoursMinutes": "{{hours}}小時{{minutes}}分鐘",
+    "durationHoursMinutes": "{{hours}}小時{{minutes}}分",
     "durationMinutes": "{{minutes}}分鐘"
   }
 }

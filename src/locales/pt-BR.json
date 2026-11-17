@@ -3,7 +3,7 @@
   "paused": "Pausado",
   "summaryActive": "Ativo",
   "summaryInactive": "Inativo",
-  "summaryTracked": "Registrado",
+  "summaryTracked": "Total",
   "inactive": "Inativo",
   "teamsMeeting": "Reunião do Teams",
   "noActivity": "Nenhuma atividade registrada",
@@ -53,7 +53,7 @@
     "weekday": "{{date, weekday}}",
     "dateShort": "{{date, dateShort}}",
     "time": "{{time, time}}",
-    "durationHoursMinutes": "{{hours}} h {{minutes}} min",
+    "durationHoursMinutes": "{{hours}}h {{minutes}}min",
     "durationMinutes": "{{minutes}} min"
   }
 }

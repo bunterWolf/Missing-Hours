@@ -1,4 +1,4 @@
-import { APPX_LANGUAGES, SUPPORTED_LANGUAGES, formatLocale, resolveLanguage } from './languages';
+import { APPX_LANGUAGES, SUPPORTED_LANGUAGES, formatLocale, hourLabelOptions, resolveLanguage } from './languages';
 
 describe('SUPPORTED_LANGUAGES', () => {
   it('lists the twelve languages, English first', () => {
@@ -37,5 +37,22 @@ describe('formatLocale', () => {
     expect(formatLocale('de', undefined)).toBe('de');
     expect(formatLocale('de', 'invalid_!')).toBe('de');
     expect(formatLocale('fr', 'fr')).toBe('fr');
+  });
+});
+
+describe('hourLabelOptions', () => {
+  const nine = new Date(2024, 0, 1, 9, 0);
+  const label = (locale) => new Intl.DateTimeFormat(locale, hourLabelOptions(locale)).format(nine);
+
+  // The hour gutter is narrow: 12-hour clocks show only the hour, as calendars do.
+  it('shows only the hour on a 12-hour clock', () => {
+    expect(label('en-US')).toBe('9 AM');
+    expect(label('ko-KR')).toBe('오전 9시');
+  });
+
+  it('keeps hours and minutes on a 24-hour clock', () => {
+    expect(label('de-DE')).toBe('09:00');
+    expect(label('en-DE')).toBe('09:00');
+    expect(label('ja-JP')).toBe('09:00');
   });
 });

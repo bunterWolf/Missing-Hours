@@ -2,9 +2,9 @@
   "tracking": "Registratie",
   "paused": "Gepauzeerd",
   "summaryActive": "Actief",
-  "summaryInactive": "Inactief",
-  "summaryTracked": "Geregistreerd",
-  "inactive": "Inactief",
+  "summaryInactive": "Pauze",
+  "summaryTracked": "Totaal",
+  "inactive": "Pauze",
   "teamsMeeting": "Teams-vergadering",
   "noActivity": "Geen activiteit geregistreerd",
   "mockData": "Voorbeeldgegevens",
@@ -53,7 +53,7 @@
     "weekday": "{{date, weekday}}",
     "dateShort": "{{date, dateShort}}",
     "time": "{{time, time}}",
-    "durationHoursMinutes": "{{hours}} u {{minutes}} min",
+    "durationHoursMinutes": "{{hours}}u {{minutes}}min",
     "durationMinutes": "{{minutes}} min"
   }
 }

@@ -3,7 +3,7 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import locales from '../locales';
-import { formatLocale, resolveLanguage } from './languages';
+import { formatLocale, hourLabelOptions, resolveLanguage } from './languages';
 
 const remote = require('electron').remote || require('@electron/remote');
 
@@ -15,23 +15,29 @@ function tryRead(read) {
   }
 }
 
-// `--lang=<code>` on the command line wins (screenshots, testing a language); then the Windows display
-// languages in order of preference, then Chromium's locale, then the browser's.
+// `--lang=<locale>` on the command line (screenshots, testing a language) wins over the system;
+// with a region (`--lang=ko-KR`) it also sets the date and time formats.
+const forcedLocale = (tryRead(() => remote.process.argv) || [])
+  .find((arg) => arg.startsWith('--lang='))?.slice('--lang='.length);
+
+// The forced locale, then the Windows display languages in order of preference, then Chromium's
+// locale, then the browser's.
 function languageCandidates() {
-  const argv = tryRead(() => remote.process.argv) || [];
-  const forced = argv.find((arg) => arg.startsWith('--lang='))?.slice('--lang='.length);
   return [
-    forced,
+    forcedLocale,
     ...(tryRead(() => remote.app.getPreferredSystemLanguages()) || []),
     tryRead(() => remote.app.getLocale()),
     typeof navigator !== 'undefined' ? navigator.language : undefined,
   ];
 }
 
-const systemLocale = tryRead(() => remote.app.getSystemLocale());
+const systemLocale = tryRead(() => new Intl.Locale(forcedLocale).region)
+  ? forcedLocale
+  : tryRead(() => remote.app.getSystemLocale());
 
 const formatters = {
-  time: () => ({ hour: '2-digit', minute: '2-digit' }),
+  // Hour labels of the timeline gutter
+  time: (value, locale) => hourLabelOptions(locale),
   weekday: () => ({ weekday: 'long' }),
   // Year only when it is not the current year
   dateShort: (value) => (value.getFullYear() === new Date().getFullYear()
@@ -52,7 +58,7 @@ i18next
         const options = formatters[format];
         if (!options || !(value instanceof Date)) return value;
         const locale = formatLocale(lng, systemLocale);
-        return new Intl.DateTimeFormat(locale, options(value)).format(value);
+        return new Intl.DateTimeFormat(locale, options(value, locale)).format(value);
       },
     },
   });

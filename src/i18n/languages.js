@@ -74,3 +74,16 @@ export function formatLocale(language, systemLocale) {
     return language;
   }
 }
+
+/**
+ * Intl options for the hour labels of the timeline gutter. The gutter is narrow, so 12-hour clocks
+ * show only the hour ('9 AM', '오전 9시'), as calendars do; 24-hour clocks keep '09:00'.
+ * @param {string} locale - From formatLocale
+ * @returns {Intl.DateTimeFormatOptions}
+ */
+export function hourLabelOptions(locale) {
+  const { hourCycle } = new Intl.DateTimeFormat(locale, { hour: 'numeric' }).resolvedOptions();
+  return hourCycle === 'h11' || hourCycle === 'h12'
+    ? { hour: 'numeric' }
+    : { hour: '2-digit', minute: '2-digit' };
+}
