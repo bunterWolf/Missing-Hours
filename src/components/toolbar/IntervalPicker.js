@@ -18,6 +18,7 @@ export default function IntervalPicker({ value, onChange }) {
   // Opened with Enter/Space (click event with detail 0): focus follows into and out of the pill.
   const viaKeyboardRef = useRef(false);
   const label = t('aggregationInterval');
+  const minutesLabel = (minutes) => t('timeFormats.durationMinutes', { minutes });
 
   // Set on close; the button can take focus only once it is visible again (after render).
   const restoreFocusRef = useRef(false);
@@ -62,7 +63,7 @@ export default function IntervalPicker({ value, onChange }) {
     <div className={'wm-interval-picker' + (open ? ' is-open' : '')} ref={rootRef}>
       {/* Stays in the layout while open, so the toolbar does not shift; the pill covers it. */}
       <Button
-        label={`${value}m`}
+        label={minutesLabel(value)}
         onClick={(event) => {
           viaKeyboardRef.current = event.detail === 0;
           setOpen(true);
@@ -80,7 +81,7 @@ export default function IntervalPicker({ value, onChange }) {
             ariaLabel={label}
             value={value}
             onChange={handleSelect}
-            options={INTERVALS.map((v) => ({ value: v, label: `${v}m` }))}
+            options={INTERVALS.map((v) => ({ value: v, label: minutesLabel(v) }))}
           />
         </div>
       )}
