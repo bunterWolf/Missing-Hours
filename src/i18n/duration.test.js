@@ -28,4 +28,10 @@ describe('formatDuration', () => {
   it('en: hours and minutes', () => {
     expect(formatDuration(75 * MINUTE, en)).toBe('1h 15m');
   });
+
+  it('ja: language-specific wording', () => {
+    const ja = translator('ja');
+    expect(formatDuration(75 * MINUTE, ja)).toBe('1時間15分');
+    expect(formatDuration(5 * MINUTE, ja)).toBe('5分');
+  });
 });
