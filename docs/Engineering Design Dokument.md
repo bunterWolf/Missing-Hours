@@ -285,8 +285,9 @@ Rules for changes are in CLAUDE.md, section "Multilingual".
   The hour labels of the timeline show `09:00` on a 24-hour clock and only the hour on a 12-hour clock
   (`9 AM`, `오전 9시`), because the gutter is narrow. The toolbar date is one Intl pattern
   (`timeFormats.dateLabel`, `src/i18n/formats.js`), so every language keeps its own order and punctuation
-  (`2024年9月24日火曜日`, `mardi 24 sept. 2024`): weekday in full, month short, the year only when it is not
-  the current year, so it fits next to the tracking button.
+  (`9月24日火曜日`, `mardi 24 sept.`): weekday in full (short only in Portuguese, where "segunda-feira" does
+  not fit), month short, no year (only the last 30 days are kept, so it is never ambiguous). That is what
+  fits next to the tracking button.
 - **Durations** (`formatDuration` in `src/i18n/duration.js`): whole minutes rounded down, hours = minutes / 60
   rounded down, empty or invalid → 0 minutes; the wording comes from `timeFormats.durationHoursMinutes` and
   `timeFormats.durationMinutes`, compact by intent (`1h 15m` in German and English, `1h 15min`, `1時間15分`).
