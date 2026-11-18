@@ -2,6 +2,37 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.1.0](https://github.com/bunterWolf/Missing-Hours/compare/v1.0.0...v1.1.0) (2026-11-18)
+
+
+### Features
+
+* check the layout in every language with npm run screenshots ([f1845fd](https://github.com/bunterWolf/Missing-Hours/commit/f1845fd5f4d9f3c41099e00c45bcf4ac52bdad44))
+* date label without year, short weekday in Portuguese ([ffd9e0a](https://github.com/bunterWolf/Missing-Hours/commit/ffd9e0a4e8b10232359d08ad385ca7fa0940fdfb))
+* **i18n:** add fr, es, it, pt-BR, nl, pl, ja, ko, zh-Hans and zh-Hant ([b097f59](https://github.com/bunterWolf/Missing-Hours/commit/b097f59b8b991a82a21e46414865c9a04b43d94e))
+* **i18n:** format durations per language ([0d26e97](https://github.com/bunterWolf/Missing-Hours/commit/0d26e97d95ab2a629acbcfa07e1e56267ffe1bb2))
+* **i18n:** resolve UI language and format locale from the system ([5f0df6a](https://github.com/bunterWolf/Missing-Hours/commit/5f0df6affc488c1fa253f07693434354b8c27160))
+* short month in the date label and a 50px larger window ([4113672](https://github.com/bunterWolf/Missing-Hours/commit/41136726cb113e23573210dd1e3e51cf343be4ec))
+
+
+### Bug Fixes
+
+* measure ellipsized texts in full in the layout check ([c1ddc62](https://github.com/bunterWolf/Missing-Hours/commit/c1ddc62de4d937575427f1bdf3e844d3c7ebc902))
+* one date pattern per language and a layout check of the real toolbar ([26bc972](https://github.com/bunterWolf/Missing-Hours/commit/26bc9725b45fe1055d6fc9549d773156241ac33d))
+
+
+### Refactoring
+
+* **i18n:** move translations into per-language JSON files ([c4592f3](https://github.com/bunterWolf/Missing-Hours/commit/c4592f37aab0e540f8dceb20ea20000d12ea502f))
+
+
+### Documentation
+
+* add multilingual support design spec ([23f138f](https://github.com/bunterWolf/Missing-Hours/commit/23f138f0eb6472dc7004b1bedd757a0043ba4bc4))
+* add multilingual support implementation plan ([b3d7e14](https://github.com/bunterWolf/Missing-Hours/commit/b3d7e14922c7f562ba0f0bb1a1faa438d8574a1e))
+* describe the stable release as it ran for 1.0.0 ([5f9a12c](https://github.com/bunterWolf/Missing-Hours/commit/5f9a12cee9bdfbe9cea7e34b6ea9dfd3dc5d32f3))
+* make multilingual support mandatory and add Store texts for all languages ([7a20070](https://github.com/bunterWolf/Missing-Hours/commit/7a200708a670169526f4b8f713315791629a476b))
+
 ## [1.0.0](https://github.com/bunterWolf/Missing-Hours/compare/v0.0.2-beta.12...v1.0.0) (2026-11-16)
 
 
