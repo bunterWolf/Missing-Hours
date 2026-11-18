@@ -5,10 +5,11 @@ import { hourLabelOptions } from './languages';
 const FORMATS = {
   // Hour labels of the timeline gutter
   time: (date, locale) => hourLabelOptions(locale),
-  // Date in the toolbar; the year only when it is not the current year
+  // Date in the toolbar: weekday in full, month short (room next to the tracking button), the year
+  // only when it is not the current year
   dateLabel: (date, locale, now) => (date.getFullYear() === now.getFullYear()
-    ? { weekday: 'long', month: 'long', day: 'numeric' }
-    : { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' }),
+    ? { weekday: 'long', month: 'short', day: 'numeric' }
+    : { weekday: 'long', month: 'short', day: 'numeric', year: 'numeric' }),
 };
 
 /**

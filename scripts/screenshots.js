@@ -150,11 +150,13 @@ async function shoot(page, language, view, theme, report) {
   for (const problem of problems) report.push(`${language} ${view} ${theme}: ${problem}`);
 }
 
-// Runs in the page: puts the widest date label of the language into the toolbar (a year that is not
-// the current one, every month, every weekday). The options mirror dateLabel in src/i18n/formats.js.
-function showLongestDate(locale) {
+// Runs in the page: puts the widest date label of the language into the toolbar (every month, every
+// weekday; with the year as for a past year, or without as in the current year). The options mirror
+// dateLabel in src/i18n/formats.js.
+function showLongestDate({ locale, withYear }) {
   const label = document.querySelector('.wm-date-nav-label');
-  const format = new Intl.DateTimeFormat(locale, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  const options = { weekday: 'long', month: 'short', day: 'numeric' };
+  const format = new Intl.DateTimeFormat(locale, withYear ? { ...options, year: 'numeric' } : options);
   const year = new Date().getFullYear() - 1;
   const probe = label.cloneNode();
   probe.style.cssText = 'position:absolute;visibility:hidden;width:auto;max-width:none';
@@ -239,7 +241,9 @@ async function checkLanguage(language, report) {
 
       // Long day: the longest date label and long footer values, set in the page only (not in any data);
       // the sample-data hint goes away as in the real app. Leaving for the settings re-renders both.
-      await page.evaluate(showLongestDate, formatLocaleFor(language));
+      await page.evaluate(showLongestDate, { locale: formatLocaleFor(language), withYear: false });
+      await shoot(page, language, 'date-this-year', theme, report);
+      await page.evaluate(showLongestDate, { locale: formatLocaleFor(language), withYear: true });
       await page.evaluate((values) => {
         document.querySelectorAll('.wm-day-summary-value').forEach((el, i) => { el.textContent = values[i]; });
         document.querySelector('.wm-footer-mock')?.remove();

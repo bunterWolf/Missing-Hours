@@ -95,8 +95,9 @@ müssen gemeinsam geändert werden.
 
 | Konstante | Wert | Bedeutung |
 |---|---|---|
-| `WINDOW_WIDTH` | 387 | Breite der **Content-Fläche** (`useContentSize`), zugleich Mindestbreite |
-| `WINDOW_HEIGHT` | 499 | Starthöhe der Content-Fläche |
+| `WINDOW_WIDTH` | 437 | Startbreite der **Content-Fläche** (`useContentSize`): Figma-Frame + 50 px, damit längere Übersetzungen und das Datum neben dem Tracking-Button passen |
+| `WINDOW_HEIGHT` | 549 | Starthöhe der Content-Fläche (Figma-Frame + 50 px) |
+| `WINDOW_MIN_WIDTH` | 387 | Mindestbreite = Breite des Figma-Frames |
 | `WINDOW_MIN_HEIGHT` | 360 | Mindesthöhe der Content-Fläche |
 
 Fenster rahmenlos; Ecken und Schatten kommen vom System (Windows 11 rundet mit 8 px). Radius 16 und

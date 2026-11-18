@@ -202,7 +202,7 @@ After an activity change, the summary times are updated. These are not based on 
 - Styling is done using **plain CSS files**, editable directly by designers. Design tokens (colors, sizes) live only in `src/styles/tokens.css` and mirror the Figma variables 1:1; text styles are in `typography.css`, reset and bundled Inter font in `base.css`. Component CSS uses only `var(--…)` tokens plus named constants (with Figma node id) at the top of the file. See `docs/design/figma-map.md` for the mapping Figma -> code and the update checklist.
 - Theme: the CSS follows `prefers-color-scheme`; the main process sets `nativeTheme.themeSource` from the appearance setting (Auto / Light / Dark, see 2.5.2.3), so there is no theme logic in the CSS
 - One component in code corresponds to one Figma component (same name, Figma node id in the file header)
-- The window is frameless with a custom title bar and starts at 387 x 499 (content size), minimum 387 x 360. The title bar holds the settings button (`…`, left of minimize; on macOS at the right end) besides the window controls
+- The window is frameless with a custom title bar and starts at 437 x 549 (content size; the Figma frame 387 x 499 plus 50 px, so longer translations fit), minimum 387 x 360. The title bar holds the settings button (`…`, left of minimize; on macOS at the right end) besides the window controls
 
 ```
 src/components/
@@ -285,7 +285,8 @@ Rules for changes are in CLAUDE.md, section "Multilingual".
   The hour labels of the timeline show `09:00` on a 24-hour clock and only the hour on a 12-hour clock
   (`9 AM`, `오전 9시`), because the gutter is narrow. The toolbar date is one Intl pattern
   (`timeFormats.dateLabel`, `src/i18n/formats.js`), so every language keeps its own order and punctuation
-  (`2024年9月24日火曜日`, `mardi 24 septembre 2024`); it omits the year in the current year.
+  (`2024年9月24日火曜日`, `mardi 24 sept. 2024`): weekday in full, month short, the year only when it is not
+  the current year, so it fits next to the tracking button.
 - **Durations** (`formatDuration` in `src/i18n/duration.js`): whole minutes rounded down, hours = minutes / 60
   rounded down, empty or invalid → 0 minutes; the wording comes from `timeFormats.durationHoursMinutes` and
   `timeFormats.durationMinutes`, compact by intent (`1h 15m` in German and English, `1h 15min`, `1時間15分`).
