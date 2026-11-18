@@ -7,12 +7,12 @@ import { toLocalDateKey, getYesterdayDateKey } from '../dateKey';
 export default function DateNav({ selectedDate, availableDates, onDateChange }) {
   const { t } = useTranslation();
 
-  // "Today" / "Yesterday", otherwise "Weekday, short date"
+  // "Today" / "Yesterday", otherwise weekday and date in the language's own pattern
   const formatDateLabel = (dateKey) => {
     if (dateKey === toLocalDateKey()) return t('timeFormats.today');
     if (dateKey === getYesterdayDateKey()) return t('timeFormats.yesterday');
     const date = new Date(dateKey + 'T00:00:00');
-    return `${t('timeFormats.weekday', { date })}, ${t('timeFormats.dateShort', { date })}`;
+    return t('timeFormats.dateLabel', { date });
   };
 
   const currentIndex = availableDates.indexOf(selectedDate);

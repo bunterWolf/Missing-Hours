@@ -157,6 +157,8 @@ if (isDev) {
 if (useMockData) {
   console.log('🧪 Mock data mode enabled for development');
 }
+// Mock data mode tracks nothing; the tracking button only switches this flag, so its states can be seen.
+let mockTracking = true;
 
 // Window background = Surface 2 of the active theme. Mirrors --surface-2 in
 // src/styles/tokens.css (light #ffffff / dark #0a0a0a); keep both in sync.
@@ -342,7 +344,7 @@ function registerIpcHandlers(): void { // Add return type void
 
   // Get tracking status
   ipcMain.handle('get-tracking-status', (): boolean => {
-    if (useMockData) return true;
+    if (useMockData) return mockTracking;
     // Ensure activityStore exists before accessing property
     return activityStore ? activityStore.isTracking : false;
   });
@@ -351,8 +353,8 @@ function registerIpcHandlers(): void { // Add return type void
   // Add types for event and shouldTrack
   ipcMain.handle('toggle-tracking', async (event: IpcMainInvokeEvent, shouldTrack: boolean): Promise<boolean> => {
     if (useMockData) {
-      console.log('Mock data mode - tracking controls disabled');
-      return true; // Return current (mock) status
+      mockTracking = shouldTrack; // nothing is tracked in mock data mode
+      return mockTracking;
     }
 
     // Ensure instances exist before calling methods

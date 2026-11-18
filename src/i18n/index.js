@@ -3,7 +3,8 @@
 import i18next from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import locales from '../locales';
-import { formatLocale, hourLabelOptions, resolveLanguage } from './languages';
+import { formatDate } from './formats';
+import { formatLocale, resolveLanguage } from './languages';
 
 const remote = require('electron').remote || require('@electron/remote');
 
@@ -35,16 +36,6 @@ const systemLocale = tryRead(() => new Intl.Locale(forcedLocale).region)
   ? forcedLocale
   : tryRead(() => remote.app.getSystemLocale());
 
-const formatters = {
-  // Hour labels of the timeline gutter
-  time: (value, locale) => hourLabelOptions(locale),
-  weekday: () => ({ weekday: 'long' }),
-  // Year only when it is not the current year
-  dateShort: (value) => (value.getFullYear() === new Date().getFullYear()
-    ? { month: 'long', day: 'numeric' }
-    : { month: 'long', day: 'numeric', year: 'numeric' }),
-};
-
 i18next
   .use(initReactI18next)
   .init({
@@ -55,10 +46,8 @@ i18next
     interpolation: {
       escapeValue: false, // React escapes
       format(value, format, lng) {
-        const options = formatters[format];
-        if (!options || !(value instanceof Date)) return value;
-        const locale = formatLocale(lng, systemLocale);
-        return new Intl.DateTimeFormat(locale, options(value, locale)).format(value);
+        if (!(value instanceof Date)) return value;
+        return formatDate(format, value, formatLocale(lng, systemLocale)) ?? value;
       },
     },
   });

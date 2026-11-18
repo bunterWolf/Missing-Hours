@@ -1,5 +1,5 @@
 {
-  "tracking": "記録",
+  "tracking": "記録中",
   "paused": "一時停止中",
   "summaryActive": "稼働",
   "summaryInactive": "離席",
@@ -50,8 +50,7 @@
   "timeFormats": {
     "today": "今日",
     "yesterday": "昨日",
-    "weekday": "{{date, weekday}}",
-    "dateShort": "{{date, dateShort}}",
+    "dateLabel": "{{date, dateLabel}}",
     "time": "{{time, time}}",
     "durationHoursMinutes": "{{hours}}時間{{minutes}}分",
     "durationMinutes": "{{minutes}}分"

@@ -179,7 +179,6 @@ const App = () => {
               onDateChange={handleDateChange}
               isTracking={isTracking}
               onToggleTracking={toggleTracking}
-              isMockData={isMockData}
               aggregationInterval={aggregationInterval}
               onIntervalChange={handleIntervalChange}
             />

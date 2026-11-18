@@ -66,7 +66,7 @@ Main process / renderer process architecture connected via Electron IPC.
 | `src/store/UserDataMigration.ts` | The app was called Workmory before: on start, `migrateLegacyUserData` copies `settings.json` and the activity store from the old `Workmory` userData folder once, never overwriting; on failure `main.ts` keeps using the old folder |
 | `src/store/ActivityPersistence.ts` | JSON persistence in `app.getPath('userData')` |
 | `src/store/ActivityIpc.ts` | IPC bridge between store and renderer; tells the renderer about new data via `activity-data-updated` |
-| `src/i18n/` | i18next setup (`index.js`); UI language from the Windows display languages and the format locale with the system region (`languages.js`; `--lang=<locale>` overrides both); durations (`duration.js`); `locales.test.js` checks every language for completeness |
+| `src/i18n/` | i18next setup (`index.js`); UI language from the Windows display languages and the format locale with the system region (`languages.js`; `--lang=<locale>` overrides both); date/time patterns (`formats.js`); durations (`duration.js`); `locales.test.js` checks every language for completeness |
 | `src/locales/` | One JSON file per UI language (12); `en.json` is the reference. See "Multilingual" |
 | `src/components/{ui,window,toolbar,timeline,footer,settings}/`, `src/renderer/` | React UI (title bar, toolbar, timeline, footer, settings view), one folder per area; Figma node id in each file header |
 
@@ -162,13 +162,15 @@ one language is missing, wrong, or breaks the layout.
   translations (natural UI wording, Microsoft's terms for Windows UI, the language's own quotation marks),
   never English placeholders. `src/i18n/locales.test.js` fails on missing keys, extra keys, empty texts or
   differing `{{placeholders}}`.
-- **Dates, times and durations only through the i18n helpers:** `timeFormats.*` keys (formatted in
-  `src/i18n/index.js` with the UI language plus the system region, so 12h/24h follows the region) and
+- **Dates, times and durations only through the i18n helpers:** `timeFormats.*` keys (one Intl pattern each in
+  `src/i18n/formats.js`, with the UI language plus the system region, so 12h/24h follows the region) and
   `formatDuration` from `src/i18n/duration.js`. Never build them with string concatenation or a hardcoded
   locale. Durations stay compact (German and English `1h 15m`).
 - **Layout must hold every language.** After any UI change run `npm run screenshots`: it starts the app with
   sample data in every language (in its typical region, e.g. `en-US` with a 12-hour clock), saves screenshots
-  to `screenshots/<lang>/` and fails on texts that are cut off, wrap, or are covered. Look at the images
+  to `screenshots/<lang>/` and fails on texts that are cut off, wrap, or are covered. It covers today, a past
+  day (tracking and paused), the open zoom choice, the longest date and long footer values, and the settings
+  (normal and Store package); a new view or state needs its own shot in `scripts/screenshots.js`. Look at the images
   too, at least for `de`, `pl` (long words), `ja` and `zh-Hant` (CJK). Shorten the translation before you
   change the design; a design change goes through Figma (`docs/design/figma-map.md`).
 - **Adding a language:** a new `src/locales/<code>.json`, the import in `src/locales/index.js`, the code in

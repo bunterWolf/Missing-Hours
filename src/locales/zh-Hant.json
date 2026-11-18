@@ -1,5 +1,5 @@
 {
-  "tracking": "記錄",
+  "tracking": "記錄中",
   "paused": "已暫停",
   "summaryActive": "活躍",
   "summaryInactive": "閒置",
@@ -50,8 +50,7 @@
   "timeFormats": {
     "today": "今天",
     "yesterday": "昨天",
-    "weekday": "{{date, weekday}}",
-    "dateShort": "{{date, dateShort}}",
+    "dateLabel": "{{date, dateLabel}}",
     "time": "{{time, time}}",
     "durationHoursMinutes": "{{hours}}小時{{minutes}}分",
     "durationMinutes": "{{minutes}}分鐘"

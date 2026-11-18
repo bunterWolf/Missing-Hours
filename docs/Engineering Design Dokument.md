@@ -283,7 +283,9 @@ Rules for changes are in CLAUDE.md, section "Multilingual".
 - **Formats:** dates and times use the UI language with the system region (`app.getSystemLocale()`, or the
   region of `--lang`), e.g. English UI on a German system → `en-DE`: English month names, 24-hour clock.
   The hour labels of the timeline show `09:00` on a 24-hour clock and only the hour on a 12-hour clock
-  (`9 AM`, `오전 9시`), because the gutter is narrow. The date label omits the year in the current year.
+  (`9 AM`, `오전 9시`), because the gutter is narrow. The toolbar date is one Intl pattern
+  (`timeFormats.dateLabel`, `src/i18n/formats.js`), so every language keeps its own order and punctuation
+  (`2024年9月24日火曜日`, `mardi 24 septembre 2024`); it omits the year in the current year.
 - **Durations** (`formatDuration` in `src/i18n/duration.js`): whole minutes rounded down, hours = minutes / 60
   rounded down, empty or invalid → 0 minutes; the wording comes from `timeFormats.durationHoursMinutes` and
   `timeFormats.durationMinutes`, compact by intent (`1h 15m` in German and English, `1h 15min`, `1時間15分`).
@@ -292,8 +294,11 @@ Rules for changes are in CLAUDE.md, section "Multilingual".
   empty texts, every language in the Store package), `languages.test.js`, `duration.test.js`.
 - **Layout check:** `npm run screenshots` (`scripts/screenshots.js`) starts the app with sample data per
   language in the region of its package language, with its own temporary userData folder, and saves
-  today, the sample day, the open zoom choice, a long day in the footer and the settings, light and dark,
-  to `screenshots/<lang>/`. It fails on texts that are cut off (measured unrounded), wrap, or are covered.
+  today, the sample day (tracking and paused), the open zoom choice, a long day (the language's widest date
+  label and long footer values, set in the page only), the settings and the settings as in the Store
+  package, light and dark, to `screenshots/<lang>/`. It fails on texts that are cut off (measured unrounded,
+  also by a clipping container; buttons keep their padding), wrap, or are covered. In mock data mode the
+  tracking button only switches a flag in the main process, so both of its states can be checked.
 
 #### 2.5.4 Development & Debugging
 

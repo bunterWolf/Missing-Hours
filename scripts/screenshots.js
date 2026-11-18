@@ -1,7 +1,9 @@
 // Layout check in every UI language: starts the built app with sample data (--mock-data) once per
 // language, in that language's typical region (the Store package language, e.g. en-US: 12-hour
-// clock), takes screenshots of today, the sample day, the open zoom choice, a long day and the
-// settings in light and dark, and reports UI texts that are cut off, wrap, or are covered.
+// clock), takes screenshots of today, the sample day (tracking and paused), the open zoom choice, a
+// long day (longest date label of the language, long footer values) and the settings (also as in
+// the Microsoft Store package) in light and dark, and reports UI texts that are cut off, wrap, or
+// are covered.
 // Run via `npm run screenshots` (builds first); `node scripts/screenshots.js de ja` checks only some
 // languages.
 //
@@ -97,9 +99,27 @@ function findLayoutProblems(selectors) {
     const textWidth = Math.max(...rects.map((r) => r.right)) - Math.min(...rects.map((r) => r.left));
     const lines = new Set(rects.map((r) => Math.round(r.bottom))).size;
 
+    // A clipping parent cuts at its padding box; a button (fixed width, overflow: hidden) must keep
+    // its padding too, or the label looks squeezed against the edge.
+    let parentOverflow = 0;
+    for (let p = el.parentElement; p && p !== document.body; p = p.parentElement) {
+      const ps = getComputedStyle(p);
+      if (ps.overflowX === 'visible') continue;
+      const pr = p.getBoundingClientRect();
+      const keepPadding = p.classList.contains('wm-button');
+      const left = pr.left + parseFloat(ps.borderLeftWidth) + (keepPadding ? parseFloat(ps.paddingLeft) : 0);
+      const right = pr.right - parseFloat(ps.borderRightWidth) - (keepPadding ? parseFloat(ps.paddingRight) : 0);
+      const textLeft = Math.min(...rects.map((r) => r.left));
+      const textRight = Math.max(...rects.map((r) => r.right));
+      parentOverflow = Math.max(left - textLeft, textRight - right);
+      break;
+    }
+
     if (lines > 1) problems.push(`wraps: ${describe(el)}`);
     else if (style.overflow !== 'visible' && textWidth > contentWidth + 0.05) {
       problems.push(`cut off by ${(textWidth - contentWidth).toFixed(1)}px: ${describe(el)}`);
+    } else if (parentOverflow > 0.05) {
+      problems.push(`cut off by its container by ${parentOverflow.toFixed(1)}px: ${describe(el)}`);
     }
     if (box.right > innerWidth + 1 || box.left < -1) problems.push(`outside the window: ${describe(el)}`);
 
@@ -128,6 +148,35 @@ async function shoot(page, language, view, theme, report) {
   await page.screenshot({ path: file }).catch(() => page.screenshot({ path: file }));
   const problems = await page.evaluate(findLayoutProblems, CHECKED_TEXT);
   for (const problem of problems) report.push(`${language} ${view} ${theme}: ${problem}`);
+}
+
+// Runs in the page: puts the widest date label of the language into the toolbar (a year that is not
+// the current one, every month, every weekday). The options mirror dateLabel in src/i18n/formats.js.
+function showLongestDate(locale) {
+  const label = document.querySelector('.wm-date-nav-label');
+  const format = new Intl.DateTimeFormat(locale, { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  const year = new Date().getFullYear() - 1;
+  const probe = label.cloneNode();
+  probe.style.cssText = 'position:absolute;visibility:hidden;width:auto;max-width:none';
+  label.parentElement.appendChild(probe);
+  let widest = '';
+  let widestWidth = 0;
+  for (let month = 0; month < 12; month += 1) {
+    for (let day = 22; day <= 28; day += 1) {
+      probe.textContent = format.format(new Date(year, month, day));
+      if (probe.getBoundingClientRect().width > widestWidth) {
+        widestWidth = probe.getBoundingClientRect().width;
+        widest = probe.textContent;
+      }
+    }
+  }
+  probe.remove();
+  label.textContent = widest;
+}
+
+// Intl locale of the app for a language and its package locale (as formatLocale in src/i18n/languages.js).
+function formatLocaleFor(language) {
+  return new Intl.Locale(language, { region: new Intl.Locale(localeFor(language)).region }).toString();
 }
 
 // The footer values of LONG_DAY in this language, from its language file.
@@ -175,14 +224,22 @@ async function checkLanguage(language, report) {
 
       await shoot(page, language, 'day', theme, report);
 
+      // Paused (in mock data mode the button only switches a flag), then tracking again.
+      await page.click('.wm-tracking-button');
+      await page.waitForSelector('.wm-tracking-button:not(.is-tracking)');
+      await shoot(page, language, 'paused', theme, report);
+      await page.click('.wm-tracking-button');
+      await page.waitForSelector('.wm-tracking-button.is-tracking');
+
       await page.click('.wm-interval-picker .wm-button');
       await page.waitForSelector('.wm-interval-pill');
       await shoot(page, language, 'zoom', theme, report);
       await page.keyboard.press('Escape');
       await page.waitForSelector('.wm-interval-pill', { state: 'detached' });
 
-      // Long day: only the footer values change (in the page, not in any data), and the sample-data
-      // hint goes away as in the real app; leaving for the settings re-renders the footer.
+      // Long day: the longest date label and long footer values, set in the page only (not in any data);
+      // the sample-data hint goes away as in the real app. Leaving for the settings re-renders both.
+      await page.evaluate(showLongestDate, formatLocaleFor(language));
       await page.evaluate((values) => {
         document.querySelectorAll('.wm-day-summary-value').forEach((el, i) => { el.textContent = values[i]; });
         document.querySelector('.wm-footer-mock')?.remove();
@@ -194,6 +251,18 @@ async function checkLanguage(language, report) {
       await shoot(page, language, 'settings', theme, report);
       await page.click('.wm-settings-toolbar .wm-button');
       await page.waitForSelector('.wm-timeline-event');
+    }
+
+    // Settings as in the Microsoft Store package: only this app instance's answer changes.
+    await app.evaluate(({ ipcMain }) => {
+      ipcMain.removeHandler('get-settings');
+      ipcMain.handle('get-settings', () => ({ allowPrerelease: false, isWindowsStore: true }));
+    });
+    await page.click('.wm-titlebar-button-settings');
+    await page.waitForSelector('.wm-settings-row-action');
+    for (const theme of THEMES) {
+      await page.emulateMedia({ colorScheme: theme });
+      await shoot(page, language, 'settings-store', theme, report);
     }
   } finally {
     await app.close();

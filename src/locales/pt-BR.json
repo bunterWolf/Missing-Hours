@@ -1,5 +1,5 @@
 {
-  "tracking": "Registro",
+  "tracking": "Registrando",
   "paused": "Pausado",
   "summaryActive": "Ativo",
   "summaryInactive": "Inativo",
@@ -50,8 +50,7 @@
   "timeFormats": {
     "today": "Hoje",
     "yesterday": "Ontem",
-    "weekday": "{{date, weekday}}",
-    "dateShort": "{{date, dateShort}}",
+    "dateLabel": "{{date, dateLabel}}",
     "time": "{{time, time}}",
     "durationHoursMinutes": "{{hours}}h {{minutes}}min",
     "durationMinutes": "{{minutes}} min"

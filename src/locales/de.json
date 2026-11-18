@@ -50,8 +50,7 @@
   "timeFormats": {
     "today": "Heute",
     "yesterday": "Gestern",
-    "weekday": "{{date, weekday}}",
-    "dateShort": "{{date, dateShort}}",
+    "dateLabel": "{{date, dateLabel}}",
     "time": "{{time, time}}",
     "durationHoursMinutes": "{{hours}}h {{minutes}}m",
     "durationMinutes": "{{minutes}}m"

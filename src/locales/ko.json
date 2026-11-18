@@ -1,5 +1,5 @@
 {
-  "tracking": "기록",
+  "tracking": "기록 중",
   "paused": "일시 중지됨",
   "summaryActive": "활동",
   "summaryInactive": "휴식",
@@ -50,8 +50,7 @@
   "timeFormats": {
     "today": "오늘",
     "yesterday": "어제",
-    "weekday": "{{date, weekday}}",
-    "dateShort": "{{date, dateShort}}",
+    "dateLabel": "{{date, dateLabel}}",
     "time": "{{time, time}}",
     "durationHoursMinutes": "{{hours}}시간 {{minutes}}분",
     "durationMinutes": "{{minutes}}분"
