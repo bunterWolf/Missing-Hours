@@ -7,6 +7,7 @@ import SettingsView from './settings/SettingsView';
 import WindowTitleBar from './window/WindowTitleBar';
 import { ipcRenderer } from 'electron';
 import i18n from '../i18n';
+import { formatDuration as formatDurationIn } from '../i18n/duration';
 import { toLocalDateKey } from './dateKey';
 import '../styles/tokens.css';
 import '../styles/typography.css';
@@ -30,21 +31,8 @@ const App = () => {
   // Which view fills the window below the title bar: the day timeline or the settings.
   const [view, setView] = useState('day'); // 'day' | 'settings'
 
-  // Format duration in milliseconds to human-readable string
-  const formatDuration = (ms) => {
-    if (!ms) return '0m';
-    
-    const seconds = Math.floor(ms / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    
-    if (hours > 0) {
-      const remainingMinutes = minutes % 60;
-      return `${hours}h ${remainingMinutes}m`;
-    }
-    
-    return `${minutes}m`;
-  };
+  // Duration in milliseconds as the UI shows it, in the UI language
+  const formatDuration = (ms) => formatDurationIn(ms, i18n.t);
 
   // Handle date changes
   const handleDateChange = (newDate) => {
@@ -159,7 +147,7 @@ const App = () => {
   // Compute summary information
   const getSummary = () => {
     if (!activityData || !activityData.aggregated || !activityData.aggregated.summary) {
-      return { active: '0m', inactive: '0m', tracked: '0m' };
+      return { active: formatDuration(0), inactive: formatDuration(0), tracked: formatDuration(0) };
     }
     
     const { summary } = activityData.aggregated;
@@ -191,7 +179,6 @@ const App = () => {
               onDateChange={handleDateChange}
               isTracking={isTracking}
               onToggleTracking={toggleTracking}
-              isMockData={isMockData}
               aggregationInterval={aggregationInterval}
               onIntervalChange={handleIntervalChange}
             />

@@ -12,6 +12,7 @@ Missing Hours is an Electron-based desktop application designed to track and ana
 - **Activity Summary**: See total active and inactive time at a glance
 - **Pause/Resume**: Control when tracking occurs
 - **Local Data Storage**: All your data stays on your computer
+- **12 Languages**: English, German, French, Spanish, Italian, Portuguese (Brazil), Dutch, Polish, Japanese, Korean, Simplified and Traditional Chinese; follows the Windows display language
 - **Cross-Platform**: Works on Windows and macOS
 - **Automatic Updates**: Seamlessly receive and install new versions
 

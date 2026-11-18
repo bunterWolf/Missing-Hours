@@ -21,6 +21,7 @@
     "dist:store": "npm run build && electron-builder --win appx",
     "generate:mock": "ts-node scripts/generate-mock-data.ts",
     "icons": "node scripts/generate-icons.js",
+    "screenshots": "npm run generate:mock && tsc && webpack --config webpack.config.js && node scripts/screenshots.js",
     "release": "node scripts/release.js",
     "release:beta": "node scripts/release-beta.js",
     "beta:create": "node scripts/create-beta-branch.js"
@@ -147,8 +148,18 @@
       "displayName": "Missing Hours",
       "backgroundColor": "transparent",
       "languages": [
+        "en-US",
         "de-DE",
-        "en-US"
+        "fr-FR",
+        "es-ES",
+        "it-IT",
+        "pt-BR",
+        "nl-NL",
+        "pl-PL",
+        "ja-JP",
+        "ko-KR",
+        "zh-CN",
+        "zh-TW"
       ],
       "minVersion": "10.0.17763.0",
       "maxVersionTested": "10.0.26100.0",
@@ -190,6 +201,7 @@
     "electron-reload": "^2.0.0-alpha.1",
     "html-webpack-plugin": "^5.6.3",
     "jest": "^30.4.2",
+    "playwright-core": "1.64.1",
     "standard-version": "^9.5.0",
     "style-loader": "^3.3.3",
     "ts-jest": "^29.4.11",

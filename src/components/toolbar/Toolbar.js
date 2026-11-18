@@ -11,7 +11,6 @@ export default function Toolbar({
   onDateChange,
   isTracking,
   onToggleTracking,
-  isMockData,
   aggregationInterval = 15,
   onIntervalChange,
 }) {
@@ -20,8 +19,8 @@ export default function Toolbar({
       <DateNav selectedDate={selectedDate} availableDates={availableDates} onDateChange={onDateChange} />
       <div className="wm-toolbar-controls">
         <IntervalPicker value={aggregationInterval} onChange={onIntervalChange} />
-        {/* No tracking toggle in mock mode: nothing is being tracked. */}
-        {!isMockData && <TrackingButton isTracking={isTracking} onToggle={onToggleTracking} />}
+        {/* In mock data mode it only switches a flag in the main process (nothing is tracked) */}
+        <TrackingButton isTracking={isTracking} onToggle={onToggleTracking} />
       </div>
     </header>
   );
