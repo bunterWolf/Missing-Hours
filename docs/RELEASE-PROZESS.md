@@ -13,22 +13,46 @@ Lokal wird nichts veröffentlicht.
 
 ## Stabiler Release
 
+Ein stabiler Release veröffentlicht den Stand der letzten Beta. Neue Arbeit geht also zuerst als Beta
+raus ([BETA-RELEASE-PROZESS.md](BETA-RELEASE-PROZESS.md)), danach wird genau dieser Stand stabil.
+Er erscheint sofort als reguläres Release, nicht als Entwurf, und alle Benutzer erhalten ihn über den
+Auto-Updater, auch die ohne Beta-Kanal. Zurücknehmen lässt er sich nicht.
+
+So lief `1.0.0` am 2026-11-16, der erste stabile Release:
+
 ```bash
-git checkout main
-git status   # muss sauber sein
-npm run release
+git checkout beta/v0.0.2
+git pull origin beta/v0.0.2
+git fetch origin && git merge-base --is-ancestor origin/main HEAD   # main lässt sich vorspulen
+npm test
+npx standard-version --release-as 1.0.0 --dry-run   # Version und Changelog prüfen
+npx standard-version --release-as 1.0.0             # Version, Changelog, Build mit Tests, Commit, Tag
+git push --follow-tags origin beta/v0.0.2
+git push origin beta/v0.0.2:main                    # Git Bash: MSYS_NO_PATHCONV=1 davor
 ```
 
-Das Skript läuft nur auf `main`. Es erhöht die Version, schreibt den Changelog, führt den Build mit
-Tests aus, committet, taggt und pusht.
+Danach wie bei einer Beta prüfen: Lauf in GitHub Actions, Dateien im Release, `latest.yml` und
+`latest-mac.yml`. Bei stabilen Releases zusätzlich das Artefakt `microsoft-store-package` am Lauf.
 
-Ein stabiler Release wird sofort als reguläres Release veröffentlicht, nicht als Entwurf. Alle
-Benutzer erhalten ihn über den Auto-Updater.
+**Version wählen:**
+- Ohne `--release-as` zählt standard-version von der Beta aus weiter: aus `1.1.0-beta.3` wird `1.1.0`,
+  solange seit dieser Beta keine `feat`-Commits dazukamen. Der Dry-Run zeigt die Version vorher.
+- Für einen Sprung auf eine neue Haupt- oder Nebenversion `--release-as` angeben, zum Beispiel
+  `--release-as 2.0.0` oder `--release-as minor`. Ohne die Angabe wäre aus `0.0.2-beta.12` die
+  Version `0.0.2` geworden, nicht `1.0.0`.
+- Soll die Version in den Microsoft Store, muss sie mit mindestens `1` beginnen (`1.0.0`, nicht `0.x`).
+  Das Einreichen steht in [MICROSOFT-STORE.md](MICROSOFT-STORE.md).
 
-> Dieser Weg wurde bisher noch nicht mit einem echten stabilen Release durchlaufen.
+**Changelog:** standard-version nimmt die Commits seit dem letzten Tag, auch wenn das eine Beta ist. Der
+Eintrag des stabilen Release enthält darum nur, was nach der letzten Beta dazukam. Alles davor steht
+in den Beta-Einträgen darunter.
 
-Soll die Version in den Microsoft Store, muss sie mit mindestens `1` beginnen (`1.0.0`, nicht `0.x`).
-Das Einreichen steht in [MICROSOFT-STORE.md](MICROSOFT-STORE.md).
+**`npm run release`** macht dasselbe ohne `--release-as`, läuft aber nur auf einem ausgecheckten `main`
+und pusht `main` statt des Beta-Branches. Den Beta-Branch danach auf `main` vorspulen, sonst zählt die
+nächste Beta von einer alten Version aus.
+
+**Nach einem stabilen Release** zählen die nächsten Betas von der stabilen Version aus weiter (aus
+`1.0.0` wird zum Beispiel `1.0.1-beta.0`, mit `feat`-Commits `1.1.0-beta.0`).
 
 ## Technische Details
 

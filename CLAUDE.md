@@ -148,8 +148,9 @@ Mock data exists **only** for development/testing via the `--mock-data` flag. Se
 feature branch --merge--> beta/v0.0.2 --tag--> published beta --fast-forward--> main
 ```
 
-`main` always holds the latest published beta, so it is the place to start from. The app has no
-stable release yet.
+`main` always holds the latest published release (beta or stable), so it is the place to start from.
+The first stable release was `1.0.0`; a stable release publishes the state of the latest beta
+(steps in `docs/RELEASE-PROZESS.md`).
 
 **Starting new work:**
 - Create one branch per topic from the current `origin/main`, named `<type>/<short-topic>`
