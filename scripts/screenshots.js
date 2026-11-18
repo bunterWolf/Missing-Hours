@@ -69,11 +69,19 @@ const CHECKED_TEXT = [
 function findLayoutProblems(selectors) {
   const problems = [];
   const describe = (el) => `${el.className.split(' ')[0]} "${el.textContent.trim()}"`;
+  // Measured with the ellipsis switched off: an ellipsized text reports only its visible part.
   const textRects = (el) => {
+    const { textOverflow } = el.style;
+    el.style.textOverflow = 'clip';
     const range = document.createRange();
     range.selectNodeContents(el);
-    return [...range.getClientRects()].filter((r) => r.width > 0);
+    const rects = [...range.getClientRects()].filter((r) => r.width > 0);
+    el.style.textOverflow = textOverflow;
+    return rects;
   };
+  // Next to the sample-data hint (development only) the footer is narrower than in the real app;
+  // the long-day shot checks the footer without it.
+  const devFooter = Boolean(document.querySelector('.wm-footer-mock'));
   const visibleArea = (el) => {
     const scroller = el.closest('.wm-timeline');
     return scroller ? scroller.getBoundingClientRect() : { top: 0, left: 0, right: innerWidth, bottom: innerHeight };
@@ -83,6 +91,7 @@ function findLayoutProblems(selectors) {
     const rects = textRects(el);
     const style = getComputedStyle(el);
     if (!el.textContent.trim() || !rects.length || style.visibility !== 'visible') continue;
+    if (devFooter && el.closest('.wm-footer')) continue;
     const box = el.getBoundingClientRect();
     const contentWidth = box.width - parseFloat(style.paddingLeft) - parseFloat(style.paddingRight);
     const textWidth = Math.max(...rects.map((r) => r.right)) - Math.min(...rects.map((r) => r.left));
