@@ -266,6 +266,35 @@ src/components/
 - **Footer**: the centered day summary *Active · Inactive · Tracked*, calculated from the aggregated summary data. The Settings view is opened (and closed again) with the `…` button in the title bar.
 - **Settings view** (replaces the former settings modal, same window; the back arrow returns to the Day View): auto-launch toggle, beta-release toggle, appearance (one line: title plus Auto / Light / Dark on the right, aligned with the toggle rows; saved as `themeMode` in `settings.json`; the main process applies it to `nativeTheme.themeSource` before the window paints, so `prefers-color-scheme` and the window background follow; IPC `get-theme-mode` / `set-theme-mode`), activity-file location (change, reset, adopt an existing file; the confirmation appears inline), placeholder link and app version. The auto-delete setting is not part of the UI; the store deletes data after a fixed 30 days.
 
+#### 2.5.3 Internationalization (i18n)
+
+All UI texts come from i18next (`src/i18n/index.js`), one JSON file per language in `src/locales/`.
+Rules for changes are in CLAUDE.md, section "Multilingual".
+
+- **Languages (12):** `en` (reference and fallback), `de`, `fr`, `es`, `it`, `pt-BR`, `nl`, `pl`, `ja`, `ko`,
+  `zh-Hans`, `zh-Hant`. No right-to-left languages yet (the layout is not mirrored). The Microsoft Store
+  package lists the matching package languages (`package.json` `build.appx.languages`).
+- **UI language** (`resolveLanguage` in `src/i18n/languages.js`): the first supported language among
+  `--lang=<locale>` (command line, for screenshots and testing), the Windows display languages in order
+  (`app.getPreferredSystemLanguages()`), `app.getLocale()` and `navigator.language`; otherwise English.
+  Chinese goes by script, without one by region (`TW`, `HK`, `MO` → `zh-Hant`, otherwise `zh-Hans`); every
+  Portuguese variant → `pt-BR`. `<html lang>` is set to the UI language (screen readers, and the right CJK
+  glyphs, since Chinese and Japanese share code points).
+- **Formats:** dates and times use the UI language with the system region (`app.getSystemLocale()`, or the
+  region of `--lang`), e.g. English UI on a German system → `en-DE`: English month names, 24-hour clock.
+  The hour labels of the timeline show `09:00` on a 24-hour clock and only the hour on a 12-hour clock
+  (`9 AM`, `오전 9시`), because the gutter is narrow. The date label omits the year in the current year.
+- **Durations** (`formatDuration` in `src/i18n/duration.js`): whole minutes rounded down, hours = minutes / 60
+  rounded down, empty or invalid → 0 minutes; the wording comes from `timeFormats.durationHoursMinutes` and
+  `timeFormats.durationMinutes`, compact by intent (`1h 15m` in German and English, `1h 15min`, `1時間15分`).
+  Only the presentation is translated; the numbers are the same in every language.
+- **Tests:** `src/i18n/locales.test.js` (every language has exactly the keys and placeholders of `en`, no
+  empty texts, every language in the Store package), `languages.test.js`, `duration.test.js`.
+- **Layout check:** `npm run screenshots` (`scripts/screenshots.js`) starts the app with sample data per
+  language in the region of its package language, with its own temporary userData folder, and saves
+  today, the sample day, the open zoom choice, a long day in the footer and the settings, light and dark,
+  to `screenshots/<lang>/`. It fails on texts that are cut off (measured unrounded), wrap, or are covered.
+
 #### 2.5.4 Development & Debugging
 
 - All components written as plain JavaScript React functional components (the backend is TypeScript)
@@ -278,6 +307,8 @@ src/components/
     src/
       ├── main/              # Electron main process
       ├── renderer/          # React entry (index.html / index.js)
+      ├── i18n/              # i18next setup, language detection, formats (see 2.5.3)
+      ├── locales/           # One JSON file per UI language
       ├── components/        # React components by area (ui, window, toolbar, timeline, footer, settings)
       ├── styles/            # tokens.css, typography.css, base.css
       ├── assets/            # logos and SVG icons (assets/icons)

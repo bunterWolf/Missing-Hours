@@ -37,7 +37,12 @@ enthält die Checkliste für spätere Figma-Änderungen. Hintergrund und Entsche
   Konstanten tragen das Präfix `--tl-`.
 - **Theme:** Light in `:root`, Dark per `@media (prefers-color-scheme: dark)`. Die Einstellung Darstellung (Auto / Hell / Dunkel) setzt im Main-Prozess `nativeTheme.themeSource`; das CSS kennt keinen eigenen Schalter.
 - **Schrift:** Inter 500/600 lokal über `@fontsource/inter` (`base.css`), kein CDN. Alle Textklassen nutzen
-  `text-box: trim-both cap alphabetic`.
+  `text-box: trim-both cap alphabetic`. Chinesisch, Japanisch und Koreanisch fallen auf die Systemschrift
+  (`system-ui`) zurück; welche, entscheidet `<html lang>`.
+- **Texte:** Figma zeigt Deutsch oder Englisch, die App läuft in 12 Sprachen (`src/locales/`, Regeln in
+  CLAUDE.md „Multilingual“). Ein Layout muss deutlich längere Texte (Polnisch, Französisch) und CJK-Zeichen
+  aushalten; Platz für Labels nie auf den deutschen oder englischen Text zuschneiden. Prüfen mit
+  `npm run screenshots`.
 
 ## 3. Variablen → Tokens (`src/styles/tokens.css`)
 
@@ -216,4 +221,5 @@ Kontrast mindestens 4,5:1 beträgt. Prüfwerte:
    Mit den DevTools nachmessen: Event-Spalte 76/24 px und Versatz 1 px, Label 23/6/12 px,
    Halbstunden-Marker 49/11 px, Scrollbar 14/5/4 px, Toolbar 60 px, Titelleiste 32 px, Footer 41 px. Event-Farben
    gegen die Prüfwerte (Abschnitt 5) und die Intervalle 5/10/15m (Stundenhöhen 288/144/96 px) prüfen. Auto-Scroll und
-   Tracking-Titel zusätzlich im echten Tracking (`npm run dev`) testen. Danach `npm test`.
+   Tracking-Titel zusätzlich im echten Tracking (`npm run dev`) testen. Danach `npm test` und
+   `npm run screenshots` (alle 12 Sprachen; neue oder geänderte Texte in allen Sprachdateien).

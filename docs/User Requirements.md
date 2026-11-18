@@ -34,6 +34,7 @@
 - The user must be able to retrieve their data unchanged after a system crash or restart, to avoid losing information.
 - The user must be able to trust that the application resumes tracking automatically after sleep mode, to ensure no activities are missed.
 - The user must be able to use the application across different operating systems (Windows, macOS, Linux) to remain independent of their preferred OS.
+- The user must see the application in their Windows display language (English, German, French, Spanish, Italian, Portuguese (Brazil), Dutch, Polish, Japanese, Korean, Simplified and Traditional Chinese; otherwise English), with dates, times and durations as they are used in their region, so they can read their day without translating it. Every text must be fully visible in every language.
 
 ### Data Portability
 - The user MUST be able to relocate their data storage folder (e.g. to a Google Drive folder) in order to synchronize their data across multiple devices and get a complete picture of their digital activities.
