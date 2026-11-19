@@ -48,7 +48,10 @@ body {
 .copy { position: absolute; left: 120px; top: 150px; width: 720px; }
 .headline { font-size: 64px; line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; margin: 0 0 32px; }
 :lang(ja) .headline, :lang(ko) .headline, :lang(zh-Hans) .headline, :lang(zh-Hant) .headline { letter-spacing: 0; line-height: 1.2; }
-.subline { font-size: 28px; line-height: 1.4; font-weight: 400; margin: 0; color: var(--text-muted); }
+.subline { font-size: 28px; line-height: 1.4; font-weight: 400; margin: 0; color: var(--text-muted); text-wrap: pretty; }
+.headline { text-wrap: balance; }
+/* Japanese: break between phrases (bunsetsu), not inside words. */
+:lang(ja) .headline, :lang(ja) .subline { word-break: auto-phrase; }
 
 .brand { position: absolute; left: 120px; bottom: 96px; display: flex; align-items: center; gap: 16px; font-size: 24px; font-weight: 600; }
 .brand img { width: 44px; height: 44px; }
