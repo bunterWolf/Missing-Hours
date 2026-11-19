@@ -32,6 +32,10 @@ Die Microsoft-Store-Version wird über den Microsoft Store aktualisiert, es gelt
 von Microsoft. Die Version von GitHub fragt bei GitHub nach neuen Versionen. Dabei werden nur die üblichen
 technischen Verbindungsdaten (zum Beispiel deine IP-Adresse) an GitHub übertragen, keine aufgezeichneten Daten.
 
+**Website**
+Ein Klick auf www.missing-hours.app in den Einstellungen öffnet die Website in deinem Browser. Die App überträgt
+dabei keine Daten.
+
 **Kontakt**
 Fragen zum Datenschutz kannst du als Issue unter https://github.com/bunterWolf/Missing-Hours/issues stellen.
 
@@ -52,8 +56,8 @@ keep track of your working time.
 All data is stored only on your computer. Missing Hours does not send any recorded data to any server, neither
 to us nor to third parties. There are no analytics or telemetry services, no ads and no user account.
 
-If you choose your own storage location in the settings (for example a synced folder like OneDrive or
-Dropbox), the data is stored there, and that service's terms apply.
+If you chose your own storage location in an older version (for example a synced folder like OneDrive or
+Dropbox), the data stays there, and that service's terms apply.
 
 **How long the data is kept**
 Missing Hours deletes recorded days automatically after 30 days. When you uninstall the Microsoft Store version,
@@ -63,6 +67,9 @@ Windows may also remove its data in the default storage location.
 The Microsoft Store version is updated through the Microsoft Store, under Microsoft's privacy terms. The
 version from GitHub asks GitHub for new versions. Only the usual technical connection data (such as your IP
 address) is sent to GitHub, no recorded data.
+
+**Website**
+Clicking www.missing-hours.app in the settings opens the website in your browser. The app sends no data with it.
 
 **Contact**
 Questions about privacy can be raised as an issue at https://github.com/bunterWolf/Missing-Hours/issues.
