@@ -106,6 +106,12 @@ async function loadAppIcon(exePath: string): Promise<Electron.NativeImage | null
 
 // Check for the mock data flag
 const useMockData = process.argv.includes('--mock-data');
+// Another sample data file (store screenshots), read only together with --mock-data: a value on the
+// flag itself (--mock-data=<file>) would not count as mock data mode and would track for real.
+const MOCK_DATA_FILE_FLAG = '--mock-data-file=';
+const mockDataFile = useMockData
+  ? process.argv.find((arg) => arg.startsWith(MOCK_DATA_FILE_FLAG))?.slice(MOCK_DATA_FILE_FLAG.length) ?? null
+  : null;
 
 // Take over the data of the Workmory versions before the rename. Runs before the instance lock and the
 // stores, which all live in userData. If copying fails, keep using the old folder so no tracked data is hidden.
@@ -249,7 +255,8 @@ async function initializeTracking(): Promise<void> { // Add return type Promise<
   try {
       // Create ActivityStore instance with mock data flag
       activityStore = new ActivityStore({
-        useMockData: useMockData
+        useMockData: useMockData,
+        mockDataPath: mockDataFile
         // Pass storagePath if needed
       });
       console.log("ActivityStore created.");

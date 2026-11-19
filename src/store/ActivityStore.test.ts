@@ -380,3 +380,38 @@ describe('ActivityStore Aufräumen', () => {
     }
   });
 });
+
+// Store screenshots load their own sample day: --mock-data --mock-data-file=<path> (see main.ts).
+describe('ActivityStore mock data from a given file', () => {
+  const os = require('os');
+  let dir: string;
+  let mockDataPath: string;
+
+  beforeEach(() => {
+    dir = fs.mkdtempSync(path.join(os.tmpdir(), 'mh-mockfile-'));
+    mockDataPath = path.join(dir, 'demo.json');
+    const start = new Date(2025, 2, 4, 9, 0, 15).getTime();
+    const heartbeats = Array.from({ length: 10 }, (_, i) => ({
+      timestamp: start + i * 30000,
+      data: { userActivity: 'active', appWindow: { app: 'Word', title: 'Demo.docx' } },
+    }));
+    fs.writeFileSync(mockDataPath, JSON.stringify({
+      version: 1, startTime: start, lastCleanup: start, aggregationInterval: 15,
+      days: { '2025-03-04': { heartbeats } },
+    }));
+  });
+
+  afterEach(() => {
+    fs.rmSync(dir, { recursive: true, force: true });
+  });
+
+  it('loads mock data from mockDataPath when given', () => {
+    const store = new ActivityStore({ useMockData: true, mockDataPath });
+    expect(store.getAvailableDates()).toContain('2025-03-04');
+  });
+
+  it('ignores mockDataPath without useMockData', () => {
+    const store = new ActivityStore({ useMockData: false, mockDataPath, storagePath: path.join(dir, 'store.json') });
+    expect(store.getAvailableDates()).not.toContain('2025-03-04');
+  });
+});
