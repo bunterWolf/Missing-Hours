@@ -65,6 +65,10 @@ unvirtualisierte Dateien). Einen eigenen Speicherort kann man in den Einstellung
 4. **Im Partner Center einreichen:** Produkt öffnen > **Einreichung starten** (bei Updates: Einreichung
    aktualisieren) > unter **Pakete** die `.appx` hochladen > Einreichung abschicken. Die Prüfung dauert
    meist ein bis drei Werktage.
+5. **Store-Bilder,** wenn sich die Oberfläche oder die Store-Texte geändert haben: `npm run store-screenshots`,
+   die Bilder in `store-screenshots/microsoft/<sprache>/` ansehen (mindestens `de`, `en`, `pl`, `ja`, `zh-Hant`)
+   und in der Einreichung unter **Store-Einträge** pro Sprache ersetzen; Texte und Bildunterschriften aus
+   `listing.md` daneben.
 
 ## Angaben für die erste Einreichung
 
