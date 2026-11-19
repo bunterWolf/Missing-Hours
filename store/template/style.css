@@ -1,0 +1,63 @@
+/* Store image: 1536 x 864 CSS px, rendered at scale 2.5 = 3840 x 2160 (store/template/render.js).
+   The app window is placed 1:1 (437 x 720 CSS px, captured at 250 %). Colors follow the app icon
+   (warm off-white #f8f7f5, near black); the color in the image comes from the programs in the timeline. */
+
+/* Inter from @fontsource/inter (bundled, no CDN); ranges as in its latin.css / latin-ext.css. */
+@font-face { font-family: Inter; font-weight: 400; src: url("../../node_modules/@fontsource/inter/files/inter-latin-400-normal.woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: Inter; font-weight: 400; src: url("../../node_modules/@fontsource/inter/files/inter-latin-ext-400-normal.woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: Inter; font-weight: 600; src: url("../../node_modules/@fontsource/inter/files/inter-latin-600-normal.woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: Inter; font-weight: 600; src: url("../../node_modules/@fontsource/inter/files/inter-latin-ext-600-normal.woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+@font-face { font-family: Inter; font-weight: 700; src: url("../../node_modules/@fontsource/inter/files/inter-latin-700-normal.woff2"); unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD; }
+@font-face { font-family: Inter; font-weight: 700; src: url("../../node_modules/@fontsource/inter/files/inter-latin-ext-700-normal.woff2"); unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF; }
+
+:root {
+  --canvas-width: 1536px;
+  --canvas-height: 864px;
+  --text: #0d0d0d;
+  --text-muted: #55524c;
+  --bg-glow: #ffffff;
+  --bg-from: #f8f7f5;
+  --bg-to: #efece7;
+  --window-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08), 0 2px 6px rgba(0, 0, 0, 0.06), 0 24px 64px rgba(0, 0, 0, 0.16);
+  --font: Inter, system-ui, sans-serif;
+}
+.dark {
+  --text: #f5f5f5;
+  --text-muted: #b4b0a8;
+  --bg-glow: #26241f;
+  --bg-from: #161513;
+  --bg-to: #0a0a0a;
+  --window-shadow: 0 0 0 1px rgba(255, 255, 255, 0.10), 0 24px 64px rgba(0, 0, 0, 0.6);
+}
+/* CJK: Inter for Latin letters and digits, then the Windows UI font of the language. */
+:lang(ja) { --font: Inter, "Yu Gothic UI", "Meiryo UI", sans-serif; }
+:lang(ko) { --font: Inter, "Malgun Gothic", sans-serif; }
+:lang(zh-Hans) { --font: Inter, "Microsoft YaHei UI", "Microsoft YaHei", sans-serif; }
+:lang(zh-Hant) { --font: Inter, "Microsoft JhengHei UI", "Microsoft JhengHei", sans-serif; }
+
+html, body { margin: 0; width: var(--canvas-width); height: var(--canvas-height); overflow: hidden; }
+body {
+  position: relative;
+  font-family: var(--font);
+  color: var(--text);
+  background:
+    radial-gradient(1100px 700px at 78% 30%, var(--bg-glow) 0%, transparent 70%),
+    linear-gradient(160deg, var(--bg-from) 0%, var(--bg-to) 100%);
+}
+
+.copy { position: absolute; left: 120px; top: 150px; width: 720px; }
+.headline { font-size: 64px; line-height: 1.08; font-weight: 700; letter-spacing: -0.025em; margin: 0 0 32px; }
+:lang(ja) .headline, :lang(ko) .headline, :lang(zh-Hans) .headline, :lang(zh-Hant) .headline { letter-spacing: 0; line-height: 1.2; }
+.subline { font-size: 28px; line-height: 1.4; font-weight: 400; margin: 0; color: var(--text-muted); }
+
+.brand { position: absolute; left: 120px; bottom: 96px; display: flex; align-items: center; gap: 16px; font-size: 24px; font-weight: 600; }
+.brand img { width: 44px; height: 44px; }
+
+.window { position: absolute; width: 437px; height: 720px; border-radius: 8px; overflow: hidden; box-shadow: var(--window-shadow); }
+.window img { display: block; width: 100%; height: 100%; }
+.window.is-dark { --window-shadow: 0 0 0 1px rgba(255, 255, 255, 0.10), 0 24px 64px rgba(0, 0, 0, 0.45); }
+
+.layout-screenshot .window { right: 150px; top: 72px; }
+/* Hero (16:9 Super hero art): no text, no product name (Partner Center rule); two windows. */
+.layout-hero .window:nth-of-type(1) { left: 420px; top: 112px; }
+.layout-hero .window:nth-of-type(2) { left: 680px; top: 72px; }
