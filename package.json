@@ -21,6 +21,7 @@
     "dist:store": "npm run build && electron-builder --win appx",
     "generate:mock": "ts-node scripts/generate-mock-data.ts",
     "icons": "node scripts/generate-icons.js",
+    "store-screenshots": "tsc && webpack --config webpack.config.js && node scripts/store-screenshots.js",
     "screenshots": "npm run generate:mock && tsc && webpack --config webpack.config.js && node scripts/screenshots.js",
     "release": "node scripts/release.js",
     "release:beta": "node scripts/release-beta.js",

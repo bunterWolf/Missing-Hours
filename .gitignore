@@ -93,3 +93,6 @@ public/mock-data.json
 
 # Layout screenshots (npm run screenshots)
 screenshots/
+
+# Store images (npm run store-screenshots)
+store-screenshots/
