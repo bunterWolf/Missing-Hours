@@ -112,7 +112,9 @@ Das Paket landet in `release/<version>/Missing-Hours-Store-<version>-x64.appx`.
 
 Die Kacheln in `resources/appx/` (StoreLogo 50, Square44x44, Square150x150, Wide310x150) erzeugt
 `npm run icons` aus `resources/icon-source/icon.svg`, nicht von Hand bearbeiten. Für die Store-Einträge im
-Partner Center (Logos unter **Store-Einträge**) lässt sich `resources/icon.png` (1024 × 1024) hochladen.
+Partner Center (Logos unter **Store-Einträge**) gilt bei Apps nur das 1:1-App-Kachelsymbol (300 × 300):
+`resources/store/AppTileIcon-300.png`, ebenfalls von `npm run icons`. Box-Art und Poster-Art sind laut Microsoft nur
+für Spiele.
 
 **Bekanntes lokales Problem:** Auf manchen Rechnern startet `makeappx.exe` aus dem electron-builder-Cache
 nicht (`spawn UNKNOWN`, im Ereignisprotokoll „Side-by-Side-Konfiguration ungültig“). Eine Kopie des Ordners
