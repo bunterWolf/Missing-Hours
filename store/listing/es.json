@@ -1,8 +1,8 @@
 {
   "shortDescription": "Registro automático del tiempo en tu PC. Missing Hours registra en qué trabajas y muestra tu día como una línea de tiempo. Todo se queda en tu ordenador.",
-  "description": "Missing Hours registra automáticamente qué programas y ventanas usas y cuándo no estás delante del ordenador. Con ello crea una línea de tiempo clara de cada día, para que puedas revisar tus horas de trabajo y emitir facturas sin poner en marcha un cronómetro.\n\n• Funciona en segundo plano y se inicia con Windows\n• Detecta pausas y ausencias automáticamente\n• Línea de tiempo diaria con los iconos de tus programas\n• Tema claro y oscuro\n• La privacidad primero: sin nube, sin cuenta, sin telemetría. Tus datos nunca salen de tu ordenador.",
+  "description": "Missing Hours registra automáticamente qué programas y ventanas usas y cuándo no estás delante del ordenador. Con ello crea una línea de tiempo clara de cada día, para que puedas revisar tus horas de trabajo y emitir facturas sin poner en marcha un cronómetro.\n\n• Se inicia con Windows y registra discretamente mientras trabajas\n• Detecta pausas y ausencias automáticamente\n• Línea de tiempo diaria con los iconos de tus programas\n• Tema claro y oscuro\n• La privacidad primero: sin nube, sin cuenta, sin telemetría. Tus datos nunca salen de tu ordenador.",
   "features": [
-    "Funciona en segundo plano y se inicia con Windows",
+    "Se inicia con Windows y registra discretamente mientras trabajas",
     "Detecta pausas y ausencias automáticamente",
     "Línea de tiempo diaria con los iconos de tus programas",
     "Tema claro y oscuro",
@@ -19,7 +19,7 @@
   ],
   "screenshots": {
     "timeline": {
-      "headline": "¿Dónde se fueron tus horas?",
+      "headline": "¿Adónde se fueron tus horas?",
       "subline": "Missing Hours registra tu jornada automáticamente, programa a programa, sin cronómetro.",
       "caption": "Tu día como línea de tiempo: Missing Hours registra los programas que usas, con sus iconos y colores, y detecta las pausas por sí solo."
     },

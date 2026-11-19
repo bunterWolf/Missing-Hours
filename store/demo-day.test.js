@@ -24,6 +24,11 @@ it('demoDate returns the last Tuesday before today', () => {
   expect(demoDate(new Date(2026, 10, 17, 10))).toEqual(new Date(2026, 10, 10));
 });
 
+// The date label shows "Yesterday" for yesterday; the images should show a weekday date.
+it('demoDate never returns yesterday', () => {
+  expect(demoDate(new Date(2026, 10, 18, 10))).toEqual(new Date(2026, 10, 10));
+});
+
 it('expandWindowsPath replaces %VARS%', () => {
   expect(expandWindowsPath('%LOCALAPPDATA%\\Figma\\Figma.exe', { LOCALAPPDATA: 'C:\\U\\L' }))
     .toBe('C:\\U\\L\\Figma\\Figma.exe');

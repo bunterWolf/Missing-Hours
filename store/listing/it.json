@@ -1,8 +1,8 @@
 {
   "shortDescription": "Registrazione automatica del tempo sul tuo PC. Missing Hours registra su cosa lavori e mostra la tua giornata come una timeline. Tutto resta sul tuo computer.",
-  "description": "Missing Hours registra automaticamente quali programmi e finestre usi e quando non sei al computer. Ne ricava una timeline chiara per ogni giornata, così puoi ricostruire le ore di lavoro e scrivere fatture senza avviare un cronometro.\n\n• Funziona in background e si avvia con Windows\n• Riconosce automaticamente pause e assenze\n• Timeline giornaliera con le icone dei tuoi programmi\n• Tema chiaro e scuro\n• Privacy prima di tutto: niente cloud, niente account, niente telemetria. I tuoi dati non lasciano mai il tuo computer.",
+  "description": "Missing Hours registra automaticamente quali programmi e finestre usi e quando non sei al computer. Ne ricava una timeline chiara per ogni giornata, così puoi ricostruire le ore di lavoro e scrivere fatture senza avviare un cronometro.\n\n• Si avvia con Windows e registra in silenzio mentre lavori\n• Riconosce automaticamente pause e assenze\n• Timeline giornaliera con le icone dei tuoi programmi\n• Tema chiaro e scuro\n• Privacy prima di tutto: niente cloud, niente account, niente telemetria. I tuoi dati non lasciano mai il tuo computer.",
   "features": [
-    "Funziona in background e si avvia con Windows",
+    "Si avvia con Windows e registra in silenzio mentre lavori",
     "Riconosce automaticamente pause e assenze",
     "Timeline giornaliera con le icone dei tuoi programmi",
     "Tema chiaro e scuro",

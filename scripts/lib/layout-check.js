@@ -39,8 +39,9 @@ function findLayoutProblems(selectors) {
     return rects;
   };
   // Next to the sample-data hint (development only) the footer is narrower than in the real app;
-  // the long-day shot checks the footer without it.
-  const devFooter = Boolean(document.querySelector('.wm-footer-mock'));
+  // the long-day shot checks the footer without it, the Store images hide the hint (display: none).
+  const mockHint = document.querySelector('.wm-footer-mock');
+  const devFooter = Boolean(mockHint) && getComputedStyle(mockHint).display !== 'none';
   const visibleArea = (el) => {
     const scroller = el.closest('.wm-timeline');
     return scroller ? scroller.getBoundingClientRect() : { top: 0, left: 0, right: innerWidth, bottom: innerHeight };

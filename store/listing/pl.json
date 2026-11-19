@@ -1,8 +1,8 @@
 {
   "shortDescription": "Automatyczna rejestracja czasu na Twoim komputerze. Missing Hours zapisuje, nad czym pracujesz, i pokazuje Twój dzień jako oś czasu. Wszystko zostaje na Twoim komputerze.",
-  "description": "Missing Hours automatycznie rejestruje, z jakich programów i okien korzystasz oraz kiedy nie ma Cię przy komputerze. Na tej podstawie tworzy przejrzystą oś czasu dla każdego dnia, dzięki której odtworzysz godziny pracy i wystawisz faktury bez włączania stopera.\n\n• Działa w tle i uruchamia się razem z systemem Windows\n• Automatycznie wykrywa przerwy i nieobecność\n• Dzienna oś czasu z ikonami Twoich programów\n• Jasny i ciemny motyw\n• Prywatność przede wszystkim: bez chmury, bez konta, bez telemetrii. Twoje dane nigdy nie opuszczają komputera.",
+  "description": "Missing Hours automatycznie rejestruje, z jakich programów i okien korzystasz oraz kiedy nie ma Cię przy komputerze. Na tej podstawie tworzy przejrzystą oś czasu dla każdego dnia, dzięki której odtworzysz godziny pracy i wystawisz faktury bez włączania stopera.\n\n• Uruchamia się razem z systemem Windows i dyskretnie rejestruje Twoją pracę\n• Automatycznie wykrywa przerwy i nieobecność\n• Dzienna oś czasu z ikonami Twoich programów\n• Jasny i ciemny motyw\n• Prywatność przede wszystkim: bez chmury, bez konta, bez telemetrii. Twoje dane nigdy nie opuszczają komputera.",
   "features": [
-    "Działa w tle i uruchamia się razem z systemem Windows",
+    "Uruchamia się razem z systemem Windows i dyskretnie rejestruje Twoją pracę",
     "Automatycznie wykrywa przerwy i nieobecność",
     "Dzienna oś czasu z ikonami Twoich programów",
     "Jasny i ciemny motyw",
@@ -43,7 +43,7 @@
     "titles": {
       "inbox": "Skrzynka odbiorcza – A. Nowak",
       "proposal": "Oferta Kowalski.docx",
-      "research": "Raport logistyka 2026",
+      "research": "Raport logistyczny 2026",
       "calculation": "Kosztorys Kowalski.xlsx",
       "projectFolder": "Projekty › Kowalski",
       "workshop": "Wyniki warsztatu.pptx",

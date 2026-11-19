@@ -1,8 +1,8 @@
 {
   "shortDescription": "Automatic time tracking for your PC. Missing Hours records what you work on and shows your day as a timeline. Everything stays on your computer.",
-  "description": "Missing Hours automatically records which programs and windows you use and when you are away from your computer. It turns this into a clear timeline for every day, so you can review your working hours and write invoices without starting a stopwatch.\n\n• Runs in the background and starts with Windows\n• Detects breaks and absence automatically\n• Daily timeline with your programs' icons\n• Light and dark theme\n• Privacy first: no cloud, no account, no telemetry. Your data never leaves your computer.",
+  "description": "Missing Hours automatically records which programs and windows you use and when you are away from your computer. It turns this into a clear timeline for every day, so you can review your working hours and write invoices without starting a stopwatch.\n\n• Starts with Windows and records quietly while you work\n• Detects breaks and absence automatically\n• Daily timeline with your programs' icons\n• Light and dark theme\n• Privacy first: no cloud, no account, no telemetry. Your data never leaves your computer.",
   "features": [
-    "Runs in the background and starts with Windows",
+    "Starts with Windows and records quietly while you work",
     "Detects breaks and absence automatically",
     "Daily timeline with your programs' icons",
     "Light and dark theme",

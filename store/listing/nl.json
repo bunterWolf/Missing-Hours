@@ -1,8 +1,8 @@
 {
   "shortDescription": "Automatische tijdregistratie voor je pc. Missing Hours legt vast waaraan je werkt en toont je dag als tijdlijn. Alles blijft op je computer.",
-  "description": "Missing Hours registreert automatisch welke programma’s en vensters je gebruikt en wanneer je niet achter je computer zit. Daarvan maakt het voor elke dag een overzichtelijke tijdlijn, zodat je je werkuren kunt nagaan en facturen kunt maken zonder een stopwatch te starten.\n\n• Draait op de achtergrond en start met Windows\n• Herkent pauzes en afwezigheid automatisch\n• Dagelijkse tijdlijn met de pictogrammen van je programma’s\n• Licht en donker thema\n• Privacy voorop: geen cloud, geen account, geen telemetrie. Je gegevens verlaten je computer nooit.",
+  "description": "Missing Hours registreert automatisch welke programma’s en vensters je gebruikt en wanneer je niet achter je computer zit. Daarvan maakt het voor elke dag een overzichtelijke tijdlijn, zodat je je werkuren kunt nagaan en facturen kunt maken zonder een stopwatch te starten.\n\n• Start met Windows en registreert ongemerkt terwijl je werkt\n• Herkent pauzes en afwezigheid automatisch\n• Dagelijkse tijdlijn met de pictogrammen van je programma’s\n• Licht en donker thema\n• Privacy voorop: geen cloud, geen account, geen telemetrie. Je gegevens verlaten je computer nooit.",
   "features": [
-    "Draait op de achtergrond en start met Windows",
+    "Start met Windows en registreert ongemerkt terwijl je werkt",
     "Herkent pauzes en afwezigheid automatisch",
     "Dagelijkse tijdlijn met de pictogrammen van je programma’s",
     "Licht en donker thema",

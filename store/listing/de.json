@@ -1,8 +1,8 @@
 {
   "shortDescription": "Automatische Zeiterfassung für deinen PC. Missing Hours zeichnet auf, woran du arbeitest, und zeigt deinen Tag als Zeitleiste. Alles bleibt lokal auf deinem Computer.",
-  "description": "Missing Hours erfasst automatisch, welche Programme und Fenster du nutzt und wann du nicht am Rechner bist. Daraus entsteht für jeden Tag eine übersichtliche Zeitleiste, mit der du Arbeitszeiten nachvollziehen und Rechnungen schreiben kannst, ohne eine Stoppuhr zu starten.\n\n• Läuft im Hintergrund und startet mit Windows\n• Erkennt Pausen und Abwesenheit automatisch\n• Zeitleiste pro Tag mit den Symbolen deiner Programme\n• Helles und dunkles Design\n• Datenschutz zuerst: keine Cloud, kein Konto, keine Telemetrie. Deine Daten verlassen deinen Computer nie.",
+  "description": "Missing Hours erfasst automatisch, welche Programme und Fenster du nutzt und wann du nicht am Rechner bist. Daraus entsteht für jeden Tag eine übersichtliche Zeitleiste, mit der du Arbeitszeiten nachvollziehen und Rechnungen schreiben kannst, ohne eine Stoppuhr zu starten.\n\n• Startet mit Windows und zeichnet unauffällig auf, während du arbeitest\n• Erkennt Pausen und Abwesenheit automatisch\n• Zeitleiste pro Tag mit den Symbolen deiner Programme\n• Helles und dunkles Design\n• Datenschutz zuerst: keine Cloud, kein Konto, keine Telemetrie. Deine Daten verlassen deinen Computer nie.",
   "features": [
-    "Läuft im Hintergrund und startet mit Windows",
+    "Startet mit Windows und zeichnet unauffällig auf, während du arbeitest",
     "Erkennt Pausen und Abwesenheit automatisch",
     "Zeitleiste pro Tag mit den Symbolen deiner Programme",
     "Helles und dunkles Design",

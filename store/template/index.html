@@ -33,6 +33,11 @@ window.renderJob = async function renderJob(job) {
     add(frame, 'img').src = src;
   }
   await Promise.all([...document.images].map((img) => img.decode()));
+  // Place each capture pixel for pixel: 437 CSS px at 250 % is 1092.5 px, the capture has 1093.
+  for (const img of document.querySelectorAll('.window img')) {
+    img.parentElement.style.width = `${img.naturalWidth / devicePixelRatio}px`;
+    img.parentElement.style.height = `${img.naturalHeight / devicePixelRatio}px`;
+  }
   await document.fonts.ready;
   return findProblems();
 };

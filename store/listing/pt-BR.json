@@ -1,8 +1,8 @@
 {
   "shortDescription": "Registro automático de tempo para o seu PC. O Missing Hours registra no que você trabalha e mostra o seu dia como uma linha do tempo. Tudo fica no seu computador.",
-  "description": "O Missing Hours registra automaticamente quais programas e janelas você usa e quando você não está no computador. Com isso, cria uma linha do tempo clara para cada dia, para você conferir suas horas de trabalho e emitir faturas sem precisar iniciar um cronômetro.\n\n• Funciona em segundo plano e inicia com o Windows\n• Detecta pausas e ausências automaticamente\n• Linha do tempo diária com os ícones dos seus programas\n• Tema claro e escuro\n• Privacidade em primeiro lugar: sem nuvem, sem conta, sem telemetria. Seus dados nunca saem do seu computador.",
+  "description": "O Missing Hours registra automaticamente quais programas e janelas você usa e quando você não está no computador. Com isso, cria uma linha do tempo clara para cada dia, para você conferir suas horas de trabalho e emitir faturas sem precisar iniciar um cronômetro.\n\n• Inicia com o Windows e registra discretamente enquanto você trabalha\n• Detecta pausas e ausências automaticamente\n• Linha do tempo diária com os ícones dos seus programas\n• Tema claro e escuro\n• Privacidade em primeiro lugar: sem nuvem, sem conta, sem telemetria. Seus dados nunca saem do seu computador.",
   "features": [
-    "Funciona em segundo plano e inicia com o Windows",
+    "Inicia com o Windows e registra discretamente enquanto você trabalha",
     "Detecta pausas e ausências automaticamente",
     "Linha do tempo diária com os ícones dos seus programas",
     "Tema claro e escuro",

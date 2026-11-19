@@ -38,9 +38,10 @@ const SCHEDULE = [
 
 const HEARTBEAT_SECONDS = [15, 45]; // as HeartbeatManager: every minute at :15 and :45
 
-// The last Tuesday strictly before the local day of `now`, at local midnight.
+// The last Tuesday at least two days before the local day of `now`, at local midnight. Not yesterday:
+// the app labels yesterday "Yesterday" instead of a weekday date.
 function demoDate(now) {
-  const date = new Date(now.getFullYear(), now.getMonth(), now.getDate());
+  const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
   do date.setDate(date.getDate() - 1); while (date.getDay() !== 2);
   return date;
 }

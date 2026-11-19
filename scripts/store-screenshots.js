@@ -64,15 +64,19 @@ function iconsLoaded(missingTitles) {
 // The minutes on the zoom button ("15m", "15 分" ...), as a number.
 const shownInterval = () => Number(document.querySelector('.wm-interval-picker .wm-button').textContent.match(/\d+/)[0]);
 
-// Sets the zoom through the app's own picker.
-async function setInterval(page, interval) {
+// Sets the zoom through the app's own picker. The button shows the new interval before the newly
+// aggregated day arrives, so also wait for the timeline to change: the demo day has a different number
+// of blocks at every interval (the short Edge visit only shows at 5 minutes).
+async function chooseInterval(page, interval) {
   if (await page.evaluate(shownInterval) === interval) return;
+  const blocksBefore = await page.locator('.wm-timeline-event').count();
   await page.click('.wm-interval-picker .wm-button');
   await page.waitForSelector('.wm-interval-pill');
   // INTERVALS in src/components/toolbar/IntervalPicker.js: [15, 10, 5]
   await page.click(`.wm-interval-pill .wm-segmented-option >> nth=${[15, 10, 5].indexOf(interval)}`);
   await page.waitForSelector('.wm-interval-pill', { state: 'detached' });
   await page.waitForFunction(`(${shownInterval})() === ${interval}`);
+  await page.waitForFunction((n) => document.querySelectorAll('.wm-timeline-event').length !== n, blocksBefore);
 }
 
 // Puts `time` at the top of the timeline: the visible range starts with the first block (8:45).
@@ -84,7 +88,7 @@ async function scrollTo(page, time, interval) {
 async function captureMotif({ app, page, motif, language, missingTitles, tmpDir, report }) {
   await page.emulateMedia({ colorScheme: motif.theme });
   if (motif.view === 'day') {
-    await setInterval(page, motif.interval);
+    await chooseInterval(page, motif.interval);
     await page.waitForSelector('.wm-timeline-event');
     await scrollTo(page, motif.scrollTo, motif.interval);
     await page.waitForFunction(iconsLoaded, missingTitles, { timeout: ICON_TIMEOUT_MS }).catch(() => {
