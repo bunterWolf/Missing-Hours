@@ -163,9 +163,9 @@ export default function SettingsView({ onBack }) {
 
         <div className="wm-settings-spacer" />
 
-        {/* Placeholder only, not a link: the app is local-only */}
+        {/* Project address as text, not a link: the app is local-only */}
         <footer className="wm-settings-footer">
-          <span className="text-m-default">{t('placeholderLink')}</span>
+          <span className="text-m-default">{t('projectLink')}</span>
           {appVersion && <span className="wm-settings-version text-m-default">{t('version')} {appVersion}</span>}
         </footer>
       </div>

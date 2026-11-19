@@ -55,6 +55,14 @@ describe.each(languages)('%s', (language) => {
     expect(differing).toEqual([]);
   });
 
+  // The app ships in the Microsoft Store and its texts show on the Store screenshots.
+  it('has no placeholder texts', () => {
+    const placeholderTexts = Object.entries(leaves)
+      .filter(([, value]) => [].concat(value).some((text) => /appname|lorem ipsum|\bTODO\b/i.test(text)))
+      .map(([key]) => key);
+    expect(placeholderTexts).toEqual([]);
+  });
+
   it('has at least two tracking phrases', () => {
     expect(Array.isArray(leaves.trackingPhrases)).toBe(true);
     expect(leaves.trackingPhrases.length).toBeGreaterThanOrEqual(2);
