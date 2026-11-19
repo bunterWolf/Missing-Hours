@@ -1,9 +1,9 @@
 module.exports = {
   preset: 'ts-jest',
   testEnvironment: 'node',
-  // Confine test discovery to the src tree, and match with a *relative*
+  // Confine test discovery to the src and store trees, and match with a *relative*
   // testMatch pattern. Both halves matter:
-  //   - `roots` stops Jest from ever crawling outside src — notably it never
+  //   - `roots` stops Jest from ever crawling outside src and store — notably it never
   //     descends into '.claude/worktrees/<name>', so a checkout that lives next
   //     to sibling worktrees doesn't pick up duplicate test copies.
   //   - The relative pattern (no leading '<rootDir>/') is matched against the
@@ -13,7 +13,7 @@ module.exports = {
   //     worktree at '.claude/worktrees/<name>') — silently matching 0 tests
   //     while still exiting non-zero. The relative form avoids that entirely.
   globalSetup: '<rootDir>/jest.globalSetup.js',
-  roots: ['<rootDir>/src'],
+  roots: ['<rootDir>/src', '<rootDir>/store'],
   testMatch: [
     '**/*.test.(ts|js)',
   ],

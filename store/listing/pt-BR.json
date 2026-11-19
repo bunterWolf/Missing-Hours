@@ -1,0 +1,57 @@
+{
+  "shortDescription": "Registro automático de tempo para o seu PC. O Missing Hours registra no que você trabalha e mostra o seu dia como uma linha do tempo. Tudo fica no seu computador.",
+  "description": "O Missing Hours registra automaticamente quais programas e janelas você usa e quando você não está no computador. Com isso, cria uma linha do tempo clara para cada dia, para você conferir suas horas de trabalho e emitir faturas sem precisar iniciar um cronômetro.\n\n• Funciona em segundo plano e inicia com o Windows\n• Detecta pausas e ausências automaticamente\n• Linha do tempo diária com os ícones dos seus programas\n• Tema claro e escuro\n• Privacidade em primeiro lugar: sem nuvem, sem conta, sem telemetria. Seus dados nunca saem do seu computador.",
+  "features": [
+    "Funciona em segundo plano e inicia com o Windows",
+    "Detecta pausas e ausências automaticamente",
+    "Linha do tempo diária com os ícones dos seus programas",
+    "Tema claro e escuro",
+    "Privacidade em primeiro lugar: sem nuvem, sem conta, sem telemetria. Seus dados nunca saem do seu computador."
+  ],
+  "searchTerms": [
+    "controle de horas",
+    "registro de tempo",
+    "planilha de horas",
+    "horas trabalhadas",
+    "faturamento",
+    "produtividade",
+    "time tracker"
+  ],
+  "screenshots": {
+    "timeline": {
+      "headline": "Para onde foram suas horas?",
+      "subline": "O Missing Hours registra seu dia de trabalho automaticamente, programa por programa, sem cronômetro.",
+      "caption": "Seu dia como linha do tempo: o Missing Hours registra os programas que você usa, com seus ícones e cores, e detecta as pausas sozinho."
+    },
+    "detail": {
+      "headline": "Tão detalhado quanto você precisa",
+      "subline": "5, 10 ou 15 minutos por bloco: até trocas rápidas aparecem.",
+      "caption": "Escolha 5, 10 ou 15 minutos por bloco e veja seu dia com o detalhe de que você precisa."
+    },
+    "dark": {
+      "headline": "Claro ou escuro, como o seu Windows",
+      "subline": "O Missing Hours segue o tema do Windows, ou você escolhe.",
+      "caption": "Tema claro e escuro, seguindo o Windows ou como você preferir."
+    },
+    "privacy": {
+      "headline": "Seus dados ficam no seu PC",
+      "subline": "Sem nuvem, sem conta, sem telemetria.",
+      "caption": "Privacidade em primeiro lugar: tudo fica salvo localmente e nada é enviado."
+    }
+  },
+  "demoDay": {
+    "titles": {
+      "inbox": "Caixa de Entrada – A. Souza",
+      "proposal": "Proposta Silva Ltda.docx",
+      "research": "Estudo de logística 2026",
+      "calculation": "Orçamento Silva Ltda.xlsx",
+      "projectFolder": "Projetos › Silva Ltda",
+      "workshop": "Resultados do workshop.pptx",
+      "processMap": "Mapa de processos Costa SA",
+      "clientPortal": "Portal do cliente Costa SA",
+      "kickoff": "Kickoff Costa SA.pptx",
+      "timesheet": "Horas por cliente.xlsx",
+      "minutes": "Ata de reunião.docx"
+    }
+  }
+}

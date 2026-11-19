@@ -1,0 +1,57 @@
+{
+  "shortDescription": "Registrazione automatica del tempo sul tuo PC. Missing Hours registra su cosa lavori e mostra la tua giornata come una timeline. Tutto resta sul tuo computer.",
+  "description": "Missing Hours registra automaticamente quali programmi e finestre usi e quando non sei al computer. Ne ricava una timeline chiara per ogni giornata, così puoi ricostruire le ore di lavoro e scrivere fatture senza avviare un cronometro.\n\n• Funziona in background e si avvia con Windows\n• Riconosce automaticamente pause e assenze\n• Timeline giornaliera con le icone dei tuoi programmi\n• Tema chiaro e scuro\n• Privacy prima di tutto: niente cloud, niente account, niente telemetria. I tuoi dati non lasciano mai il tuo computer.",
+  "features": [
+    "Funziona in background e si avvia con Windows",
+    "Riconosce automaticamente pause e assenze",
+    "Timeline giornaliera con le icone dei tuoi programmi",
+    "Tema chiaro e scuro",
+    "Privacy prima di tutto: niente cloud, niente account, niente telemetria. I tuoi dati non lasciano mai il tuo computer."
+  ],
+  "searchTerms": [
+    "rilevazione tempo",
+    "time tracker",
+    "foglio ore",
+    "ore di lavoro",
+    "fatturazione",
+    "produttività",
+    "timeline"
+  ],
+  "screenshots": {
+    "timeline": {
+      "headline": "Dove sono finite le tue ore?",
+      "subline": "Missing Hours registra la tua giornata di lavoro in automatico, programma per programma, senza cronometro.",
+      "caption": "La tua giornata come timeline: Missing Hours registra i programmi che usi, con le loro icone e i loro colori, e riconosce le pause da solo."
+    },
+    "detail": {
+      "headline": "Preciso quanto ti serve",
+      "subline": "5, 10 o 15 minuti per blocco: si vedono anche i cambi brevi.",
+      "caption": "Scegli 5, 10 o 15 minuti per blocco e guarda la tua giornata con il dettaglio che ti serve."
+    },
+    "dark": {
+      "headline": "Chiaro o scuro, come il tuo Windows",
+      "subline": "Missing Hours segue il tema di Windows, oppure lo scegli tu.",
+      "caption": "Tema chiaro e scuro, come Windows o a tua scelta."
+    },
+    "privacy": {
+      "headline": "I tuoi dati restano sul tuo PC",
+      "subline": "Niente cloud, niente account, niente telemetria.",
+      "caption": "Privacy prima di tutto: tutto resta salvato in locale, niente viene inviato."
+    }
+  },
+  "demoDay": {
+    "titles": {
+      "inbox": "Posta in arrivo – Studio Ferri",
+      "proposal": "Offerta Rossi Srl.docx",
+      "research": "Studio logistica 2026",
+      "calculation": "Preventivo Rossi Srl.xlsx",
+      "projectFolder": "Progetti › Rossi Srl",
+      "workshop": "Risultati workshop.pptx",
+      "processMap": "Mappa processi Bianchi SpA",
+      "clientPortal": "Portale clienti Bianchi SpA",
+      "kickoff": "Kickoff Bianchi SpA.pptx",
+      "timesheet": "Ore per cliente.xlsx",
+      "minutes": "Verbale riunione.docx"
+    }
+  }
+}

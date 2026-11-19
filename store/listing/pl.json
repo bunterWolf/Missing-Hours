@@ -1,0 +1,57 @@
+{
+  "shortDescription": "Automatyczna rejestracja czasu na Twoim komputerze. Missing Hours zapisuje, nad czym pracujesz, i pokazuje Twój dzień jako oś czasu. Wszystko zostaje na Twoim komputerze.",
+  "description": "Missing Hours automatycznie rejestruje, z jakich programów i okien korzystasz oraz kiedy nie ma Cię przy komputerze. Na tej podstawie tworzy przejrzystą oś czasu dla każdego dnia, dzięki której odtworzysz godziny pracy i wystawisz faktury bez włączania stopera.\n\n• Działa w tle i uruchamia się razem z systemem Windows\n• Automatycznie wykrywa przerwy i nieobecność\n• Dzienna oś czasu z ikonami Twoich programów\n• Jasny i ciemny motyw\n• Prywatność przede wszystkim: bez chmury, bez konta, bez telemetrii. Twoje dane nigdy nie opuszczają komputera.",
+  "features": [
+    "Działa w tle i uruchamia się razem z systemem Windows",
+    "Automatycznie wykrywa przerwy i nieobecność",
+    "Dzienna oś czasu z ikonami Twoich programów",
+    "Jasny i ciemny motyw",
+    "Prywatność przede wszystkim: bez chmury, bez konta, bez telemetrii. Twoje dane nigdy nie opuszczają komputera."
+  ],
+  "searchTerms": [
+    "ewidencja czasu",
+    "śledzenie czasu",
+    "czas pracy",
+    "karta czasu pracy",
+    "faktury",
+    "produktywność",
+    "time tracker"
+  ],
+  "screenshots": {
+    "timeline": {
+      "headline": "Gdzie podziały się Twoje godziny?",
+      "subline": "Missing Hours automatycznie zapisuje Twój dzień pracy – program po programie, bez stopera.",
+      "caption": "Twój dzień jako oś czasu: Missing Hours zapisuje, z jakich programów korzystasz, z ich ikonami i kolorami, a przerwy wykrywa sam."
+    },
+    "detail": {
+      "headline": "Tak dokładnie, jak potrzebujesz",
+      "subline": "5, 10 lub 15 minut na blok – widać nawet krótkie przełączenia.",
+      "caption": "Wybierz 5, 10 lub 15 minut na blok i oglądaj swój dzień tak szczegółowo, jak potrzebujesz."
+    },
+    "dark": {
+      "headline": "Jasny lub ciemny, jak Twój Windows",
+      "subline": "Missing Hours stosuje motyw systemu Windows lub ten, który wybierzesz.",
+      "caption": "Jasny i ciemny motyw – zgodnie z systemem Windows lub według Twojego wyboru."
+    },
+    "privacy": {
+      "headline": "Twoje dane zostają na Twoim komputerze",
+      "subline": "Bez chmury, bez konta, bez telemetrii.",
+      "caption": "Prywatność przede wszystkim: wszystko jest zapisywane lokalnie i nic nie jest wysyłane."
+    }
+  },
+  "demoDay": {
+    "titles": {
+      "inbox": "Skrzynka odbiorcza – A. Nowak",
+      "proposal": "Oferta Kowalski.docx",
+      "research": "Raport logistyka 2026",
+      "calculation": "Kosztorys Kowalski.xlsx",
+      "projectFolder": "Projekty › Kowalski",
+      "workshop": "Wyniki warsztatu.pptx",
+      "processMap": "Mapa procesów Wiśniewski",
+      "clientPortal": "Portal klienta Wiśniewski",
+      "kickoff": "Kick-off Wiśniewski.pptx",
+      "timesheet": "Godziny wg klienta.xlsx",
+      "minutes": "Notatka ze spotkania.docx"
+    }
+  }
+}

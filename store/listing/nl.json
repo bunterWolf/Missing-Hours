@@ -1,0 +1,57 @@
+{
+  "shortDescription": "Automatische tijdregistratie voor je pc. Missing Hours legt vast waaraan je werkt en toont je dag als tijdlijn. Alles blijft op je computer.",
+  "description": "Missing Hours registreert automatisch welke programma’s en vensters je gebruikt en wanneer je niet achter je computer zit. Daarvan maakt het voor elke dag een overzichtelijke tijdlijn, zodat je je werkuren kunt nagaan en facturen kunt maken zonder een stopwatch te starten.\n\n• Draait op de achtergrond en start met Windows\n• Herkent pauzes en afwezigheid automatisch\n• Dagelijkse tijdlijn met de pictogrammen van je programma’s\n• Licht en donker thema\n• Privacy voorop: geen cloud, geen account, geen telemetrie. Je gegevens verlaten je computer nooit.",
+  "features": [
+    "Draait op de achtergrond en start met Windows",
+    "Herkent pauzes en afwezigheid automatisch",
+    "Dagelijkse tijdlijn met de pictogrammen van je programma’s",
+    "Licht en donker thema",
+    "Privacy voorop: geen cloud, geen account, geen telemetrie. Je gegevens verlaten je computer nooit."
+  ],
+  "searchTerms": [
+    "tijdregistratie",
+    "urenregistratie",
+    "urenstaat",
+    "werktijd",
+    "facturatie",
+    "productiviteit",
+    "time tracker"
+  ],
+  "screenshots": {
+    "timeline": {
+      "headline": "Waar zijn je uren gebleven?",
+      "subline": "Missing Hours legt je werkdag automatisch vast, programma voor programma, zonder stopwatch.",
+      "caption": "Je dag als tijdlijn: Missing Hours registreert welke programma’s je gebruikt, met hun pictogrammen en kleuren, en herkent pauzes vanzelf."
+    },
+    "detail": {
+      "headline": "Zo nauwkeurig als je wilt",
+      "subline": "5, 10 of 15 minuten per blok: ook korte wissels worden zichtbaar.",
+      "caption": "Kies 5, 10 of 15 minuten per blok en bekijk je dag zo gedetailleerd als je nodig hebt."
+    },
+    "dark": {
+      "headline": "Licht of donker, net als je Windows",
+      "subline": "Missing Hours volgt het thema van Windows, of je kiest zelf.",
+      "caption": "Licht en donker thema, volgens Windows of naar keuze."
+    },
+    "privacy": {
+      "headline": "Je gegevens blijven op je pc",
+      "subline": "Geen cloud, geen account, geen telemetrie.",
+      "caption": "Privacy voorop: alles wordt lokaal opgeslagen en er wordt niets verzonden."
+    }
+  },
+  "demoDay": {
+    "titles": {
+      "inbox": "Postvak IN – De Vries Advies",
+      "proposal": "Offerte Jansen BV.docx",
+      "research": "Marktonderzoek logistiek 2026",
+      "calculation": "Begroting Jansen BV.xlsx",
+      "projectFolder": "Projecten › Jansen BV",
+      "workshop": "Resultaten workshop.pptx",
+      "processMap": "Proceskaart Bakker NV",
+      "clientPortal": "Klantportaal Bakker NV",
+      "kickoff": "Kick-off Bakker NV.pptx",
+      "timesheet": "Uren per klant.xlsx",
+      "minutes": "Notulen overleg.docx"
+    }
+  }
+}

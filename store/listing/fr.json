@@ -1,0 +1,57 @@
+{
+  "shortDescription": "Suivi automatique du temps sur ton PC. Missing Hours enregistre ce sur quoi tu travailles et affiche ta journée sous forme de frise chronologique. Tout reste sur ton ordinateur.",
+  "description": "Missing Hours enregistre automatiquement les programmes et fenêtres que tu utilises et les moments où tu n’es pas devant ton ordinateur. Il en tire une frise claire pour chaque journée, pour retrouver tes heures de travail et rédiger tes factures sans lancer de chronomètre.\n\n• Fonctionne en arrière-plan et démarre avec Windows\n• Détecte automatiquement les pauses et les absences\n• Frise quotidienne avec les icônes de tes programmes\n• Thème clair et sombre\n• Confidentialité d’abord : pas de cloud, pas de compte, pas de télémétrie. Tes données ne quittent jamais ton ordinateur.",
+  "features": [
+    "Fonctionne en arrière-plan et démarre avec Windows",
+    "Détecte automatiquement les pauses et les absences",
+    "Frise quotidienne avec les icônes de tes programmes",
+    "Thème clair et sombre",
+    "Confidentialité d’abord : pas de cloud, pas de compte, pas de télémétrie. Tes données ne quittent jamais ton ordinateur."
+  ],
+  "searchTerms": [
+    "suivi du temps",
+    "feuille de temps",
+    "temps de travail",
+    "facturation",
+    "productivité",
+    "time tracker",
+    "chronologie"
+  ],
+  "screenshots": {
+    "timeline": {
+      "headline": "Où sont passées tes heures ?",
+      "subline": "Missing Hours enregistre ta journée de travail automatiquement, programme par programme, sans chronomètre.",
+      "caption": "Ta journée sous forme de frise : Missing Hours enregistre les programmes que tu utilises, avec leurs icônes et leurs couleurs, et détecte les pauses tout seul."
+    },
+    "detail": {
+      "headline": "Aussi précis que nécessaire",
+      "subline": "5, 10 ou 15 minutes par bloc : même les changements rapides apparaissent.",
+      "caption": "Choisis 5, 10 ou 15 minutes par bloc pour voir ta journée avec la précision dont tu as besoin."
+    },
+    "dark": {
+      "headline": "Clair ou sombre, comme ton Windows",
+      "subline": "Missing Hours suit le thème de Windows, ou tu le choisis toi-même.",
+      "caption": "Thème clair et sombre, selon Windows ou selon ton choix."
+    },
+    "privacy": {
+      "headline": "Tes données restent sur ton PC",
+      "subline": "Pas de cloud, pas de compte, pas de télémétrie.",
+      "caption": "Confidentialité d’abord : tout est enregistré localement, rien n’est envoyé."
+    }
+  },
+  "demoDay": {
+    "titles": {
+      "inbox": "Boîte de réception – B. Martin",
+      "proposal": "Offre Dupont SARL.docx",
+      "research": "Étude marché logistique 2026",
+      "calculation": "Calcul Dupont SARL.xlsx",
+      "projectFolder": "Projets › Dupont SARL",
+      "workshop": "Résultats atelier.pptx",
+      "processMap": "Carte des processus Leroy SA",
+      "clientPortal": "Portail client Leroy SA",
+      "kickoff": "Lancement Leroy SA.pptx",
+      "timesheet": "Heures par client.xlsx",
+      "minutes": "Compte rendu réunion.docx"
+    }
+  }
+}
