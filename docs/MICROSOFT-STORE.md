@@ -65,10 +65,9 @@ unvirtualisierte Dateien). Einen eigenen Speicherort kann man in den Einstellung
 4. **Im Partner Center einreichen:** Produkt öffnen > **Einreichung starten** (bei Updates: Einreichung
    aktualisieren) > unter **Pakete** die `.appx` hochladen > Einreichung abschicken. Die Prüfung dauert
    meist ein bis drei Werktage.
-5. **Store-Bilder,** wenn sich die Oberfläche oder die Store-Texte geändert haben: `npm run store-screenshots`,
-   die Bilder in `store-screenshots/microsoft/<sprache>/` ansehen (mindestens `de`, `en`, `pl`, `ja`, `zh-Hant`)
-   und in der Einreichung unter **Store-Einträge** pro Sprache ersetzen; Texte und Bildunterschriften aus
-   `listing.md` daneben.
+5. **Store-Einträge,** nur wenn sich die Oberfläche, die Store-Texte oder die Sprachen geändert haben. Sonst
+   übernimmt Partner Center Bilder und Texte der letzten Einreichung. Ablauf unter
+   [Store-Einträge per Import aktualisieren](#store-einträge-per-import-aktualisieren).
 
 ## Angaben für die erste Einreichung
 
@@ -85,7 +84,7 @@ unvirtualisierte Dateien). Einen eigenen Speicherort kann man in den Einstellung
 - **Store-Einträge:** einen pro Sprache des Pakets (12, siehe `build.appx.languages` in `package.json`), Texte
   aus `store/listing/` (unten). Screenshots und Titelbild erzeugt `npm run store-screenshots` in 3840 × 2160
   nach `store-screenshots/microsoft/<sprache>/` (`00-hero.png` als 16:9-Super-Hero-Art, `01`–`05` als
-  Screenshots in dieser Reihenfolge). Das Skript braucht die Programme des Beispieltags auf dem Rechner (Office,
+  Screenshots in dieser Reihenfolge), ins Partner Center kommen sie per Import (unten). Das Skript braucht die Programme des Beispieltags auf dem Rechner (Office,
   Edge, Chrome, Figma), sonst erscheinen sie ohne Icon. Die Datenschutz-URL ist für alle Sprachen dieselbe
   (Deutsch und Englisch). Eine neue Sprache in der App braucht auch `store/listing/<sprache>.json`.
 
@@ -98,8 +97,8 @@ Reihenfolge: 1. Tagesansicht hell, 2. Pause mit Schraffur, 3. Tagesansicht dunke
 Die Texte pro Sprache stehen in `store/listing/<sprache>.json`, die sprachunabhängigen Angaben
 (Kategorie, Website, Support, Datenschutz-URL, Copyright, Entwickler) in `store/listing/common.json`.
 `store/listing/listing.test.js` prüft, dass jede Sprache alle Felder hat und die Grenzen von Partner
-Center einhält. `npm run store-screenshots` schreibt alles zusätzlich als `listing.md` zum Kopieren
-neben die Bilder.
+Center einhält. `npm run store-screenshots` schreibt alles als `listing.md` zum Lesen neben die Bilder und
+als `listings.csv` in die Import-Ordner (nächster Abschnitt).
 
 | Feld in `<sprache>.json` | Partner Center (Store-Eintrag der Sprache) |
 | --- | --- |
@@ -114,6 +113,56 @@ neben die Bilder.
 Suchbegriffe: Partner Center erlaubt bis zu 7 Begriffe (je höchstens 30 Zeichen, zusammen höchstens 21 Wörter;
 beim Eintragen prüfen). Die Begriffe und alle Texte außer Deutsch und Englisch sind noch nicht von
 Muttersprachlern geprüft.
+
+### Store-Einträge per Import aktualisieren
+
+Bilder, Bildunterschriften und Texte kommen über **Import listings** ins Partner Center, nicht von Hand: 12
+Sprachen mit je 6 Bildern sind sonst 72 einzelne Uploads, und Suchbegriffe, die man per Browser-Automatisierung
+eintippt, speichert Partner Center nicht. So lief es zuerst am 2026-11-20.
+
+1. **Bilder und Import-Ordner erzeugen:** `npm run store-screenshots` (alle 12 Sprachen). Das Skript schreibt
+   neben die Bilder in 3840 × 2160 die Import-Ordner
+   `store-screenshots/microsoft-store-import/missing-hours-store-1` bis `-3`: je vier Sprachen, die Bilder in
+   1920 × 1080 und eine `listings.csv` mit den Texten aller Sprachen (`store/partner-center.js`).
+2. **Bilder ansehen,** mindestens `de`, `en`, `pl`, `ja`, `zh-Hant` in `store-screenshots/microsoft/<sprache>/`.
+3. **Ordner an einen leicht auffindbaren Ort kopieren,** z. B. in den Download-Ordner. Der Ordnername muss
+   bleiben, wie er ist (siehe unten).
+4. **Importieren, Ordner für Ordner:** Partner Center > Produkt > Übersicht der Einreichung > **Store listings** >
+   **Import listings** > **Upload folder** > Ordner wählen. Die Dateiauswahl ist ein Windows-Dialog. Ein
+   Agent kann ihn nicht bedienen; er öffnet den Dialog und der Mensch wählt den Ordner. Warten, bis unter
+   „Store listings“ nicht mehr **Importing** steht, dann den nächsten Ordner.
+5. **Prüfen** (Agent, im eingebauten Browser angemeldet, nur lesend):
+   `GET /en-us/dashboard/product/api/nonjaguarlistings/products/9P2JR2B30DG4/submissions/<Einreichung>/listings?languageId=<id>`
+   zeigt pro Sprache `listingModels[0].windowsScreenshots` (Bilder mit `description` = Bildunterschrift),
+   `squareHeroArt` (das 16:9-Titelbild), `listing.description`/`features` und `validationItems` (leer = keine
+   Fehler). Die `languageId` steht in den Links der Seite „Manage Store listing languages“ (z. B. de-de 14,
+   en-us 4). Die Suchbegriffe fehlen in dieser Antwort; sie stehen auf der Seite des Eintrags unter
+   **Keywords** (erscheinen ein paar Sekunden nach dem Laden). Am Ende steht in der Übersicht bei
+   „Store listings“ **Complete**.
+6. **Einreichen** (Submit for certification) macht der Mensch.
+
+**Was Partner Center beim Import verlangt** (Microsoft Learn „Import and export Store listings“ und
+ausprobiert):
+
+- **Bildpfade beginnen mit dem Namen des hochgeladenen Ordners:** `missing-hours-store-1/de/01-timeline.png`.
+  Ohne den Ordnernamen schlägt der ganze Import fehl, und die Fehlerseite zeigt eine leere Liste.
+- **Kleine Ordner:** Ein Ordner mit allen 72 Bildern in 4K (109 MB) lief länger, als die Anmeldung im Partner
+  Center hält. Mit 1920 × 1080 und vier Sprachen pro Ordner (etwa 17 MB) geht es.
+- **Seite nicht neu laden, solange „Importing“ dasteht:** Der Upload läuft in der Seite, Neuladen bricht ihn ab.
+- **Leere Zellen:** Ein leeres Bildfeld behält das Bild, das Partner Center schon hat. Ein leeres Textfeld
+  übernimmt den Wert der Spalte `default`, die leer ist, löscht den Text also. Darum enthält jeder Ordner die
+  Texte und Bildunterschriften aller Sprachen. Eine fehlende Zeile ändert laut Microsoft nichts, nur die
+  Trailer-Zeilen dürfen nicht fehlen; das Skript lässt darum alle Felder weg, die es nicht pflegt (z. B.
+  Versionshinweise). Bis 2026-11-20 lief der Import nur mit allen Zeilen eines Exports; der erste Import mit
+  den Zeilen des Skripts steht noch aus.
+- **Spalten `Field`, `ID`, `Type` unverändert lassen;** die Spalten der Sprachen heißen wie die Paketsprachen in
+  Kleinbuchstaben (`de-de`, `zh-tw`). Genau eine `.csv` pro Ordner, UTF-8.
+- **Nicht ausprobiert:** Fällt ein Motiv weg, bleibt sein altes Bild stehen, weil das Skript nur so viele
+  Bildzeilen schreibt, wie `store/motifs.js` Motive hat. Dann das Bild von Hand im Eintrag löschen.
+
+**Wenn ein Import scheitert:** In der Übersicht **Export listings** lädt den aktuellen Stand als CSV mit allen
+Zeilen herunter (`listingData-<Store-ID>-<Einreichung>.csv`). Ihr Aufbau ist der Maßstab für
+`store/partner-center.js`. Mit **Upload .csv** lassen sich nur die Texte testen, ohne Bilder.
 
 ## Lokal bauen und testen
 
