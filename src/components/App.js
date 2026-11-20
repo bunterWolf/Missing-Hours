@@ -9,10 +9,14 @@ import { ipcRenderer } from 'electron';
 import i18n from '../i18n';
 import { formatDuration as formatDurationIn } from '../i18n/duration';
 import { toLocalDateKey } from './dateKey';
+import { applyDayChange } from './dayChange';
 import '../styles/tokens.css';
 import '../styles/typography.css';
 import '../styles/base.css';
 import './App.css';
+
+// How often the date navigation checks for a new day (a date comparison, cheap).
+const DAY_CHANGE_CHECK_MS = 15 * 1000;
 
 const App = () => {
   const [selectedDate, setSelectedDate] = useState(() => toLocalDateKey());
@@ -22,6 +26,10 @@ const App = () => {
   
   const [activityData, setActivityData] = useState(null);
   const [availableDates, setAvailableDates] = useState([]);
+  const availableDatesRef = useRef(availableDates);
+  availableDatesRef.current = availableDates;
+  // The day that is "today" for the date navigation; see checkDayChange.
+  const todayRef = useRef(selectedDate);
   const [isTracking, setIsTracking] = useState(false);
   const [isMockData, setIsMockData] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
@@ -34,14 +42,32 @@ const App = () => {
   // Duration in milliseconds as the UI shows it, in the UI language
   const formatDuration = (ms) => formatDurationIn(ms, i18n.t);
 
-  // Handle date changes
+  // Handle date changes. Reads the ref, not the state: checkDayChange also calls it
+  // from long-lived listeners.
   const handleDateChange = (newDate) => {
-    if (newDate === selectedDate) return;
+    if (newDate === selectedDateRef.current) return;
     selectedDateRef.current = newDate;
     // Drop the previous day's data so it is never shown under the new date.
     setActivityData(null);
     setIsLoading(true);
     setSelectedDate(newDate);
+  };
+
+  // The app stays open past midnight, usually asleep overnight. Without this the
+  // view would stay on yesterday until a restart. Uses only refs and setters, so a
+  // copy from any render can run in a long-lived listener.
+  const checkDayChange = () => {
+    const current = {
+      today: todayRef.current,
+      selectedDate: selectedDateRef.current,
+      availableDates: availableDatesRef.current,
+    };
+    const next = applyDayChange(current, toLocalDateKey());
+    if (next === current) return;
+    todayRef.current = next.today;
+    availableDatesRef.current = next.availableDates;
+    setAvailableDates(next.availableDates);
+    handleDateChange(next.selectedDate);
   };
 
   // Toggle tracking
@@ -86,6 +112,7 @@ const App = () => {
   useEffect(() => {
     // Listen for activity data updates
     ipcRenderer.on('activity-data-updated', (event, dateKey) => {
+      checkDayChange();
       if (dateKey === selectedDate) {
         loadActivityData();
       }
@@ -137,6 +164,17 @@ const App = () => {
     };
     
     init();
+  }, []);
+
+  // Notice a day change soon after waking up, also while tracking is paused (no data
+  // updates then): timers run again after a sleep, focus covers the user coming back.
+  useEffect(() => {
+    const timer = setInterval(checkDayChange, DAY_CHANGE_CHECK_MS);
+    window.addEventListener('focus', checkDayChange);
+    return () => {
+      clearInterval(timer);
+      window.removeEventListener('focus', checkDayChange);
+    };
   }, []);
 
   // Reload data when selected date changes
