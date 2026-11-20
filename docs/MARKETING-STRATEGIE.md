@@ -1,8 +1,8 @@
 # Marketing-Strategie Missing Hours
 
 Stand: November 2026 (Version 1.1.0). Grundlage für die Website, die Store-Einträge, README und Ankündigungen.
-Die fertigen Store-Texte stehen in [MICROSOFT-STORE.md](MICROSOFT-STORE.md); sie werden aus diesem Dokument
-abgeleitet und in allen 12 Sprachen gepflegt.
+Die fertigen Store-Texte stehen in `store/listing/<sprache>.json` (siehe [MICROSOFT-STORE.md](MICROSOFT-STORE.md)); sie
+werden aus diesem Dokument abgeleitet und in allen 12 Sprachen gepflegt.
 
 **Ziel:** Missing Hours ist kostenlos und verdient kein Geld. Erfolg heißt Verbreitung: viele Installationen,
 gute Bewertungen, Empfehlungen. Dafür muss die App beim ersten Blick überzeugen und beim ersten Tag halten,
@@ -181,7 +181,7 @@ Jeder Text auf Website und im Store stützt sich auf eine dieser Säulen. Reihen
 ## 5. Tonalität
 
 - **Du**, wie in der App und den Store-Texten (in jeder Sprache die übliche vertraute Form, siehe die
-  Übersetzungen in MICROSOFT-STORE.md).
+  Übersetzungen in `store/listing/`).
 - **Ruhig und klar.** Kurze Sätze, konkrete Wörter. Die App ist leise, die Texte auch.
 - **Ehrlich.** Lieber eine Funktion weniger nennen als eine zu viel. Keine Superlative („die beste“,
   „revolutionär“), kein „KI“.
@@ -313,7 +313,7 @@ Inhalte, nach denen die Zielgruppe in der Situation des Schmerzes sucht:
 
 ## 8. Microsoft Store (App Store Optimization)
 
-Die Texte für alle 12 Sprachen stehen in [MICROSOFT-STORE.md](MICROSOFT-STORE.md). Diese Regeln gelten für
+Die Texte für alle 12 Sprachen stehen in `store/listing/<sprache>.json` ([MICROSOFT-STORE.md](MICROSOFT-STORE.md)). Diese Regeln gelten für
 ihre Überarbeitung.
 
 ### Felder und Inhalte
@@ -360,7 +360,8 @@ lassen.
 
 ### Screenshots (Reihenfolge = Wichtigkeit)
 
-Aus `npm run screenshots` (Mock-Daten, je Sprache), im Store-Format mit kurzer Überschrift über dem Bild:
+Aus `npm run store-screenshots` (echte App mit dem Beispieltag aus `store/demo-day.js`, je Sprache), im Store-Format
+mit kurzer Überschrift und Unterzeile neben dem Fenster:
 
 1. Tagesansicht hell, voller Arbeitstag — „Dein Tag, automatisch aufgeschrieben“
 2. Pause/Mittag mit Schraffur sichtbar — „Pausen erkennt Missing Hours selbst“
@@ -400,8 +401,8 @@ der eine kostenlose, private App baut.
 - [x] Englischer Teil von PRIVACY.md an den deutschen angeglichen (2026-11-19)
 - [x] Store-Texte in 12 Sprachen um „kostenlos“, Einstiegsfrage, Suchbegriffe und Screenshot-Überschriften
       ergänzt (2026-11-19, [MICROSOFT-STORE.md](MICROSOFT-STORE.md)); Muttersprachler-Prüfung offen
-- [ ] Vorzeigbare Beispieldaten für Screenshots: Die heutigen Mock-Daten sind Testfälle („Aggregate to
-      visible“, keine Programmsymbole, Hinweis „Sample Data“) und taugen weder für Store noch README
+- [x] Vorzeigbare Beispieldaten für Screenshots: Beispieltag einer Beraterin mit echten Programmsymbolen,
+      Store-Bilder in 12 Sprachen per `npm run store-screenshots` (2026-11-20); offen: Screenshot fürs README
 
 ### Phase 1: Launch (2–4 Wochen)
 

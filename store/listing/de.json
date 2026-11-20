@@ -1,0 +1,63 @@
+{
+  "shortDescription": "Automatische Zeiterfassung für deinen PC. Missing Hours zeichnet auf, woran du arbeitest, und zeigt deinen Tag als Zeitleiste. Kostenlos, und alles bleibt lokal auf deinem Computer.",
+  "description": "Weißt du am Freitag noch, woran du am Dienstag gearbeitet hast? Missing Hours schon. Missing Hours erfasst automatisch, welche Programme und Fenster du nutzt und wann du nicht am Rechner bist. Daraus entsteht für jeden Tag eine übersichtliche Zeitleiste, mit der du Arbeitszeiten nachvollziehen und Rechnungen schreiben kannst, ohne eine Stoppuhr zu starten.\n\n• Startet mit Windows und zeichnet unauffällig auf, während du arbeitest\n• Erkennt Pausen und Abwesenheit automatisch\n• Zeitleiste pro Tag mit den Symbolen deiner Programme\n• Helles und dunkles Design\n• Datenschutz zuerst: keine Cloud, kein Konto, keine Telemetrie. Deine Daten verlassen deinen Computer nie.\n• Kostenlos: kein Abo, keine Werbung, keine In-App-Käufe",
+  "features": [
+    "Startet mit Windows und zeichnet unauffällig auf, während du arbeitest",
+    "Erkennt Pausen und Abwesenheit automatisch",
+    "Zeitleiste pro Tag mit den Symbolen deiner Programme",
+    "Helles und dunkles Design",
+    "Datenschutz zuerst: keine Cloud, kein Konto, keine Telemetrie. Deine Daten verlassen deinen Computer nie.",
+    "Kostenlos: kein Abo, keine Werbung, keine In-App-Käufe"
+  ],
+  "searchTerms": [
+    "Zeiterfassung",
+    "Arbeitszeit",
+    "Stundenzettel",
+    "Zeittracker",
+    "automatische Zeiterfassung",
+    "Stunden abrechnen",
+    "Aktivitätsprotokoll"
+  ],
+  "screenshots": {
+    "timeline": {
+      "headline": "Dein Tag, automatisch aufgeschrieben",
+      "subline": "Missing Hours zeichnet deinen Arbeitstag automatisch auf – Programm für Programm, ohne Stoppuhr.",
+      "caption": "Dein Tag als Zeitleiste: Missing Hours erfasst, welche Programme du nutzt, mit ihren Symbolen und Farben, und erkennt Pausen von selbst."
+    },
+    "breaks": {
+      "headline": "Pausen erkennt Missing Hours selbst",
+      "subline": "Mittag und Kaffeepause landen nicht als Arbeitszeit in deinem Tag.",
+      "caption": "Missing Hours erkennt, wann du nicht am Rechner bist, und zeigt Pausen schraffiert in der Zeitleiste."
+    },
+    "dark": {
+      "headline": "Hell oder dunkel, wie dein Windows",
+      "subline": "Missing Hours folgt dem Design von Windows, oder du legst es selbst fest.",
+      "caption": "Helles und dunkles Design, passend zu Windows oder nach deiner Wahl."
+    },
+    "zoom": {
+      "headline": "Grob oder genau: 15, 10 oder 5 Minuten",
+      "subline": "Auch kurze Wechsel zwischen Programmen werden sichtbar.",
+      "caption": "Wähle 5, 10 oder 15 Minuten pro Block und sieh deinen Tag so genau, wie du ihn brauchst."
+    },
+    "privacy": {
+      "headline": "Kein Konto. Keine Cloud. Läuft einfach mit.",
+      "subline": "Deine Daten bleiben auf deinem PC.",
+      "caption": "Datenschutz zuerst: Alles wird lokal gespeichert, nichts wird übertragen."
+    }
+  },
+  "demoDay": {
+    "titles": {
+      "inbox": "Posteingang – Koch Beratung",
+      "proposal": "Angebot Müller GmbH.docx",
+      "research": "Marktstudie Logistik 2026",
+      "calculation": "Kalkulation Müller GmbH.xlsx",
+      "projectFolder": "Projekte › Müller GmbH",
+      "workshop": "Workshop-Ergebnisse.pptx",
+      "processMap": "Prozesslandkarte Weber AG",
+      "clientPortal": "Kundenportal Weber AG",
+      "kickoff": "Kickoff Weber AG.pptx",
+      "timesheet": "Stunden je Kunde.xlsx",
+      "minutes": "Protokoll Jour fixe.docx"
+    }
+  }
+}

@@ -76,6 +76,8 @@ export interface StoreData {
 export interface StoreOptions {
   useMockData: boolean;
   storagePath: string | null;
+  /** Mock data mode only: file to load instead of public/mock-data.json (store screenshots). */
+  mockDataPath: string | null;
 }
 
 
@@ -115,7 +117,8 @@ class ActivityStore {
   constructor(options: Partial<StoreOptions> = {}) {
     this.options = {
       useMockData: options.useMockData ?? false,
-      storagePath: options.storagePath ?? null
+      storagePath: options.storagePath ?? null,
+      mockDataPath: options.mockDataPath ?? null
     };
 
     // Initialisiere Settings Manager
@@ -138,7 +141,7 @@ class ActivityStore {
       try {
         // Path relative to the main process execution directory (dist/main)
         // Adjust this path if your build process places public/ differently
-        const mockDataPath = path.join(__dirname, '../../public/mock-data.json');
+        const mockDataPath = this.options.mockDataPath ?? path.join(__dirname, '../../public/mock-data.json');
         console.log(`[Store] Attempting to load mock data from: ${mockDataPath}`);
         if (fs.existsSync(mockDataPath)) {
             const mockDataContent = fs.readFileSync(mockDataPath, 'utf-8');

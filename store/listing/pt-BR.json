@@ -1,0 +1,63 @@
+{
+  "shortDescription": "Registro automático de tempo para o seu PC. O Missing Hours registra no que você trabalha e mostra o seu dia como uma linha do tempo. Gratuito, e tudo fica no seu computador.",
+  "description": "Na sexta-feira, você ainda lembra no que trabalhou na terça? O Missing Hours lembra. O Missing Hours registra automaticamente quais programas e janelas você usa e quando você não está no computador. Com isso, cria uma linha do tempo clara para cada dia, para você conferir suas horas de trabalho e emitir faturas sem precisar iniciar um cronômetro.\n\n• Inicia com o Windows e registra discretamente enquanto você trabalha\n• Detecta pausas e ausências automaticamente\n• Linha do tempo diária com os ícones dos seus programas\n• Tema claro e escuro\n• Privacidade em primeiro lugar: sem nuvem, sem conta, sem telemetria. Seus dados nunca saem do seu computador.\n• Gratuito: sem assinatura, sem anúncios, sem compras no aplicativo",
+  "features": [
+    "Inicia com o Windows e registra discretamente enquanto você trabalha",
+    "Detecta pausas e ausências automaticamente",
+    "Linha do tempo diária com os ícones dos seus programas",
+    "Tema claro e escuro",
+    "Privacidade em primeiro lugar: sem nuvem, sem conta, sem telemetria. Seus dados nunca saem do seu computador.",
+    "Gratuito: sem assinatura, sem anúncios, sem compras no aplicativo"
+  ],
+  "searchTerms": [
+    "controle de horas",
+    "rastreador de tempo",
+    "planilha de horas",
+    "horas trabalhadas",
+    "apontamento de horas",
+    "horas faturáveis",
+    "registro de atividades"
+  ],
+  "screenshots": {
+    "timeline": {
+      "headline": "Seu dia, registrado automaticamente",
+      "subline": "O Missing Hours registra seu dia de trabalho automaticamente, programa por programa, sem cronômetro.",
+      "caption": "Seu dia como linha do tempo: o Missing Hours registra os programas que você usa, com seus ícones e cores, e detecta as pausas sozinho."
+    },
+    "breaks": {
+      "headline": "O Missing Hours detecta as pausas sozinho",
+      "subline": "Almoço e pausas para o café não entram como tempo de trabalho.",
+      "caption": "O Missing Hours detecta quando você não está no computador e mostra as pausas hachuradas na linha do tempo."
+    },
+    "dark": {
+      "headline": "Claro ou escuro, como o seu Windows",
+      "subline": "O Missing Hours segue o tema do Windows, ou você escolhe.",
+      "caption": "Tema claro e escuro, seguindo o Windows ou como você preferir."
+    },
+    "zoom": {
+      "headline": "Geral ou detalhado: 15, 10 ou 5 minutos",
+      "subline": "Até as trocas rápidas entre programas ficam visíveis.",
+      "caption": "Escolha 5, 10 ou 15 minutos por bloco e veja seu dia com o detalhe de que você precisa."
+    },
+    "privacy": {
+      "headline": "Sem conta. Sem nuvem. Simplesmente funciona.",
+      "subline": "Seus dados ficam no seu PC.",
+      "caption": "Privacidade em primeiro lugar: tudo fica salvo localmente e nada é enviado."
+    }
+  },
+  "demoDay": {
+    "titles": {
+      "inbox": "Caixa de Entrada – A. Souza",
+      "proposal": "Proposta Silva Ltda.docx",
+      "research": "Estudo de logística 2026",
+      "calculation": "Orçamento Silva Ltda.xlsx",
+      "projectFolder": "Projetos › Silva Ltda",
+      "workshop": "Resultados do workshop.pptx",
+      "processMap": "Mapa de processos Costa SA",
+      "clientPortal": "Portal do cliente Costa SA",
+      "kickoff": "Kickoff Costa SA.pptx",
+      "timesheet": "Horas por cliente.xlsx",
+      "minutes": "Ata de reunião.docx"
+    }
+  }
+}

@@ -144,7 +144,14 @@ npm run icons
 ```
 and commit the generated files: `resources/icon.ico` (Windows, 16–256 px), `resources/icon.png`
 (1024 px, window icon outside Windows), `resources/icon.icns` (macOS, artwork scaled to Apple's
-824/1024 icon grid) and the Microsoft Store tiles in `resources/appx/`.
+824/1024 icon grid), the Microsoft Store tiles in `resources/appx/` and the Partner Center tile icon in
+`resources/store/`.
+
+#### Store Images
+
+`npm run store-screenshots` makes the Microsoft Store images (3840 × 2160) in every language from the real
+app with a demo workday, plus the listing texts to copy (`store-screenshots/microsoft/<language>/`). The texts
+live in `store/listing/`; details in `docs/MICROSOFT-STORE.md`.
 
 #### Creating a Release
 
