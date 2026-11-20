@@ -93,6 +93,26 @@
   color: var(--ink-2);
 }
 
+/* Website link: looks like the footer text, darker and underlined on hover (no Figma design yet).
+   The font comes from .text-m-default. */
+.wm-settings-website {
+  padding: 0;
+  border: none;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+}
+
+.wm-settings-website:hover {
+  color: var(--ink);
+  text-decoration: underline;
+}
+
+.wm-settings-website:focus-visible {
+  outline: 1px solid var(--ink-3);
+  outline-offset: 2px;
+}
+
 .wm-settings-version {
   font-variant-numeric: tabular-nums;
 }

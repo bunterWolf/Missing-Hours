@@ -7,6 +7,7 @@
 //   resources/icon.icns    macOS app bundle (16-1024 px); the artwork sits on Apple's
 //                          icon grid (824 of 1024 px) so it matches the size of other Mac icons
 //   resources/appx/*.png   Microsoft Store tiles (sizes fixed by the package manifest)
+//   resources/store/AppTileIcon-300.png  Partner Center > Store listing > 1:1 App tile icon (300 px)
 
 const fs = require('fs');
 const path = require('path');
@@ -116,6 +117,8 @@ function write(relativePath, data) {
 write('icon.ico', buildIco());
 write('icon.png', render(1024).png);
 write('icon.icns', buildIcns());
+fs.mkdirSync(path.join(RESOURCES, 'store'), { recursive: true });
+write(path.join('store', 'AppTileIcon-300.png'), render(300).png);
 for (const [name, width, height, artSize] of APPX_TILES) {
   write(path.join('appx', name), render(width, height, artSize).png);
 }

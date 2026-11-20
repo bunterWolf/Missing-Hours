@@ -37,4 +37,5 @@
 - The user must see the application in their Windows display language (English, German, French, Spanish, Italian, Portuguese (Brazil), Dutch, Polish, Japanese, Korean, Simplified and Traditional Chinese; otherwise English), with dates, times and durations as they are used in their region, so they can read their day without translating it. Every text must be fully visible in every language.
 
 ### Data Portability
-- The user MUST be able to relocate their data storage folder (e.g. to a Google Drive folder) in order to synchronize their data across multiple devices and get a complete picture of their digital activities.
+- ~~The user MUST be able to relocate their data storage folder (e.g. to a Google Drive folder) in order to synchronize their data across multiple devices and get a complete picture of their digital activities.~~
+  Dropped in `0.0.2-beta.11`: the storage location can no longer be chosen. A folder chosen in an older version stays in use.

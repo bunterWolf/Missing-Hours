@@ -1,0 +1,63 @@
+{
+  "shortDescription": "为你的电脑提供自动时间记录。Missing Hours 记录你在做什么，并以时间轴展示你的一天。免费，所有数据都保存在你的电脑上。",
+  "description": "到了周五，你还记得周二做了什么工作吗？Missing Hours 记得。Missing Hours 会自动记录你使用了哪些程序和窗口，以及你何时不在电脑前。它据此为每一天生成清晰的时间轴，让你无需启动秒表就能回顾工作时间并开具发票。\n\n• 随 Windows 启动，在你工作时安静地记录\n• 自动识别休息和离开\n• 带有程序图标的每日时间轴\n• 浅色和深色主题\n• 隐私优先：没有云端、没有账户、没有遥测。你的数据永远不会离开你的电脑。\n• 免费：无订阅、无广告、无应用内购买",
+  "features": [
+    "随 Windows 启动，在你工作时安静地记录",
+    "自动识别休息和离开",
+    "带有程序图标的每日时间轴",
+    "浅色和深色主题",
+    "隐私优先：没有云端、没有账户、没有遥测。你的数据永远不会离开你的电脑。",
+    "免费：无订阅、无广告、无应用内购买"
+  ],
+  "searchTerms": [
+    "时间追踪",
+    "时间记录",
+    "工时",
+    "工时表",
+    "工作时间",
+    "自动记录时间",
+    "活动记录"
+  ],
+  "screenshots": {
+    "timeline": {
+      "headline": "你的一天，自动记录",
+      "subline": "Missing Hours 按程序自动记录你的工作日，无需秒表。",
+      "caption": "以时间轴查看你的一天：Missing Hours 记录你使用的程序，并显示其图标和颜色，还会自动识别休息。"
+    },
+    "breaks": {
+      "headline": "Missing Hours 自动识别休息",
+      "subline": "午餐和咖啡休息不会被算作工作时间。",
+      "caption": "Missing Hours 会识别你何时不在电脑前，并在时间轴上用斜线标出休息。"
+    },
+    "dark": {
+      "headline": "浅色或深色，与你的 Windows 一致",
+      "subline": "Missing Hours 跟随 Windows 主题，你也可以自己选择。",
+      "caption": "浅色和深色主题，跟随 Windows 或由你选择。"
+    },
+    "zoom": {
+      "headline": "粗略或精细：15、10 或 5 分钟",
+      "subline": "连程序之间的短暂切换也能看到。",
+      "caption": "每个时间块可选 5、10 或 15 分钟，按你需要的精细程度查看一天。"
+    },
+    "privacy": {
+      "headline": "无需账户，无需云端，打开就能用。",
+      "subline": "你的数据只留在你的电脑上。",
+      "caption": "隐私优先：所有数据都保存在本地，不会发送到任何地方。"
+    }
+  },
+  "demoDay": {
+    "titles": {
+      "inbox": "收件箱 – 陈氏咨询",
+      "proposal": "方案_华东贸易.docx",
+      "research": "物流市场报告 2026",
+      "calculation": "报价_华东贸易.xlsx",
+      "projectFolder": "项目 › 华东贸易",
+      "workshop": "研讨会成果.pptx",
+      "processMap": "流程图_恒达工业",
+      "clientPortal": "客户门户 – 恒达工业",
+      "kickoff": "启动会_恒达工业.pptx",
+      "timesheet": "客户工时汇总.xlsx",
+      "minutes": "例会纪要.docx"
+    }
+  }
+}
