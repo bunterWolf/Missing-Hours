@@ -3,7 +3,7 @@
 import TimelineGenerator from '../src/store/TimelineGenerator';
 import en from './listing/en.json';
 import {
-  APPS, SCHEDULE, demoDate, expandWindowsPath, resolveAppPaths, buildDemoStoreData,
+  APPS, SCHEDULE, SHOT_TIME, demoDate, shotTime, expandWindowsPath, resolveAppPaths, buildDemoStoreData,
 } from './demo-day';
 
 const MIN = 60 * 1000;
@@ -19,14 +19,25 @@ function events(interval) {
   return generator.generateTimelineEvents(data.days[DAY_KEY].heartbeats, at(23, 59) + 1 * HOUR);
 }
 
-it('demoDate returns the last Tuesday before today', () => {
-  expect(demoDate(new Date(2026, 10, 19, 10))).toEqual(new Date(2026, 10, 17));
-  expect(demoDate(new Date(2026, 10, 17, 10))).toEqual(new Date(2026, 10, 10));
+// The images show "Today" with the app's clock at SHOT_TIME (store-screenshots.js fixes it).
+it('demoDate returns today at local midnight', () => {
+  expect(demoDate(new Date(2026, 10, 19, 10, 30))).toEqual(new Date(2026, 10, 19));
+  expect(demoDate(new Date(2026, 10, 17, 0, 0))).toEqual(new Date(2026, 10, 17));
 });
 
-// The date label shows "Yesterday" for yesterday; the images should show a weekday date.
-it('demoDate never returns yesterday', () => {
-  expect(demoDate(new Date(2026, 10, 18, 10))).toEqual(new Date(2026, 10, 10));
+it('shotTime is SHOT_TIME on the demo day, after the last block', () => {
+  expect(SHOT_TIME).toBe('17:20');
+  expect(shotTime(DATE)).toEqual(new Date(2026, 10, 17, 17, 20));
+  const [h, m] = SCHEDULE[SCHEDULE.length - 1].end.split(':').map(Number);
+  expect(shotTime(DATE).getTime()).toBeGreaterThan(at(h, m));
+});
+
+// At SHOT_TIME the whole day is aggregated: the app skips intervals that end after "now".
+it.each([15, 10, 5])('at shot time the whole day shows at %i minutes', (interval) => {
+  const data = buildDemoStoreData({ date: DATE, titles: en.demoDay.titles, paths });
+  const generator = new TimelineGenerator(interval);
+  const atShot = generator.generateTimelineEvents(data.days[DAY_KEY].heartbeats, shotTime(DATE).getTime());
+  expect(atShot).toEqual(events(interval));
 });
 
 it('expandWindowsPath replaces %VARS%', () => {

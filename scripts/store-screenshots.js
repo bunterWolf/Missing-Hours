@@ -7,7 +7,8 @@
 // only some languages. Output: store-screenshots/microsoft/<language>/ (not in git).
 //
 // Touches no real data: the app runs with --mock-data (no tracking, no saving) in a temporary userData
-// folder; the demo day only lives in a temporary file. Icons and brand colors come from the programs
+// folder; the demo day only lives in a temporary file. The demo day is today, and the app's clock is set
+// to the shot time (store/demo-day.js SHOT_TIME), so the images show "Today" with the running block. Icons and brand colors come from the programs
 // installed on this machine; a missing program shows in the default event style.
 const { spawnSync } = require('child_process');
 const fs = require('fs');
@@ -16,12 +17,13 @@ const path = require('path');
 const electronPath = require('electron');
 const { ROOT, NEUTRAL_POINTER, localeFor, pickLanguages, launchApp } = require('./lib/launch-app');
 const { CHECKED_TEXT, findLayoutProblems } = require('./lib/layout-check');
-const { APPS, SCHEDULE, demoDate, resolveAppPaths, buildDemoStoreData } = require('../store/demo-day');
+const { APPS, SCHEDULE, demoDate, shotTime, resolveAppPaths, buildDemoStoreData } = require('../store/demo-day');
 const { MOTIFS, HERO } = require('../store/motifs');
 
 const OUT_DIR = path.join(ROOT, 'store-screenshots', 'microsoft');
 const LISTING_DIR = path.join(ROOT, 'store', 'listing');
 const RENDER_SCRIPT = path.join(ROOT, 'store', 'template', 'render.js');
+const FIXED_CLOCK = path.join(ROOT, 'store', 'fixed-clock.js');
 // The app window in the images: default width, taller than the start size so more hours show.
 const WINDOW = { width: 437, height: 720 };
 const DEVICE_SCALE = 2.5; // 437 x 720 -> 1093 x 1800 px, placed 1:1 in the 1536 x 864 template at scale 2.5
@@ -121,23 +123,33 @@ async function captureMotif({ app, page, motif, language, missingTitles, tmpDir,
 
 async function captureLanguage({ language, listing, paths, missing, tmpDir, report }) {
   const dataFile = path.join(tmpDir, `demo-day-${language}.json`);
-  const data = buildDemoStoreData({ date: demoDate(new Date()), titles: listing.demoDay.titles, paths });
+  const date = demoDate(new Date());
+  const clock = shotTime(date).getTime();
+  const data = buildDemoStoreData({ date, titles: listing.demoDay.titles, paths });
   fs.writeFileSync(dataFile, JSON.stringify(data));
   const missingTitles = SCHEDULE.filter((s) => missing.includes(s.app)).map((s) => listing.demoDay.titles[s.title]);
 
   const { app, page, close } = await launchApp({
     language,
     args: ['--mock-data', `--mock-data-file=${dataFile}`, `--force-device-scale-factor=${DEVICE_SCALE}`],
+    // The demo day is today, and the app's clock shows the shot time (store/demo-day.js SHOT_TIME).
+    preload: [FIXED_CLOCK],
+    env: { MISSING_HOURS_CLOCK: String(clock) },
   });
   try {
     await app.evaluate(({ BrowserWindow }, size) => {
       BrowserWindow.getAllWindows()[0].setContentSize(size.width, size.height);
     }, WINDOW);
+    // The window's clock too, from the first script on (reload), so it shows today up to the shot time.
+    await page.clock.install({ time: clock });
+    await page.reload();
+    await page.waitForSelector('.wm-timeline-event');
+    const clocks = [await app.evaluate(() => Date.now()), await page.evaluate(() => Date.now())];
+    if (clocks.some((t) => Math.abs(t - clock) > 10 * 60 * 1000)) {
+      throw new Error(`The app's clock is not at the shot time (${clocks.map((t) => new Date(t).toString()).join(' / ')}).`);
+    }
     // The sample-data hint is development only; the real app does not show it.
     await page.addStyleTag({ content: '.wm-footer-mock { display: none !important; }' });
-    await page.waitForSelector('.wm-date-nav-arrows .wm-button:first-child:not([disabled])');
-    await page.click('.wm-date-nav-arrows .wm-button >> nth=0'); // back from today to the demo day
-    await page.waitForSelector('.wm-timeline-event');
     const captures = {};
     for (const motif of MOTIFS) {
       captures[motif.file] = await captureMotif({ app, page, motif, language, missingTitles, tmpDir, report });

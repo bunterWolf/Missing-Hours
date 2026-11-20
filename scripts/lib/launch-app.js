@@ -47,22 +47,26 @@ function pickLanguages(requested) {
   return requested.length ? requested : ALL_LANGUAGES;
 }
 
-async function launchApp({ language, args = [] }) {
+// preload: files the main process loads before the app (-r); env: extra environment variables for the app.
+async function launchApp({ language, args = [], preload = [], env = {} }) {
   const userData = fs.mkdtempSync(path.join(os.tmpdir(), 'missing-hours-screenshots-'));
   const app = await electron.launch({
     cwd: ROOT,
-    args: ['.', `--lang=${localeFor(language)}`, `--user-data-dir=${userData}`, ...KEEP_PAINTING, ...args],
+    env: { ...process.env, ...env },
+    args: [...preload.flatMap((file) => ['-r', file]), '.', `--lang=${localeFor(language)}`, `--user-data-dir=${userData}`, ...KEEP_PAINTING, ...args],
   });
   const close = async () => {
     await app.close();
     fs.rmSync(userData, { recursive: true, force: true });
   };
   try {
+    // The window first: an evaluate in the main process right after the start can be lost while the app
+    // gets ready ("Resulting promise was garbage collected", seen with the demo day on today).
+    const page = await app.firstWindow();
     const actualUserData = await app.evaluate(({ app: electronApp }) => electronApp.getPath('userData'));
     if (path.resolve(actualUserData) !== path.resolve(userData)) {
       throw new Error(`The app uses ${actualUserData} instead of the temporary folder; stopping so no real data is touched.`);
     }
-    const page = await app.firstWindow();
     await app.evaluate(({ BrowserWindow }) => BrowserWindow.getAllWindows()[0].webContents.setBackgroundThrottling(false));
     await page.waitForSelector('.wm-app');
     const documentLanguage = await page.evaluate(() => document.documentElement.lang);

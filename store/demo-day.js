@@ -38,12 +38,19 @@ const SCHEDULE = [
 
 const HEARTBEAT_SECONDS = [15, 45]; // as HeartbeatManager: every minute at :15 and :45
 
-// The last Tuesday at least two days before the local day of `now`, at local midnight. Not yesterday:
-// the app labels yesterday "Yesterday" instead of a weekday date.
+// The images show the demo day as "Today", with the app's clock fixed at SHOT_TIME: after the last block,
+// so the whole day is aggregated and the running block follows it (the app shows today up to "now").
+const SHOT_TIME = '17:20';
+
+// Today at local midnight.
 function demoDate(now) {
-  const date = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 1);
-  do date.setDate(date.getDate() - 1); while (date.getDay() !== 2);
-  return date;
+  return new Date(now.getFullYear(), now.getMonth(), now.getDate());
+}
+
+// SHOT_TIME on the demo day: the time the app's clock shows while the images are made.
+function shotTime(date) {
+  const [h, m] = SHOT_TIME.split(':').map(Number);
+  return new Date(date.getFullYear(), date.getMonth(), date.getDate(), h, m);
 }
 
 // Replaces %NAME% with the environment variable; Windows names are case-insensitive.
@@ -96,4 +103,4 @@ function buildDemoStoreData({ date, titles, paths }) {
   };
 }
 
-module.exports = { APPS, SCHEDULE, demoDate, expandWindowsPath, resolveAppPaths, buildDemoStoreData };
+module.exports = { APPS, SCHEDULE, SHOT_TIME, demoDate, shotTime, expandWindowsPath, resolveAppPaths, buildDemoStoreData };

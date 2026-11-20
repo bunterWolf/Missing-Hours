@@ -162,7 +162,9 @@ echten Alltag), aber die Blöcke im Bild dürfen nicht unruhig wirken.
 („Angebot Müller GmbH – Prozessanalyse.docx“, „Proposal Miller & Co – Process Review.docx“,
 „Offre Dupont SARL …“, „田中商事 提案書.docx“ …). Programmnamen bleiben unübersetzt.
 
-**Datum:** der letzte Dienstag vor dem Lauf (Ortszeit). Die Datei mit den Herzschlägen schreibt das
+**Datum:** heute, damit oben „Heute“ steht. Die App zeigt heute nur bis „jetzt“ und daran anschließend den
+laufenden Block, deshalb läuft ihre Uhr bei der Aufnahme ab 17:20 (`SHOT_TIME` in `store/demo-day.js`): im
+Hauptprozess über `store/fixed-clock.js` (mit `-r` vor der App geladen), im Fenster über Playwrights `page.clock`. Die Datei mit den Herzschlägen schreibt das
 Skript pro Sprache in einen temporären Ordner, nicht ins Repo.
 
 **Heartbeats, nicht Blöcke:** Der Beispieltag wird in `StoreData`-Herzschläge (30 s, `userActivity`,
