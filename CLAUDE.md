@@ -41,6 +41,7 @@ one before making related changes, and **keep it in sync** when behavior changes
 | Beta release process | `docs/BETA-RELEASE-PROZESS.md` |
 | Microsoft Store package (MSIX), Partner Center steps, Store-specific behavior | `docs/MICROSOFT-STORE.md` |
 | Privacy policy (linked from the Store listing; keep in sync with what is recorded) | `PRIVACY.md` |
+| Marketing: positioning, target groups, messaging, what may and may not be claimed (basis for website, Store texts, README) | `docs/MARKETING-STRATEGIE.md` |
 | Coding pattern preferences (original) | `.cursor/rules/coding-pattern-preferences.mdc` |
 | UI: Figma node/variable → file/class/token mapping, Figma update checklist | `docs/design/figma-map.md` |
 | UI texts, languages, date/time/duration formats (see "Multilingual" below) | `docs/Engineering Design Dokument.md` §2.5.3 |
