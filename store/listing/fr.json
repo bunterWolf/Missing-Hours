@@ -1,41 +1,47 @@
 {
-  "shortDescription": "Suivi automatique du temps sur ton PC. Missing Hours enregistre ce sur quoi tu travailles et affiche ta journée sous forme de frise chronologique. Tout reste sur ton ordinateur.",
-  "description": "Missing Hours enregistre automatiquement les programmes et fenêtres que tu utilises et les moments où tu n’es pas devant ton ordinateur. Il en tire une frise claire pour chaque journée, pour retrouver tes heures de travail et rédiger tes factures sans lancer de chronomètre.\n\n• Démarre avec Windows et enregistre discrètement pendant que tu travailles\n• Détecte automatiquement les pauses et les absences\n• Frise quotidienne avec les icônes de tes programmes\n• Thème clair et sombre\n• Confidentialité d’abord : pas de cloud, pas de compte, pas de télémétrie. Tes données ne quittent jamais ton ordinateur.",
+  "shortDescription": "Suivi automatique du temps sur ton PC. Missing Hours enregistre ce sur quoi tu travailles et affiche ta journée sous forme de frise chronologique. Gratuit, et tout reste sur ton ordinateur.",
+  "description": "Tu te souviens encore vendredi de ce sur quoi tu as travaillé mardi ? Missing Hours, oui. Missing Hours enregistre automatiquement les programmes et fenêtres que tu utilises et les moments où tu n’es pas devant ton ordinateur. Il en tire une frise claire pour chaque journée, pour retrouver tes heures de travail et rédiger tes factures sans lancer de chronomètre.\n\n• Démarre avec Windows et enregistre discrètement pendant que tu travailles\n• Détecte automatiquement les pauses et les absences\n• Frise quotidienne avec les icônes de tes programmes\n• Thème clair et sombre\n• Confidentialité d’abord : pas de cloud, pas de compte, pas de télémétrie. Tes données ne quittent jamais ton ordinateur.\n• Gratuit : pas d’abonnement, pas de publicité, pas d’achats intégrés",
   "features": [
     "Démarre avec Windows et enregistre discrètement pendant que tu travailles",
     "Détecte automatiquement les pauses et les absences",
     "Frise quotidienne avec les icônes de tes programmes",
     "Thème clair et sombre",
-    "Confidentialité d’abord : pas de cloud, pas de compte, pas de télémétrie. Tes données ne quittent jamais ton ordinateur."
+    "Confidentialité d’abord : pas de cloud, pas de compte, pas de télémétrie. Tes données ne quittent jamais ton ordinateur.",
+    "Gratuit : pas d’abonnement, pas de publicité, pas d’achats intégrés"
   ],
   "searchTerms": [
     "suivi du temps",
     "feuille de temps",
-    "temps de travail",
-    "facturation",
-    "productivité",
-    "time tracker",
-    "chronologie"
+    "heures de travail",
+    "pointage",
+    "suivi automatique du temps",
+    "heures facturables",
+    "suivi d’activité"
   ],
   "screenshots": {
     "timeline": {
-      "headline": "Où sont passées tes heures ?",
+      "headline": "Ta journée, notée automatiquement",
       "subline": "Missing Hours enregistre ta journée de travail automatiquement, programme par programme, sans chronomètre.",
       "caption": "Ta journée sous forme de frise : Missing Hours enregistre les programmes que tu utilises, avec leurs icônes et leurs couleurs, et détecte les pauses tout seul."
     },
-    "detail": {
-      "headline": "Aussi précis que nécessaire",
-      "subline": "5, 10 ou 15 minutes par bloc : même les changements rapides apparaissent.",
-      "caption": "Choisis 5, 10 ou 15 minutes par bloc pour voir ta journée avec la précision dont tu as besoin."
+    "breaks": {
+      "headline": "Missing Hours détecte tout seul les pauses",
+      "subline": "Le déjeuner et les pauses café ne comptent pas comme temps de travail.",
+      "caption": "Missing Hours détecte quand tu n’es pas devant ton ordinateur et affiche les pauses hachurées dans la frise."
     },
     "dark": {
       "headline": "Clair ou sombre, comme ton Windows",
       "subline": "Missing Hours suit le thème de Windows, ou tu le choisis toi-même.",
       "caption": "Thème clair et sombre, selon Windows ou selon ton choix."
     },
+    "zoom": {
+      "headline": "Large ou précis : 15, 10 ou 5 minutes",
+      "subline": "Même les courts passages d’un programme à l’autre deviennent visibles.",
+      "caption": "Choisis 5, 10 ou 15 minutes par bloc pour voir ta journée avec la précision dont tu as besoin."
+    },
     "privacy": {
-      "headline": "Tes données restent sur ton PC",
-      "subline": "Pas de cloud, pas de compte, pas de télémétrie.",
+      "headline": "Pas de compte. Pas de cloud. Il tourne tout seul.",
+      "subline": "Tes données restent sur ton PC.",
       "caption": "Confidentialité d’abord : tout est enregistré localement, rien n’est envoyé."
     }
   },

@@ -1,41 +1,47 @@
 {
-  "shortDescription": "Automatic time tracking for your PC. Missing Hours records what you work on and shows your day as a timeline. Everything stays on your computer.",
-  "description": "Missing Hours automatically records which programs and windows you use and when you are away from your computer. It turns this into a clear timeline for every day, so you can review your working hours and write invoices without starting a stopwatch.\n\n• Starts with Windows and records quietly while you work\n• Detects breaks and absence automatically\n• Daily timeline with your programs' icons\n• Light and dark theme\n• Privacy first: no cloud, no account, no telemetry. Your data never leaves your computer.",
+  "shortDescription": "Automatic time tracking for your PC. Missing Hours records what you work on and shows your day as a timeline. Free, and everything stays on your computer.",
+  "description": "Do you still remember on Friday what you worked on on Tuesday? Missing Hours does. Missing Hours automatically records which programs and windows you use and when you are away from your computer. It turns this into a clear timeline for every day, so you can review your working hours and write invoices without starting a stopwatch.\n\n• Starts with Windows and records quietly while you work\n• Detects breaks and absence automatically\n• Daily timeline with your programs' icons\n• Light and dark theme\n• Privacy first: no cloud, no account, no telemetry. Your data never leaves your computer.\n• Free: no subscription, no ads, no in-app purchases",
   "features": [
     "Starts with Windows and records quietly while you work",
     "Detects breaks and absence automatically",
     "Daily timeline with your programs' icons",
     "Light and dark theme",
-    "Privacy first: no cloud, no account, no telemetry. Your data never leaves your computer."
+    "Privacy first: no cloud, no account, no telemetry. Your data never leaves your computer.",
+    "Free: no subscription, no ads, no in-app purchases"
   ],
   "searchTerms": [
-    "time tracking",
     "time tracker",
+    "time tracking",
     "timesheet",
     "work hours",
-    "invoicing",
-    "productivity",
-    "timeline"
+    "automatic time tracking",
+    "billable hours",
+    "activity tracker"
   ],
   "screenshots": {
     "timeline": {
-      "headline": "Where did your hours go?",
+      "headline": "Your day, written down automatically",
       "subline": "Missing Hours records your workday automatically – app by app, no stopwatch.",
       "caption": "Your day as a timeline: Missing Hours records the programs you use, with their icons and colors, and detects breaks on its own."
     },
-    "detail": {
-      "headline": "As detailed as you need",
-      "subline": "5, 10 or 15 minutes per block – even short switches show up.",
-      "caption": "Choose 5, 10 or 15 minutes per block to see your day in as much detail as you need."
+    "breaks": {
+      "headline": "Missing Hours detects breaks on its own",
+      "subline": "Lunch and coffee breaks don’t end up as working time.",
+      "caption": "Missing Hours detects when you are away from your computer and shows breaks hatched in the timeline."
     },
     "dark": {
-      "headline": "Light or dark, like your Windows",
+      "headline": "Light or dark, just like your Windows",
       "subline": "Missing Hours follows your Windows theme, or you pick one yourself.",
       "caption": "Light and dark theme, following Windows or set by you."
     },
+    "zoom": {
+      "headline": "Rough or precise: 15, 10 or 5 minutes",
+      "subline": "Even short switches between programs become visible.",
+      "caption": "Choose 5, 10 or 15 minutes per block to see your day in as much detail as you need."
+    },
     "privacy": {
-      "headline": "Your data stays on your PC",
-      "subline": "No cloud, no account, no telemetry.",
+      "headline": "No account. No cloud. It just runs along.",
+      "subline": "Your data stays on your PC.",
       "caption": "Privacy first: everything is stored locally and nothing is sent anywhere."
     }
   },

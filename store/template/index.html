@@ -22,8 +22,10 @@ window.renderJob = async function renderJob(job) {
   };
   if (job.layout === 'screenshot') {
     const copy = add(document.body, 'div', 'copy');
-    add(copy, 'h1', 'headline', job.headline);
-    add(copy, 'p', 'subline', job.subline);
+    // The product name never breaks across lines.
+    const keepName = (text) => text.replaceAll('Missing Hours', 'Missing Hours');
+    add(copy, 'h1', 'headline', keepName(job.headline));
+    add(copy, 'p', 'subline', keepName(job.subline));
     const brand = add(document.body, 'div', 'brand');
     add(brand, 'img').src = '../../resources/icon.png';
     brand.appendChild(document.createTextNode('Missing Hours')); // product name, not translated
@@ -42,7 +44,7 @@ window.renderJob = async function renderJob(job) {
   return findProblems();
 };
 
-// Headline at most 2 lines, subline at most 3; nothing outside the canvas; the text stays clear of
+// Headline and subline at most 3 lines each (three short sentences stack well); nothing outside the canvas; the text stays clear of
 // the window and the product name.
 function findProblems() {
   const problems = [];
@@ -53,7 +55,7 @@ function findProblems() {
   };
   const headline = document.querySelector('.headline');
   const subline = document.querySelector('.subline');
-  if (headline && lines(headline) > 2) problems.push(`headline wraps to ${lines(headline)} lines`);
+  if (headline && lines(headline) > 3) problems.push(`headline wraps to ${lines(headline)} lines`);
   if (subline && lines(subline) > 3) problems.push(`subline wraps to ${lines(subline)} lines`);
   const box = (el) => el.getBoundingClientRect();
   for (const el of document.querySelectorAll('.copy, .brand, .window')) {

@@ -19,6 +19,7 @@ const CHECKED_TEXT = [
   '.wm-day-summary-label',
   '.wm-settings-title',
   '.wm-setting-row-title',
+  '.wm-settings-website',
   '.wm-settings-version',
 ];
 

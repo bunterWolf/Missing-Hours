@@ -1,41 +1,47 @@
 {
-  "shortDescription": "Automatyczna rejestracja czasu na Twoim komputerze. Missing Hours zapisuje, nad czym pracujesz, i pokazuje Twój dzień jako oś czasu. Wszystko zostaje na Twoim komputerze.",
-  "description": "Missing Hours automatycznie rejestruje, z jakich programów i okien korzystasz oraz kiedy nie ma Cię przy komputerze. Na tej podstawie tworzy przejrzystą oś czasu dla każdego dnia, dzięki której odtworzysz godziny pracy i wystawisz faktury bez włączania stopera.\n\n• Uruchamia się razem z systemem Windows i dyskretnie rejestruje Twoją pracę\n• Automatycznie wykrywa przerwy i nieobecność\n• Dzienna oś czasu z ikonami Twoich programów\n• Jasny i ciemny motyw\n• Prywatność przede wszystkim: bez chmury, bez konta, bez telemetrii. Twoje dane nigdy nie opuszczają komputera.",
+  "shortDescription": "Automatyczna rejestracja czasu na Twoim komputerze. Missing Hours zapisuje, nad czym pracujesz, i pokazuje Twój dzień jako oś czasu. Bezpłatna aplikacja, a wszystkie dane zostają na Twoim komputerze.",
+  "description": "Piątek, a wtorek już zatarł się w pamięci? Missing Hours pamięta. Missing Hours automatycznie rejestruje, z jakich programów i okien korzystasz oraz kiedy nie ma Cię przy komputerze. Na tej podstawie tworzy przejrzystą oś czasu dla każdego dnia, dzięki której odtworzysz godziny pracy i wystawisz faktury bez włączania stopera.\n\n• Uruchamia się razem z systemem Windows i dyskretnie rejestruje Twoją pracę\n• Automatycznie wykrywa przerwy i nieobecność\n• Dzienna oś czasu z ikonami Twoich programów\n• Jasny i ciemny motyw\n• Prywatność przede wszystkim: bez chmury, bez konta, bez telemetrii. Twoje dane nigdy nie opuszczają komputera.\n• Bezpłatna: bez subskrypcji, bez reklam, bez zakupów w aplikacji",
   "features": [
     "Uruchamia się razem z systemem Windows i dyskretnie rejestruje Twoją pracę",
     "Automatycznie wykrywa przerwy i nieobecność",
     "Dzienna oś czasu z ikonami Twoich programów",
     "Jasny i ciemny motyw",
-    "Prywatność przede wszystkim: bez chmury, bez konta, bez telemetrii. Twoje dane nigdy nie opuszczają komputera."
+    "Prywatność przede wszystkim: bez chmury, bez konta, bez telemetrii. Twoje dane nigdy nie opuszczają komputera.",
+    "Bezpłatna: bez subskrypcji, bez reklam, bez zakupów w aplikacji"
   ],
   "searchTerms": [
-    "ewidencja czasu",
+    "ewidencja czasu pracy",
     "śledzenie czasu",
-    "czas pracy",
     "karta czasu pracy",
-    "faktury",
-    "produktywność",
-    "time tracker"
+    "godziny pracy",
+    "automatyczna rejestracja czasu",
+    "rozliczanie godzin",
+    "dziennik aktywności"
   ],
   "screenshots": {
     "timeline": {
-      "headline": "Gdzie podziały się Twoje godziny?",
+      "headline": "Twój dzień zapisany automatycznie",
       "subline": "Missing Hours automatycznie zapisuje Twój dzień pracy – program po programie, bez stopera.",
       "caption": "Twój dzień jako oś czasu: Missing Hours zapisuje, z jakich programów korzystasz, z ich ikonami i kolorami, a przerwy wykrywa sam."
     },
-    "detail": {
-      "headline": "Tak dokładnie, jak potrzebujesz",
-      "subline": "5, 10 lub 15 minut na blok – widać nawet krótkie przełączenia.",
-      "caption": "Wybierz 5, 10 lub 15 minut na blok i oglądaj swój dzień tak szczegółowo, jak potrzebujesz."
+    "breaks": {
+      "headline": "Missing Hours sam wykrywa przerwy",
+      "subline": "Obiad i przerwy na kawę nie trafiają do czasu pracy.",
+      "caption": "Missing Hours wykrywa, kiedy nie ma Cię przy komputerze, i pokazuje przerwy na osi czasu jako kreskowane pola."
     },
     "dark": {
       "headline": "Jasny lub ciemny, jak Twój Windows",
       "subline": "Missing Hours stosuje motyw systemu Windows lub ten, który wybierzesz.",
       "caption": "Jasny i ciemny motyw – zgodnie z systemem Windows lub według Twojego wyboru."
     },
+    "zoom": {
+      "headline": "Ogólnie lub dokładnie: 15, 10 lub 5 minut",
+      "subline": "Widać nawet krótkie przełączenia między programami.",
+      "caption": "Wybierz 5, 10 lub 15 minut na blok i oglądaj swój dzień tak szczegółowo, jak potrzebujesz."
+    },
     "privacy": {
-      "headline": "Twoje dane zostają na Twoim komputerze",
-      "subline": "Bez chmury, bez konta, bez telemetrii.",
+      "headline": "Bez konta. Bez chmury. Po prostu działa.",
+      "subline": "Twoje dane zostają na Twoim komputerze.",
       "caption": "Prywatność przede wszystkim: wszystko jest zapisywane lokalnie i nic nie jest wysyłane."
     }
   },

@@ -42,7 +42,7 @@ it('every supported language has a listing file and nothing else', () => {
 
 it('common.json has the language-independent fields', () => {
   const common = JSON.parse(fs.readFileSync(path.join(LISTING_DIR, 'common.json'), 'utf8'));
-  expect(Object.keys(common).sort()).toEqual(['category', 'copyright', 'developer', 'privacyUrl']);
+  expect(Object.keys(common).sort()).toEqual(['category', 'copyright', 'developer', 'privacyUrl', 'supportUrl', 'website']);
   Object.values(common).forEach((value) => expect(String(value).trim()).not.toBe(''));
 });
 

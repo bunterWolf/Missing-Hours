@@ -95,6 +95,10 @@ async function captureMotif({ app, page, motif, language, missingTitles, tmpDir,
       throw new Error(`${language} ${motif.file}: not every program icon loaded within ${ICON_TIMEOUT_MS / 1000} s.`);
     });
     for (const title of await page.evaluate(findCutTitles)) report.push(`${language} ${motif.file}: event title cut off: "${title}"`);
+    if (motif.pickerOpen) {
+      await page.click('.wm-interval-picker .wm-button');
+      await page.waitForSelector('.wm-interval-pill');
+    }
   } else {
     // Settings as in the Microsoft Store package: only this app instance's answer changes.
     await app.evaluate(({ ipcMain }) => {
@@ -108,6 +112,10 @@ async function captureMotif({ app, page, motif, language, missingTitles, tmpDir,
   for (const problem of await page.evaluate(findLayoutProblems, CHECKED_TEXT)) report.push(`${language} ${motif.file}: ${problem}`);
   const file = path.join(tmpDir, `${language}-${motif.file}.png`);
   await page.screenshot({ path: file }).catch(() => page.screenshot({ path: file })); // see screenshots.js
+  if (motif.pickerOpen) {
+    await page.keyboard.press('Escape');
+    await page.waitForSelector('.wm-interval-pill', { state: 'detached' });
+  }
   return file;
 }
 
@@ -174,6 +182,7 @@ function listingMarkdown(language, listing, common) {
     `# Store listing: ${language}`,
     '',
     `Category: ${common.category} · Developer: ${common.developer} · Copyright: ${common.copyright}`,
+    `Website: ${common.website} · Support: ${common.supportUrl}`,
     `Privacy policy: ${common.privacyUrl}`,
     '',
     '## Short description', '', listing.shortDescription, '',

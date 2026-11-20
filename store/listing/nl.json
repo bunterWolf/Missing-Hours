@@ -1,41 +1,47 @@
 {
-  "shortDescription": "Automatische tijdregistratie voor je pc. Missing Hours legt vast waaraan je werkt en toont je dag als tijdlijn. Alles blijft op je computer.",
-  "description": "Missing Hours registreert automatisch welke programma’s en vensters je gebruikt en wanneer je niet achter je computer zit. Daarvan maakt het voor elke dag een overzichtelijke tijdlijn, zodat je je werkuren kunt nagaan en facturen kunt maken zonder een stopwatch te starten.\n\n• Start met Windows en registreert ongemerkt terwijl je werkt\n• Herkent pauzes en afwezigheid automatisch\n• Dagelijkse tijdlijn met de pictogrammen van je programma’s\n• Licht en donker thema\n• Privacy voorop: geen cloud, geen account, geen telemetrie. Je gegevens verlaten je computer nooit.",
+  "shortDescription": "Automatische tijdregistratie voor je pc. Missing Hours legt vast waaraan je werkt en toont je dag als tijdlijn. Gratis, en alles blijft op je computer.",
+  "description": "Weet je op vrijdag nog waaraan je dinsdag hebt gewerkt? Missing Hours wel. Missing Hours registreert automatisch welke programma’s en vensters je gebruikt en wanneer je niet achter je computer zit. Daarvan maakt het voor elke dag een overzichtelijke tijdlijn, zodat je je werkuren kunt nagaan en facturen kunt maken zonder een stopwatch te starten.\n\n• Start met Windows en registreert ongemerkt terwijl je werkt\n• Herkent pauzes en afwezigheid automatisch\n• Dagelijkse tijdlijn met de pictogrammen van je programma’s\n• Licht en donker thema\n• Privacy voorop: geen cloud, geen account, geen telemetrie. Je gegevens verlaten je computer nooit.\n• Gratis: geen abonnement, geen advertenties, geen in-app-aankopen",
   "features": [
     "Start met Windows en registreert ongemerkt terwijl je werkt",
     "Herkent pauzes en afwezigheid automatisch",
     "Dagelijkse tijdlijn met de pictogrammen van je programma’s",
     "Licht en donker thema",
-    "Privacy voorop: geen cloud, geen account, geen telemetrie. Je gegevens verlaten je computer nooit."
+    "Privacy voorop: geen cloud, geen account, geen telemetrie. Je gegevens verlaten je computer nooit.",
+    "Gratis: geen abonnement, geen advertenties, geen in-app-aankopen"
   ],
   "searchTerms": [
-    "tijdregistratie",
     "urenregistratie",
+    "tijdregistratie",
     "urenstaat",
-    "werktijd",
-    "facturatie",
-    "productiviteit",
-    "time tracker"
+    "werkuren",
+    "automatische tijdregistratie",
+    "declarabele uren",
+    "activiteitenlogboek"
   ],
   "screenshots": {
     "timeline": {
-      "headline": "Waar zijn je uren gebleven?",
+      "headline": "Je dag, automatisch bijgehouden",
       "subline": "Missing Hours legt je werkdag automatisch vast, programma voor programma, zonder stopwatch.",
       "caption": "Je dag als tijdlijn: Missing Hours registreert welke programma’s je gebruikt, met hun pictogrammen en kleuren, en herkent pauzes vanzelf."
     },
-    "detail": {
-      "headline": "Zo nauwkeurig als je wilt",
-      "subline": "5, 10 of 15 minuten per blok: ook korte wissels worden zichtbaar.",
-      "caption": "Kies 5, 10 of 15 minuten per blok en bekijk je dag zo gedetailleerd als je nodig hebt."
+    "breaks": {
+      "headline": "Missing Hours herkent pauzes zelf",
+      "subline": "Lunch en koffiepauzes tellen niet mee als werktijd.",
+      "caption": "Missing Hours herkent wanneer je niet achter je computer zit en toont pauzes gearceerd in de tijdlijn."
     },
     "dark": {
       "headline": "Licht of donker, net als je Windows",
       "subline": "Missing Hours volgt het thema van Windows, of je kiest zelf.",
       "caption": "Licht en donker thema, volgens Windows of naar keuze."
     },
+    "zoom": {
+      "headline": "Grof of precies: 15, 10 of 5 minuten",
+      "subline": "Ook korte wissels tussen programma’s worden zichtbaar.",
+      "caption": "Kies 5, 10 of 15 minuten per blok en bekijk je dag zo gedetailleerd als je nodig hebt."
+    },
     "privacy": {
-      "headline": "Je gegevens blijven op je pc",
-      "subline": "Geen cloud, geen account, geen telemetrie.",
+      "headline": "Geen account. Geen cloud. Het draait gewoon mee.",
+      "subline": "Je gegevens blijven op je pc.",
       "caption": "Privacy voorop: alles wordt lokaal opgeslagen en er wordt niets verzonden."
     }
   },

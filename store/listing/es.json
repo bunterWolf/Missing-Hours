@@ -1,41 +1,47 @@
 {
-  "shortDescription": "Registro automático del tiempo en tu PC. Missing Hours registra en qué trabajas y muestra tu día como una línea de tiempo. Todo se queda en tu ordenador.",
-  "description": "Missing Hours registra automáticamente qué programas y ventanas usas y cuándo no estás delante del ordenador. Con ello crea una línea de tiempo clara de cada día, para que puedas revisar tus horas de trabajo y emitir facturas sin poner en marcha un cronómetro.\n\n• Se inicia con Windows y registra discretamente mientras trabajas\n• Detecta pausas y ausencias automáticamente\n• Línea de tiempo diaria con los iconos de tus programas\n• Tema claro y oscuro\n• La privacidad primero: sin nube, sin cuenta, sin telemetría. Tus datos nunca salen de tu ordenador.",
+  "shortDescription": "Registro automático del tiempo en tu PC. Missing Hours registra en qué trabajas y muestra tu día como una línea de tiempo. Gratis, y todo se queda en tu ordenador.",
+  "description": "¿Recuerdas el viernes en qué trabajaste el martes? Missing Hours sí. Missing Hours registra automáticamente qué programas y ventanas usas y cuándo no estás delante del ordenador. Con ello crea una línea de tiempo clara de cada día, para que puedas revisar tus horas de trabajo y emitir facturas sin poner en marcha un cronómetro.\n\n• Se inicia con Windows y registra discretamente mientras trabajas\n• Detecta pausas y ausencias automáticamente\n• Línea de tiempo diaria con los iconos de tus programas\n• Tema claro y oscuro\n• La privacidad primero: sin nube, sin cuenta, sin telemetría. Tus datos nunca salen de tu ordenador.\n• Gratis: sin suscripción, sin anuncios, sin compras dentro de la aplicación",
   "features": [
     "Se inicia con Windows y registra discretamente mientras trabajas",
     "Detecta pausas y ausencias automáticamente",
     "Línea de tiempo diaria con los iconos de tus programas",
     "Tema claro y oscuro",
-    "La privacidad primero: sin nube, sin cuenta, sin telemetría. Tus datos nunca salen de tu ordenador."
+    "La privacidad primero: sin nube, sin cuenta, sin telemetría. Tus datos nunca salen de tu ordenador.",
+    "Gratis: sin suscripción, sin anuncios, sin compras dentro de la aplicación"
   ],
   "searchTerms": [
-    "control horario",
+    "control de horas",
     "registro de tiempo",
     "hoja de horas",
     "horas de trabajo",
-    "facturación",
-    "productividad",
-    "time tracker"
+    "seguimiento del tiempo",
+    "horas facturables",
+    "registro de actividad"
   ],
   "screenshots": {
     "timeline": {
-      "headline": "¿Adónde se fueron tus horas?",
+      "headline": "Tu día, anotado automáticamente",
       "subline": "Missing Hours registra tu jornada automáticamente, programa a programa, sin cronómetro.",
       "caption": "Tu día como línea de tiempo: Missing Hours registra los programas que usas, con sus iconos y colores, y detecta las pausas por sí solo."
     },
-    "detail": {
-      "headline": "Tan preciso como lo necesites",
-      "subline": "5, 10 o 15 minutos por bloque: hasta los cambios breves se ven.",
-      "caption": "Elige 5, 10 o 15 minutos por bloque y mira tu día con el detalle que necesitas."
+    "breaks": {
+      "headline": "Missing Hours detecta las pausas por sí solo",
+      "subline": "El almuerzo y las pausas para el café no cuentan como tiempo de trabajo.",
+      "caption": "Missing Hours detecta cuándo no estás delante del ordenador y muestra las pausas rayadas en la línea de tiempo."
     },
     "dark": {
       "headline": "Claro u oscuro, como tu Windows",
       "subline": "Missing Hours sigue el tema de Windows, o lo eliges tú.",
       "caption": "Tema claro y oscuro, según Windows o a tu elección."
     },
+    "zoom": {
+      "headline": "General o detallado: 15, 10 o 5 minutos",
+      "subline": "Incluso los cambios breves entre programas se vuelven visibles.",
+      "caption": "Elige 5, 10 o 15 minutos por bloque y mira tu día con el detalle que necesitas."
+    },
     "privacy": {
-      "headline": "Tus datos se quedan en tu PC",
-      "subline": "Sin nube, sin cuenta, sin telemetría.",
+      "headline": "Sin cuenta. Sin nube. Simplemente funciona.",
+      "subline": "Tus datos se quedan en tu PC.",
       "caption": "La privacidad primero: todo se guarda en local y no se envía nada."
     }
   },

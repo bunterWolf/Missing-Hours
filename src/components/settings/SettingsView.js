@@ -163,9 +163,16 @@ export default function SettingsView({ onBack }) {
 
         <div className="wm-settings-spacer" />
 
-        {/* Project address as text, not a link: the app is local-only */}
+        {/* The domain is a name like the product name, so it is not translated. The main process
+            opens the fixed URL in the browser ('open-website'); no data goes with it. */}
         <footer className="wm-settings-footer">
-          <span className="text-m-default">{t('projectLink')}</span>
+          <button
+            type="button"
+            className="wm-settings-website text-m-default"
+            onClick={() => ipcRenderer.invoke('open-website')}
+          >
+            www.missing-hours.app
+          </button>
           {appVersion && <span className="wm-settings-version text-m-default">{t('version')} {appVersion}</span>}
         </footer>
       </div>

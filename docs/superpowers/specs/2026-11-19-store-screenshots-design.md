@@ -254,7 +254,7 @@ Erprobt im Entwurf vom 2026-11-19 (diese Fallen sind real):
   Zeitleiste.
 - **Fenster** mit Schatten und 8 px (skaliert) runden Ecken wie unter Windows 11.
 - **Text:** Inter (aus `@fontsource/inter`, lokal), für `ja`/`ko`/`zh-*` die Windows-Schriften der
-  Sprache, wie die App sie nutzt. Überschrift höchstens zwei Zeilen; Prüfung im Template wie in 6.6,
+  Sprache, wie die App sie nutzt. Überschrift höchstens drei Zeilen, der Produktname bricht nie um; Prüfung im Template wie in 6.6,
   sonst Fehler.
 - **Kleines App-Icon mit Produktname** unten links.
 - Format als Parameter (Breite, Höhe, Anordnung), damit später 16:10 für Apple dazukommen kann.

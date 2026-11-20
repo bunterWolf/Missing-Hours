@@ -497,6 +497,11 @@ function registerIpcHandlers(): void { // Add return type void
     await shell.openExternal('ms-settings:startupapps');
   });
 
+  // Settings footer: opens the website in the browser (fixed URL, nothing is sent with it)
+  ipcMain.handle('open-website', async (): Promise<void> => {
+    await shell.openExternal('https://www.missing-hours.app');
+  });
+
   console.log("IPC handlers registered.");
 }
 

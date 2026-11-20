@@ -73,6 +73,7 @@ unvirtualisierte Dateien). Einen eigenen Speicherort kann man in den Einstellung
 ## Angaben für die erste Einreichung
 
 - **Preis und Verfügbarkeit:** kostenlos, alle Märkte
+- **Website des Entwicklers:** `https://www.missing-hours.app`; Supportkontakt: `https://github.com/bunterWolf/Missing-Hours/issues`
 - **Eigenschaften:** Kategorie „Produktivität“; „Diese App greift auf persönliche Informationen zu“: ja,
   Datenschutz-URL `https://github.com/bunterWolf/Missing-Hours/blob/main/PRIVACY.md`
 - **Altersfreigabe:** Fragebogen ausfüllen; keine Kommunikation zwischen Nutzern, keine Käufe, keine
@@ -83,15 +84,19 @@ unvirtualisierte Dateien). Einen eigenen Speicherort kann man in den Einstellung
   > data stays on the device.
 - **Store-Einträge:** einen pro Sprache des Pakets (12, siehe `build.appx.languages` in `package.json`), Texte
   aus `store/listing/` (unten). Screenshots und Titelbild erzeugt `npm run store-screenshots` in 3840 × 2160
-  nach `store-screenshots/microsoft/<sprache>/` (`00-hero.png` als 16:9-Super-Hero-Art, `01`–`04` als
+  nach `store-screenshots/microsoft/<sprache>/` (`00-hero.png` als 16:9-Super-Hero-Art, `01`–`05` als
   Screenshots in dieser Reihenfolge). Das Skript braucht die Programme des Beispieltags auf dem Rechner (Office,
   Edge, Chrome, Figma), sonst erscheinen sie ohne Icon. Die Datenschutz-URL ist für alle Sprachen dieselbe
   (Deutsch und Englisch). Eine neue Sprache in der App braucht auch `store/listing/<sprache>.json`.
 
 ### Store-Texte
 
+Abgeleitet aus [MARKETING-STRATEGIE.md](MARKETING-STRATEGIE.md) (Abschnitt 8). Die Screenshots in dieser
+Reihenfolge: 1. Tagesansicht hell, 2. Pause mit Schraffur, 3. Tagesansicht dunkel, 4. Zoom-Auswahl offen
+(5 Minuten), 5. Einstellungen (Motive in `store/motifs.js`).
+
 Die Texte pro Sprache stehen in `store/listing/<sprache>.json`, die sprachunabhängigen Angaben
-(Kategorie, Datenschutz-URL, Copyright, Entwickler) in `store/listing/common.json`.
+(Kategorie, Website, Support, Datenschutz-URL, Copyright, Entwickler) in `store/listing/common.json`.
 `store/listing/listing.test.js` prüft, dass jede Sprache alle Felder hat und die Grenzen von Partner
 Center einhält. `npm run store-screenshots` schreibt alles zusätzlich als `listing.md` zum Kopieren
 neben die Bilder.
@@ -105,6 +110,10 @@ neben die Bilder.
 | `screenshots.<motiv>.caption` | Bildunterschrift des Screenshots |
 | `screenshots.<motiv>.headline` / `.subline` | Text auf dem Bild (nicht im Partner Center) |
 | `demoDay.titles` | Fenstertitel im Beispieltag der Screenshots (nicht im Partner Center) |
+
+Suchbegriffe: Partner Center erlaubt bis zu 7 Begriffe (je höchstens 30 Zeichen, zusammen höchstens 21 Wörter;
+beim Eintragen prüfen). Die Begriffe und alle Texte außer Deutsch und Englisch sind noch nicht von
+Muttersprachlern geprüft.
 
 ## Lokal bauen und testen
 
