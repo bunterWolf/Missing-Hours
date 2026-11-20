@@ -245,6 +245,7 @@ src/components/
 1. **Echtzeit-Updates**
    - Nahtlose Integration neuer Events
    - Keine Neuladung bei Datenaktualisierung
+   - Tageswechsel bei offener App (meist über Nacht im Ruhemodus): Die Datumsnavigation prüft alle 15 s, beim Fokus des Fensters und bei jeder Datenaktualisierung, ob ein neuer Tag begonnen hat (`applyDayChange` in `src/components/dayChange.js`, getestet in `dayChange.test.js`). Der neue Tag kommt in die Liste der Tage. Wer „Heute“ angesehen hat, landet auf dem neuen Tag; ein bewusst gewählter vergangener Tag bleibt stehen. Ein Neustart ist dafür nicht nötig
 
 2. **Scroll-Verhalten**
    - Der Timeline-Container scrollt nativ (eigene 14-px-Scrollbar)
