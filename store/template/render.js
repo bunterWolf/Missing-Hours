@@ -1,8 +1,10 @@
 // Electron main script: renders Store images from store/template/index.html.
 //   electron store/template/render.js <jobs.json>
-// jobs.json: [{ out, layout: 'screenshot' | 'hero', theme, lang, headline?, subline?, windows: [{ src, theme }] }]
-// with absolute file paths for out and src. Writes each out (PNG, 3840 x 2160) and <jobs.json>.result.json
-// = { problems: [...] }. Exit code 0 also with problems (the caller reports them), 1 on a crash.
+// jobs.json: [{ out, importOut?, layout: 'screenshot' | 'hero', theme, lang, headline?, subline?, windows: [{ src, theme }] }]
+// with absolute file paths for out, importOut and src. Writes each out (PNG, 3840 x 2160), importOut
+// (the same image at 1920 x 1080, for the Partner Center import, store/partner-center.js) and
+// <jobs.json>.result.json = { problems: [...] }. Exit code 0 also with problems (the caller reports
+// them), 1 on a crash.
 //
 // Runs in its own process because the app is captured with --force-device-scale-factor=2.5, while this
 // page needs scale 1 plus an emulated device scale of 2.5. Found while trying it out (2026-11-19):
@@ -15,6 +17,7 @@ const { app, BrowserWindow } = require('electron');
 
 const CANVAS = { width: 1536, height: 864 };
 const SCALE = 2.5; // 1536 x 864 -> 3840 x 2160
+const IMPORT_SCALE = 0.5; // of the capture: 3840 x 2160 -> 1920 x 1080
 const JOB_TIMEOUT_MS = 30000;
 
 const jobsFile = path.resolve(process.argv[process.argv.length - 1]);
@@ -59,12 +62,16 @@ app.whenReady().then(async () => {
       `render ${job.out}`,
     );
     found.forEach((problem) => problems.push(`${job.lang} ${path.basename(job.out)}: ${problem}`));
-    const shot = await withTimeout(
-      cdp.sendCommand('Page.captureScreenshot', { format: 'png', clip: { x: 0, y: 0, ...CANVAS, scale: 1 } }),
-      `capture ${job.out}`,
-    );
-    fs.mkdirSync(path.dirname(job.out), { recursive: true });
-    fs.writeFileSync(job.out, Buffer.from(shot.data, 'base64'));
+    const capture = async (file, scale) => {
+      const shot = await withTimeout(
+        cdp.sendCommand('Page.captureScreenshot', { format: 'png', clip: { x: 0, y: 0, ...CANVAS, scale } }),
+        `capture ${file}`,
+      );
+      fs.mkdirSync(path.dirname(file), { recursive: true });
+      fs.writeFileSync(file, Buffer.from(shot.data, 'base64'));
+    };
+    await capture(job.out, 1);
+    if (job.importOut) await capture(job.importOut, IMPORT_SCALE);
   }
   fs.writeFileSync(`${jobsFile}.result.json`, JSON.stringify({ problems }, null, 2));
   win.destroy();

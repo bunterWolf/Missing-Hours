@@ -1,10 +1,13 @@
 // Microsoft Store images in every UI language, from the real app: starts the built app with the demo
 // day (store/demo-day.js) per language, captures the window at 250 % in the states of store/motifs.js,
 // and renders them onto the 3840 x 2160 Store images (store/template/render.js). Also writes the
-// listing texts as listing.md for copying into Partner Center. Fails on cut-off, wrapping or covered
-// texts in the app, cut-off window titles of the demo day, and headlines that do not fit.
+// listing texts as listing.md, and the folders for "Import listings" in Partner Center
+// (store/partner-center.js: one CSV with all texts plus the images at 1920 x 1080, four languages per
+// folder). Fails on cut-off, wrapping or covered texts in the app, cut-off window titles of the demo
+// day, and headlines that do not fit.
 // Run via `npm run store-screenshots` (builds first); `node scripts/store-screenshots.js de ja` makes
-// only some languages. Output: store-screenshots/microsoft/<language>/ (not in git).
+// only some languages. Output: store-screenshots/microsoft/<language>/ and
+// store-screenshots/microsoft-store-import/missing-hours-store-<n>/ (not in git).
 //
 // Touches no real data: the app runs with --mock-data (no tracking, no saving) in a temporary userData
 // folder; the demo day only lives in a temporary file. The demo day is today, and the app's clock is set
@@ -19,8 +22,10 @@ const { ROOT, NEUTRAL_POINTER, localeFor, pickLanguages, launchApp } = require('
 const { CHECKED_TEXT, findLayoutProblems } = require('./lib/layout-check');
 const { APPS, SCHEDULE, demoDate, shotTime, resolveAppPaths, buildDemoStoreData } = require('../store/demo-day');
 const { MOTIFS, HERO } = require('../store/motifs');
+const { LANGUAGE_CODES, importBatches, importRows, toCsv } = require('../store/partner-center');
 
 const OUT_DIR = path.join(ROOT, 'store-screenshots', 'microsoft');
+const IMPORT_DIR = path.join(ROOT, 'store-screenshots', 'microsoft-store-import');
 const LISTING_DIR = path.join(ROOT, 'store', 'listing');
 const RENDER_SCRIPT = path.join(ROOT, 'store', 'template', 'render.js');
 const FIXED_CLOCK = path.join(ROOT, 'store', 'fixed-clock.js');
@@ -162,13 +167,15 @@ async function captureLanguage({ language, listing, paths, missing, tmpDir, repo
   }
 }
 
-function renderJobs(language, listing, captures) {
+function renderJobs(language, listing, captures, importFolder) {
   const out = (file) => path.join(OUT_DIR, language, `${file}.png`);
+  const importOut = (file) => path.join(IMPORT_DIR, importFolder, language, `${file}.png`);
   const themeOf = (file) => MOTIFS.find((m) => m.file === file).theme;
   return [
-    { out: out(HERO.file), layout: 'hero', theme: HERO.theme, lang: language, windows: HERO.windows.map((file) => ({ src: captures[file], theme: themeOf(file) })) },
+    { out: out(HERO.file), importOut: importOut(HERO.file), layout: 'hero', theme: HERO.theme, lang: language, windows: HERO.windows.map((file) => ({ src: captures[file], theme: themeOf(file) })) },
     ...MOTIFS.map((motif) => ({
       out: out(motif.file),
+      importOut: importOut(motif.file),
       layout: 'screenshot',
       theme: motif.theme,
       lang: language,
@@ -215,6 +222,10 @@ async function main() {
   const { paths, missing } = resolveAppPaths();
   for (const id of missing) console.warn(`Warning: ${APPS[id].name} not found at ${paths[id]}; it shows without icon and brand color.`);
 
+  const batches = importBatches(languages);
+  const folderOf = (language) => batches.find((b) => b.languages.includes(language)).folder;
+  fs.rmSync(IMPORT_DIR, { recursive: true, force: true });
+
   const tmpDir = fs.mkdtempSync(path.join(os.tmpdir(), 'missing-hours-store-'));
   const report = [];
   try {
@@ -223,13 +234,20 @@ async function main() {
       const listing = readJson(path.join(LISTING_DIR, `${language}.json`));
       const captures = await captureLanguage({ language, listing, paths, missing, tmpDir, report });
       fs.mkdirSync(path.join(OUT_DIR, language), { recursive: true });
-      render(renderJobs(language, listing, captures), tmpDir, report);
+      render(renderJobs(language, listing, captures, folderOf(language)), tmpDir, report);
       fs.writeFileSync(path.join(OUT_DIR, language, 'listing.md'), listingMarkdown(language, listing, common));
     }
   } finally {
     fs.rmSync(tmpDir, { recursive: true, force: true });
   }
+  // Every import folder carries the texts of all languages, the images only of its own.
+  const listings = Object.fromEntries(Object.keys(LANGUAGE_CODES).map((language) => [language, readJson(path.join(LISTING_DIR, `${language}.json`))]));
+  for (const { folder, languages: imageLanguages } of batches) {
+    const csv = toCsv(importRows({ listings, common, folder, imageLanguages }));
+    fs.writeFileSync(path.join(IMPORT_DIR, folder, 'listings.csv'), csv);
+  }
   console.log(`\nSaved to ${OUT_DIR}`);
+  console.log(`Import folders for Partner Center: ${IMPORT_DIR} (${batches.map((b) => `${b.folder}: ${b.languages.join(', ')}`).join('; ')})`);
   if (report.length) {
     console.error(`\nProblems (${report.length}):\n${report.map((line) => `  ${line}`).join('\n')}`);
     process.exitCode = 1;
