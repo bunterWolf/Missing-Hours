@@ -245,6 +245,7 @@ src/components/
 1. **Echtzeit-Updates**
    - Nahtlose Integration neuer Events
    - Keine Neuladung bei Datenaktualisierung
+   - Tageswechsel bei offener App (meist über Nacht im Ruhemodus): Die Datumsnavigation prüft alle 15 s, beim Fokus des Fensters und bei jeder Datenaktualisierung, ob ein neuer Tag begonnen hat (`applyDayChange` in `src/components/dayChange.js`, getestet in `dayChange.test.js`). Der neue Tag kommt in die Liste der Tage. Wer „Heute“ angesehen hat, landet auf dem neuen Tag; ein bewusst gewählter vergangener Tag bleibt stehen. Ein Neustart ist dafür nicht nötig
 
 2. **Scroll-Verhalten**
    - Der Timeline-Container scrollt nativ (eigene 14-px-Scrollbar)
@@ -264,7 +265,7 @@ src/components/
 
 #### 2.5.2.3 Footer and Settings view
 - **Footer**: the centered day summary *Active · Inactive · Tracked*, calculated from the aggregated summary data. The Settings view is opened (and closed again) with the `…` button in the title bar.
-- **Settings view** (replaces the former settings modal, same window; the back arrow returns to the Day View): auto-launch toggle, beta-release toggle, appearance (one line: title plus Auto / Light / Dark on the right, aligned with the toggle rows; saved as `themeMode` in `settings.json`; the main process applies it to `nativeTheme.themeSource` before the window paints, so `prefers-color-scheme` and the window background follow; IPC `get-theme-mode` / `set-theme-mode`), activity-file location (change, reset, adopt an existing file; the confirmation appears inline), placeholder link and app version. The auto-delete setting is not part of the UI; the store deletes data after a fixed 30 days.
+- **Settings view** (replaces the former settings modal, same window; the back arrow returns to the Day View): auto-launch toggle, beta-release toggle, appearance (one line: title plus Auto / Light / Dark on the right, aligned with the toggle rows; saved as `themeMode` in `settings.json`; the main process applies it to `nativeTheme.themeSource` before the window paints, so `prefers-color-scheme` and the window background follow; IPC `get-theme-mode` / `set-theme-mode`), the website link `www.missing-hours.app` (not translated, like the product name; a click asks the main process via IPC `open-website` to open the fixed URL in the browser) and app version. There is no storage-location setting any more (removed in `0.0.2-beta.11`); a folder chosen in an older version stays in use. The auto-delete setting is not part of the UI; the store deletes data after a fixed 30 days.
 
 #### 2.5.3 Internationalization (i18n)
 
@@ -380,7 +381,7 @@ OS Events -> Watcher -> Heartbeat -> ActivityStore-heartbeats -> ActivityStore-a
 
 ## 8. Extensibility
 - Modular watcher system
-- Configurable save path (e.g., Google Drive folder)
+- ~~Configurable save path (e.g., Google Drive folder)~~ removed in `0.0.2-beta.11`
 
 ## 9. Limitations
 - Accessibility permissions on macOS

@@ -1,32 +1,58 @@
-# Missing Hours - Automatic time tracking made easy and free
+<p align="center">
+  <img src="resources/icon.png" alt="" width="96" height="96">
+</p>
 
-Missing Hours is an Electron-based desktop application designed to track and analyze your computer activity. It automatically records which applications you use, detects inactive periods, and identifies time spent on different tasks.
+<h1 align="center">Missing Hours</h1>
+
+<p align="center"><strong>Find your missing hours.</strong><br>
+Free, automatic time tracking for your PC. No account, no cloud, no telemetry.</p>
+
+<p align="center">
+  <a href="https://github.com/bunterWolf/Missing-Hours/releases/latest"><strong>Download for Windows</strong></a>
+  · <a href="https://www.missing-hours.app">www.missing-hours.app</a>
+</p>
+
+Do you still remember on Friday what you worked on on Tuesday? Missing Hours does. It quietly records which
+programs and windows you use, detects breaks and shows every day as a clear timeline, so you can fill in your
+timesheet or bill your hours without ever starting a stopwatch. Everything stays on your computer.
 
 ## Features
 
-- **Automatic Activity Tracking**: Monitors which applications you're using without manual input
-- **Inactivity Detection**: Identifies when you're away from your computer
-- **Teams Meeting Tracking**: Recognizes and logs your Microsoft Teams meetings
-- **Timeline View**: Visual representation of your day with color-coded activities
-- **Date Navigation**: Easily switch between today, yesterday, and previous days
-- **Activity Summary**: See total active and inactive time at a glance
-- **Pause/Resume**: Control when tracking occurs
-- **Local Data Storage**: All your data stays on your computer
-- **12 Languages**: English, German, French, Spanish, Italian, Portuguese (Brazil), Dutch, Polish, Japanese, Korean, Simplified and Traditional Chinese; follows the Windows display language
-- **Cross-Platform**: Works on Windows and macOS
-- **Automatic Updates**: Seamlessly receive and install new versions
+- **Automatic**: records the active program and window title every 30 seconds. Nothing to start, stop or forget.
+- **Breaks detected**: time away from your computer, including sleep mode, shows up as inactive, not as work.
+- **Daily timeline**: your day in blocks of 15, 10 or 5 minutes, with your programs' icons and colors;
+  consecutive identical blocks are merged.
+- **Day summary**: active, inactive and tracked time at a glance.
+- **Last 30 days**: browse back through previous days; older days are deleted automatically.
+- **Pause with one click** when something is private.
+- **Runs in the background** and starts with Windows.
+- **Light, dark or automatic** appearance.
+- **12 languages**: English, German, French, Spanish, Italian, Portuguese (Brazil), Dutch, Polish, Japanese,
+  Korean, Simplified and Traditional Chinese; follows the Windows display language, with dates and times as
+  used in your region.
+- **Free**: no subscription, no ads, no in-app purchases.
 
-## Supported Platforms
+## Privacy
 
-- **Windows**: Installer (.exe)
-  - One-click installation
-  - Automatic updates
-  - Windows 10 and newer
+- All data is stored only on your computer. Missing Hours sends no recorded data anywhere, neither to us nor to
+  third parties.
+- No account, no analytics, no telemetry.
+- It sees which window is open, not what you type. No keystrokes, no screenshots.
+- The source code is public, so you can check all of this yourself.
 
-- **macOS**: ZIP archive
-  - Unzip and move to Applications
-  - Automatic updates
-  - macOS 10.15 (Catalina) and newer
+Details in the [privacy policy](PRIVACY.md).
+
+## Download
+
+- **Windows 10 and 11**: the installer `Missing-Hours-Setup-<version>-win-x64.exe` from the
+  [latest release](https://github.com/bunterWolf/Missing-Hours/releases/latest). It updates itself
+  automatically. A Microsoft Store version is on its way.
+- **macOS 10.15 and newer (experimental)**: the release also has ZIP files for Apple silicon (`arm64`) and
+  Intel (`x64`). They are not signed, so macOS warns on first start, and the Mac version is less tested than
+  the Windows one.
+
+Missing Hours does not export times or create invoices; it shows you where your time went, so you can fill in
+your timesheet or invoice quickly.
 
 ## Development
 
@@ -118,7 +144,14 @@ npm run icons
 ```
 and commit the generated files: `resources/icon.ico` (Windows, 16–256 px), `resources/icon.png`
 (1024 px, window icon outside Windows), `resources/icon.icns` (macOS, artwork scaled to Apple's
-824/1024 icon grid) and the Microsoft Store tiles in `resources/appx/`.
+824/1024 icon grid), the Microsoft Store tiles in `resources/appx/` and the Partner Center tile icon in
+`resources/store/`.
+
+#### Store Images
+
+`npm run store-screenshots` makes the Microsoft Store images (3840 × 2160) in every language from the real
+app with a demo workday, plus the listing texts to copy (`store-screenshots/microsoft/<language>/`). The texts
+live in `store/listing/`; details in `docs/MICROSOFT-STORE.md`.
 
 #### Creating a Release
 
@@ -194,9 +227,14 @@ Beta testers need to opt-in to receive beta updates:
 
 ## Data Storage
 
-Activity data is stored in the app's user data directory. The location can no longer be changed in the settings; a folder chosen in an older version stays in use.
+Activity data is stored in the app's user data directory (on Windows `%APPDATA%\missing-hours`, on macOS
+`~/Library/Application Support/missing-hours`; the Microsoft Store version may use its package folder, see
+[docs/MICROSOFT-STORE.md](docs/MICROSOFT-STORE.md)). The location can no longer be changed in the settings; a
+folder chosen in an older version stays in use. Days older than 30 days are deleted automatically.
 
-Data is automatically cleaned up after 30 days to avoid excessive storage usage.
+## License
 
-Missing Hours is designed with privacy in mind:
-- **Local Storage:** All tracked data is stored locally on your computer. No data is sent to external servers.
+Missing Hours is free to use for everyone, privately and at work. The source code is available under the
+[PolyForm Shield License 1.0.0](LICENSE.md): you may use, study and change it, but not use it to offer a product
+that competes with Missing Hours, for example by selling or publishing a copy of the app. The name
+"Missing Hours" and the app icon are not licensed for other products.
