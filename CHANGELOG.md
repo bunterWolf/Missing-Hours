@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0-beta.1](https://github.com/bunterWolf/Missing-Hours/compare/v1.2.0-beta.0...v1.2.0-beta.1) (2026-11-22)
+
+
+### Maintenance
+
+* **deps:** update Electron to 45.4.1 ([7a1f5f3](https://github.com/bunterWolf/Missing-Hours/commit/7a1f5f37ba1cd7a0358637231eaf410422f0cac6))
+
 ## [1.2.0-beta.0](https://github.com/bunterWolf/Missing-Hours/compare/v1.1.0...v1.2.0-beta.0) (2026-11-22)
 
 
