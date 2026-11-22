@@ -2,6 +2,41 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0-beta.0](https://github.com/bunterWolf/Missing-Hours/compare/v1.1.0...v1.2.0-beta.0) (2026-11-22)
+
+
+### Features
+
+* 300 px app tile icon for the Store listing ([3fc468f](https://github.com/bunterWolf/Missing-Hours/commit/3fc468f528a13ee254caf1bd2d4e844ba7a19370))
+* generate Microsoft Store screenshots (npm run store-screenshots) ([53c3c87](https://github.com/bunterWolf/Missing-Hours/commit/53c3c871533ab323e4a6f581b3c319635253482c))
+* link www.missing-hours.app in the settings, license and marketing docs ([8fb974a](https://github.com/bunterWolf/Missing-Hours/commit/8fb974a55d84cb4827d3a887252ad97af8cb23a3))
+* load mock data from a given file (--mock-data-file) ([8516776](https://github.com/bunterWolf/Missing-Hours/commit/8516776bc917d8ca9308a4061e139030d39a1d63))
+* Partner Center import folders for the Store listings ([0c517bb](https://github.com/bunterWolf/Missing-Hours/commit/0c517bb509d321cecde120fb5541d87af78a9b44))
+* realistic demo day for store screenshots ([4d5c9be](https://github.com/bunterWolf/Missing-Hours/commit/4d5c9bebd8f3db1136bc395ca4cd2f1f1318f8b5))
+* store image template and renderer ([98f2649](https://github.com/bunterWolf/Missing-Hours/commit/98f2649efe273f5b6389ae7b3dac3829774be84e))
+* store images show the demo day as today ([8a40ddd](https://github.com/bunterWolf/Missing-Hours/commit/8a40ddd94fc727cc64d91b9ffe3d5e954dfa2e45))
+* store listing texts as data in all 12 languages ([82aa211](https://github.com/bunterWolf/Missing-Hours/commit/82aa2115d3dfef87047f6bdf5cec4953c12d1be0))
+
+
+### Bug Fixes
+
+* accurate Store feature text, no 'Yesterday' date and reliable checks in store images ([d97bcfb](https://github.com/bunterWolf/Missing-Hours/commit/d97bcfbfda38ebfa74f7abc4fcb91e19aa120a67))
+* balanced headline breaks and phrase breaks for Japanese in store images ([3b56948](https://github.com/bunterWolf/Missing-Hours/commit/3b5694827fe4fce49ec498e33bfd5b65ac00bff2))
+* move the view to the new day after midnight and after sleep ([2067fa3](https://github.com/bunterWolf/Missing-Hours/commit/2067fa327fee90c8135d65fab9faf09981d088bc))
+* show the project address instead of a placeholder in the settings ([de374a4](https://github.com/bunterWolf/Missing-Hours/commit/de374a4a950246aa117384e8486101a819f8ac5f))
+
+
+### Refactoring
+
+* share app launching between screenshot scripts ([d1925a4](https://github.com/bunterWolf/Missing-Hours/commit/d1925a40b14a9306057369fb7570c1c46eed766f))
+
+
+### Documentation
+
+* design and plan for store listing and screenshots ([394ca57](https://github.com/bunterWolf/Missing-Hours/commit/394ca5772ecb49112a53adad7cc4e932c8b28325))
+* store listing and screenshot workflow ([694f3b9](https://github.com/bunterWolf/Missing-Hours/commit/694f3b9ae93bf2fb729e462c712618f55cfc9988))
+* updating the Store listings via Partner Center import ([1246e2e](https://github.com/bunterWolf/Missing-Hours/commit/1246e2e19d7e9342822a5f14288624726ac21a55))
+
 ## [1.1.0](https://github.com/bunterWolf/Missing-Hours/compare/v1.0.0...v1.1.0) (2026-11-18)
 
 
