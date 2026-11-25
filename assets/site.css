@@ -441,3 +441,35 @@ p{text-wrap:pretty}
 /* runtime: <sc-if> wrappers don't take part in layout */
 .dc-if{display:contents}
 .dc-if[hidden]{display:none}
+
+/* v2 sections */
+.eyebrow{margin:0 0 16px;font-size:13px;line-height:16px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-muted)}
+.sec{border-top:1px solid var(--border-subtle)}
+.sec-in{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:72px;align-items:center;padding-top:104px;padding-bottom:104px}
+.sec-in--stack{display:flex;flex-direction:column;align-items:stretch;gap:48px}
+.sec-in--narrow{display:block}
+.sec-in--narrow>*{max-width:720px}
+.sec-sub{margin:20px 0 0;font-size:20px;line-height:30px;color:var(--ink-muted);max-width:560px}
+.sec-in--narrow .maker{margin:32px 0 0;max-width:560px}
+.cost-fig{margin:0}
+.cost-n{margin:0;font-size:96px;line-height:1;font-weight:600;letter-spacing:-0.04em;color:var(--ink)}
+.cost-fig figcaption{margin:16px 0 0;font-size:16px;line-height:24px;color:var(--ink-muted);max-width:380px}
+.steps{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:40px}
+.step-n{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:50%;border:1px solid var(--border-subtle);font-size:13px;line-height:1;font-weight:600;color:var(--ink)}
+.step-h{margin:16px 0 8px;font-size:18px;line-height:24px;font-weight:600;letter-spacing:-0.01em;color:var(--ink)}
+.step p{margin:0;font-size:16px;line-height:24px;color:var(--ink-muted)}
+.rec-lists{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:32px}
+.rec-h{margin:0;font-size:13px;line-height:16px;font-weight:600;letter-spacing:0.06em;text-transform:uppercase;color:var(--ink-muted)}
+.rec .facts{margin-top:16px}
+.panel-note{margin:16px 0 0;font-size:16px;line-height:24px;color:var(--ink-muted)}
+@media (max-width: 860px){
+.sec-in{grid-template-columns:minmax(0,1fr);gap:40px;padding-top:72px;padding-bottom:72px}
+.sec-in--stack{gap:32px}
+.sec-sub{font-size:18px;line-height:27px}
+.steps{grid-template-columns:minmax(0,1fr);gap:28px}
+.cost-n{font-size:72px}
+}
+@media (max-width: 559px){
+.rec-lists{grid-template-columns:minmax(0,1fr);gap:24px}
+.cost-n{font-size:60px}
+}

@@ -117,11 +117,74 @@ check('new logo', () => {
   return problems;
 });
 
+const SECTIONS = [
+  ['top', null],
+  ['cost', 'Forgotten hours cost real money.'],
+  ['how', 'How automatic time tracking works here'],
+  ['example', 'From your day to your timesheet'],
+  ['records', 'What it records, and what it never does'],
+  ['any-day', 'Any day, rough or precise.'],
+  ['alongside', 'Keep your time tracker. This is where you look things up.'],
+  ['privacy', 'No account. No cloud.'],
+  ['free', 'Free, with the code in the open.'],
+  ['faq', 'Questions'],
+  ['download', 'What did you work on last Tuesday?']
+];
+const text = (s) => s.replace(/<[^>]+>/g, '').replace(/&#39;/g, "'").replace(/&amp;/g, '&').trim();
+
+check('structure', () => {
+  const html = read('index.html');
+  const problems = [];
+  const h1s = html.match(/<h1\b[^>]*>[\s\S]*?<\/h1>/g) || [];
+  if (h1s.length !== 1 || text(h1s[0]) !== 'Find your missing hours.') problems.push(`expected one H1 "Find your missing hours.", found ${h1s.length}`);
+  const sections = [...html.matchAll(/<section\b[^>]*\bid="([^"]+)"[^>]*>([\s\S]*?)<\/section>/g)].map((m) => [m[1], m[2]]);
+  const ids = sections.map((s) => s[0]);
+  const want = SECTIONS.map((s) => s[0]);
+  if (ids.join() !== want.join()) problems.push(`section order\n      is   ${ids.join(' ')}\n      want ${want.join(' ')}`);
+  for (const [id, h2] of SECTIONS) {
+    if (!h2) continue;
+    const body = (sections.find((s) => s[0] === id) || [])[1] || '';
+    const got = (body.match(/<h2\b[^>]*>([\s\S]*?)<\/h2>/) || [])[1];
+    if (!got || text(got) !== h2) problems.push(`#${id}: H2 is "${got ? text(got) : 'missing'}", want "${h2}"`);
+  }
+  if ((html.match(/<section\b/g) || []).length !== SECTIONS.length) problems.push('there are sections without the expected ids');
+  return problems;
+});
+
+check('copy rules', () => {
+  const html = text(read('index.html'));
+  const problems = [];
+  for (const bad of ['It just runs along', 'Running a team', "Breaks don't count as work", 'open source', 'Open source',
+    'Signed installer', 'add up on their own', 'Fill a timesheet', 'Answer a client', 'Find a lost hour', 'Write an invoice']) {
+    if (html.includes(bad)) problems.push(`must not say "${bad}"`);
+  }
+  for (const good of ['Automatic time tracking for Windows', 'keystrokes', 'window title', 'Microsoft Store', '30 days']) {
+    if (!html.toLowerCase().includes(good.toLowerCase())) problems.push(`should say "${good}"`);
+  }
+  return problems;
+});
+
+check('no dangling bindings', async () => {
+  const vm = await import('node:vm');
+  const ctx = { window: {} };
+  vm.createContext(ctx);
+  vm.runInContext(read('assets/design.js'), ctx);
+  class DCLogic { constructor() { this.props = {}; this.state = {}; } }
+  const vals = new (ctx.window.MHDesign(DCLogic))().renderVals();
+  const get = (p) => p.split('.').reduce((v, k) => (v == null ? undefined : v[k]), vals);
+  const html = read('index.html');
+  const paths = new Set();
+  for (const m of html.matchAll(/data-dc-(?:text|if)="([^"]+)"/g)) paths.add(m[1]);
+  for (const m of html.matchAll(/data-dc='([^']*)'/g)) for (const h of m[1].matchAll(/\{\{\s*([\w.$]+)\s*\}\}/g)) paths.add(h[1]);
+  for (const m of html.matchAll(/data-dc-on='([^']*)'/g)) for (const p of Object.values(JSON.parse(m[1]))) paths.add(p);
+  return [...paths].filter((p) => get(p) === undefined).map((p) => `binding ${p} has no value in renderVals()`);
+});
+
 // ---------------------------------------------------------------------------
 let failed = 0;
 for (const { name, fn } of checks) {
   let problems;
-  try { problems = fn(); } catch (e) { problems = [`threw: ${e.message}`]; }
+  try { problems = await fn(); } catch (e) { problems = [`threw: ${e.message}`]; }
   if (problems.length) {
     failed++;
     console.log(`FAIL ${name}`);

@@ -8,17 +8,6 @@ let still = true;
 try { still = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
 return still || typeof this.setState !== 'function';
 }
-_focusIn(rootNode, id) {
-const go = () => { try { const el = rootNode.getElementById ? rootNode.getElementById(id) : document.getElementById(id); if (el) el.focus(); } catch (err) {} };
-try { requestAnimationFrame(go); } catch (err) { setTimeout(go, 16); }
-}
-_nextIndex(key, i, n) {
-if (key === 'ArrowRight' || key === 'ArrowDown') return (i + 1) % n;
-if (key === 'ArrowLeft' || key === 'ArrowUp') return (i + n - 1) % n;
-if (key === 'Home') return 0;
-if (key === 'End') return n - 1;
-return -1;
-}
 _type(i) {
 if (i > 1 || this._still()) return;
 this._typing = this._typing || {};
@@ -64,40 +53,9 @@ this.setState({ zoom: n, zflash: flash });
 clearTimeout(this._tz);
 if (flash) this._tz = setTimeout(() => this.setState({ zflash: false }), 1600);
 }
-_pickTab(i, rn) {
-const root = rn || document;
-let h0 = 0;
-let narrow = false;
-try { narrow = window.matchMedia('(max-width: 720px)').matches && !this._still(); } catch (err) {}
-if (narrow) { const box = this._byId(root, 'mh-panels'); if (box) h0 = box.offsetHeight; }
-this.setState({ tab: i });
-this._type(i);
-const after = () => {
-const t = this._byId(root, 'mh-tab-' + i);
-try { if (t) t.scrollIntoView({ inline: 'nearest', block: 'nearest' }); } catch (err) {}
-this._measure(root);
-if (!narrow || !h0) return;
-const box = this._byId(root, 'mh-panels');
-if (!box) return;
-box.style.transition = 'none';
-box.style.height = '';
-const h1 = box.offsetHeight;
-if (Math.abs(h1 - h0) < 2) return;
-box.style.overflow = 'hidden';
-box.style.height = h0 + 'px';
-void box.offsetHeight;
-box.style.transition = 'height .15s ease-out';
-box.style.height = h1 + 'px';
-clearTimeout(this._th);
-this._th = setTimeout(() => { box.style.height = ''; box.style.overflow = ''; box.style.transition = ''; }, 190);
-};
-try { requestAnimationFrame(after); } catch (err) { setTimeout(after, 16); }
-}
 renderVals() {
 const s = this.state || {};
 const still = this._still();
-const tab = typeof s.tab === 'number' ? s.tab : 0;
-const ret = s.ret || 30;
 const m = still ? 0 : (s.m || 0);
 
 const cfg = this._cfg();
@@ -112,34 +70,10 @@ trk: this._fmt(510 + r),
 dotCls: 'run-dot ' + (still ? '' : (m === 0 ? 'pulse-0' : (m % 2 ? 'pulse-1' : 'pulse-2')))
 };
 
-const tabs = {};
-const panel = {};
-for (let i = 0; i < 4; i++) {
-const on = i === tab;
-tabs['t' + i] = {
-sel: on ? 'true' : 'false',
-ti: on ? '0' : '-1',
-cls: on ? 'tab is-sel' : 'tab',
-pick: (e) => this._pickTab(i, this._root(e)),
-key: (e) => {
-const j = this._nextIndex(e.key, i, 4);
-if (j < 0) return;
-e.preventDefault();
-const rn = this._root(e);
-this._pickTab(j, rn);
-this._focusIn(rn, 'mh-tab-' + j);
-}
-};
-panel['p' + i] = on;
-}
-
-const full = ['3h 55m', '4h 25m'];
-const n0 = still ? 6 : (s.ty0 || 0);
+const full = '4h 25m';
 const n1 = still ? 6 : (s.ty1 || 0);
 const ty = {
-inv: full[0].slice(0, n0),
-ts: full[1].slice(0, n1),
-caret: !still,
+ts: full.slice(0, n1),
 caret2: !still
 };
 
@@ -162,12 +96,10 @@ for (let d = 0; d < 3; d++) [15, 10, 5].forEach((n) => { zoom['d' + d + 'z' + n]
 const zf = {};
 Object.keys(cfg.flash).forEach((k) => { zf[k] = cfg.flash[k] + (fl ? ' is-flash' : ''); });
 
-const rv = s.ret || 30;
+const rv = 30;
 const keep = rv === 7 ? 2 : (rv === 30 ? 5 : 14);
 const strip = {};
 for (let k = 0; k < 14; k++) { const gone = k >= keep; strip['c' + k] = { cls: gone ? 'rcol is-gone' : 'rcol', st: '--d: ' + (Math.abs(k - keep) * 28) + 'ms;' }; }
-const retO = { note: 'Older days are deleted for good. 30 days is the default; in Settings you can pick any number of days.' };
-[7, 30, 90].forEach((n) => { const on = n === rv; retO['s' + n] = { cls: on ? 'seg-o is-sel' : 'seg-o', on: on ? 'true' : 'false', pick: () => this.setState({ ret: n }) }; });
 
 const trunc = s.trunc || {};
 const tr = {};
@@ -175,13 +107,10 @@ cfg.keys.forEach((k) => { const on = !!trunc[k]; tr[k] = { ti: on ? '0' : '-1', 
 return {
 tr: tr,
 hero: hero,
-tabs: tabs,
-panel: panel,
 ty: ty,
 zoom: zoom,
 zf: zf,
 strip: strip,
-ret: retO,
 ui: { headCls: s.scrolled ? 'head is-scrolled' : 'head' }
 };
 }
@@ -193,10 +122,10 @@ try { this._onResize = markSoon; window.addEventListener('resize', this._onResiz
 const check = () => {
 if (this._started || this._still()) return;
 try {
-const el = document.getElementById('mh-tabs');
-if (!el) { this._started = true; this._t2 = setTimeout(() => this._type(0), 1200); return; }
+const el = document.getElementById('example');
+if (!el) { this._started = true; return; }
 const r = el.getBoundingClientRect();
-if (r.top < (window.innerHeight || 800) * 0.7 && r.bottom > 0) { this._started = true; this._type((this.state || {}).tab || 0); }
+if (r.top < (window.innerHeight || 800) * 0.7 && r.bottom > 0) { this._started = true; this._type(1); }
 } catch (e) { this._started = true; }
 };
 try {
