@@ -236,6 +236,10 @@ function createWindow(): void { // Add return type void
     mainWindow.webContents.openDevTools();
   }
 
+  // Windows shutdown, restart or sign-out: Electron emits no 'before-quit' then, so save here,
+  // otherwise up to the last 10 minutes (autosave) of the day would be lost.
+  mainWindow.on('session-end', () => activityStore?.saveToDisk());
+
   // Emitted when the window is closed
   if (mainWindow) {
       mainWindow.on('closed', () => { // Use arrow function for correct 'this' if needed (not needed here)
