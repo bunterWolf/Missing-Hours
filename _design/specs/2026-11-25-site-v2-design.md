@@ -81,6 +81,13 @@ remembering. It complements the tool hours are logged in; it doesn't replace it.
   10. FAQ (also marked up for Google).
   11. Final CTA "What did you work on last Tuesday? / Next week, you'll know." (kept).
 - Removed: the "Breaks don't count as work" section, the "Running a team?" note.
+- **New logo** (user's icon handoff, 2026-11-25, source folder `Desktop\icons\MissingHours-Icons`): eleven hour
+  strokes with the 1 o'clock stroke moved outward in red (`#e5484d`, never as a fill). On the site the free-standing
+  logo replaces `assets/icon.svg` everywhere (header, footer, favicon, text pages, 404): `missing-hours-logo-hell.svg`
+  on light, `missing-hours-logo-dunkel.svg` on dark, switched by the page theme / `prefers-color-scheme`; the
+  `-klein` variants for sizes ≤ 24 px (header 28 px and footer 24 px use the regular/klein as fits). Favicon: SVG
+  with a dark-mode media query inside, PNG 64 from `logo/` as fallback; `apple-touch-icon` and the OG image use the
+  new mark. Lockup: mark left, "Missing Hours" in Inter 600, letter-spacing −0.02em.
 - Real app icons (Outlook, Word, Excel, PowerPoint, a browser, etc.) replace the colored placeholder squares in
   the app views. The user accepts the trademark risk.
 - Previews and versions: v1 is tag `site-v1`. Work happens on branch `site-v2`; every reviewable state is
