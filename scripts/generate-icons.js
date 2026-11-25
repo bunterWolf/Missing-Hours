@@ -1,13 +1,16 @@
-// Generates every app icon file from the one source drawing, resources/icon-source/icon.svg
-// (square viewBox of any size; the artwork fills it edge to edge).
-// Run `npm run icons` after changing the SVG and commit the generated files.
+// Generates every app icon file from the master drawings in resources/icon-source/
+// (160 x 160 viewBox, each file fills its canvas; the tile margins are part of the drawing).
+// Run `npm run icons` after changing a master and commit the generated files.
 //
 //   resources/icon.ico     Windows: exe, installer, shortcuts, taskbar, window (16-256 px)
 //   resources/icon.png     1024 px, window icon outside Windows, Linux
-//   resources/icon.icns    macOS app bundle (16-1024 px); the artwork sits on Apple's
-//                          icon grid (824 of 1024 px) so it matches the size of other Mac icons
-//   resources/appx/*.png   Microsoft Store tiles (sizes fixed by the package manifest)
+//   resources/icon.icns    macOS app bundle (16-1024 px), light tile on Apple's icon grid
+//   resources/appx/*.png   Microsoft Store package assets (scale and targetsize variants, see APPX_*)
 //   resources/store/AppTileIcon-300.png  Partner Center > Store listing > 1:1 App tile icon (300 px)
+//
+// Masters: windows-kachel.svg (white tile, Windows and Store), windows-unplated-hell/-dunkel.svg
+// (no tile, black/white ticks for the light/dark taskbar), kachel-hell.svg (macOS tile).
+// kachel-dunkel.svg and logo-hell/-dunkel.svg are not used here yet (macOS dark icon, website).
 
 const fs = require('fs');
 const path = require('path');
@@ -15,34 +18,47 @@ const { Resvg } = require('@resvg/resvg-js');
 
 const ROOT = path.join(__dirname, '..');
 const RESOURCES = path.join(ROOT, 'resources');
-const SOURCE = fs.readFileSync(path.join(RESOURCES, 'icon-source', 'icon.svg'), 'utf8');
-const SOURCE_SIZE = Number(SOURCE.match(/viewBox="0 0 ([\d.]+) [\d.]+"/)[1]); // square viewBox of the source
+const master = (name) => fs.readFileSync(path.join(RESOURCES, 'icon-source', `${name}.svg`), 'utf8');
+const WINDOWS = master('windows-kachel');
+const UNPLATED_LIGHT_THEME = master('windows-unplated-hell'); // black ticks
+const UNPLATED_DARK_THEME = master('windows-unplated-dunkel'); // white ticks
+const MAC = master('kachel-hell');
 
 const ICO_SIZES = [16, 20, 24, 32, 40, 48, 64, 128, 256];
-const MAC_ICON_SHARE = 824 / 1024; // Apple macOS icon grid: artwork 824 px on a 1024 px canvas
 // ICNS chunk type -> pixel size (the @2x types share pixel sizes with the 1x ones)
 const ICNS_TYPES = [
   ['icp4', 16], ['ic11', 32], ['icp5', 32], ['ic12', 64], ['icp6', 64], ['ic07', 128],
   ['ic13', 256], ['ic08', 256], ['ic14', 512], ['ic09', 512], ['ic10', 1024],
 ];
-// Store tiles: canvas size and the artwork's size in px
-const APPX_TILES = [
-  ['StoreLogo.png', 50, 50, 50],
-  ['Square44x44Logo.png', 44, 44, 44],
-  ['Square150x150Logo.png', 150, 150, 112],
-  ['Wide310x150Logo.png', 310, 150, 112],
-];
+// Store package: logo name -> size at scale 100; Windows picks the file for the display scale
+const APPX_SCALED = [['StoreLogo', 50], ['Square44x44Logo', 44], ['Square150x150Logo', 150]];
+const APPX_SCALES = [100, 125, 150, 200, 400];
+// App icon (taskbar, Start, search) in exact pixel sizes, each with and without the tile
+const APPX_TARGET_SIZES = [16, 20, 24, 30, 32, 36, 40, 48, 60, 64, 72, 80, 96, 256];
 
-// Renders the icon centered on a transparent width x height canvas, the artwork `artSize` px wide.
-function render(width, height = width, artSize = Math.min(width, height)) {
-  const units = SOURCE_SIZE / artSize; // source units per output pixel
+// Small icons get bolder ticks so they stay legible (design rule of the icon handoff)
+function tickScale(size) {
+  if (size <= 24) return 1.25;
+  if (size <= 32) return 1.12;
+  return 1;
+}
+
+// Renders a master centered on a transparent width x height canvas, the drawing `artSize` px wide.
+function render(source, width, height = width, artSize = Math.min(width, height)) {
+  const sourceSize = Number(source.match(/viewBox="0 0 ([\d.]+) [\d.]+"/)[1]);
+  const units = sourceSize / artSize; // source units per output pixel
   const viewW = width * units;
   const viewH = height * units;
-  const viewBox = `${(SOURCE_SIZE - viewW) / 2} ${(SOURCE_SIZE - viewH) / 2} ${viewW} ${viewH}`;
-  const svg = SOURCE.replace(/<svg[^>]*>/, (tag) => tag
-    .replace(/\swidth="[^"]*"/, ` width="${width}"`)
-    .replace(/\sheight="[^"]*"/, ` height="${height}"`)
-    .replace(/\sviewBox="[^"]*"/, ` viewBox="${viewBox}"`));
+  const viewBox = `${(sourceSize - viewW) / 2} ${(sourceSize - viewH) / 2} ${viewW} ${viewH}`;
+  const scale = tickScale(artSize);
+  const svg = source
+    .replace(/<svg[^>]*>/, (tag) => tag
+      .replace(/\swidth="[^"]*"/, ` width="${width}"`)
+      .replace(/\sheight="[^"]*"/, ` height="${height}"`)
+      .replace(/\sviewBox="[^"]*"/, ` viewBox="${viewBox}"`))
+    // only the ticks get bolder, not the tile's edge
+    .replace(/<line\b[^>]*>/g, (line) => line
+      .replace(/stroke-width="([\d.]+)"/, (_, w) => `stroke-width="${Number((w * scale).toFixed(3))}"`));
   const image = new Resvg(svg, { fitTo: { mode: 'original' }, shapeRendering: 2 }).render();
   return { png: image.asPng(), rgba: image.pixels, width: image.width, height: image.height };
 }
@@ -75,7 +91,7 @@ function bmpEntry({ rgba, width, height }) {
 
 function buildIco() {
   const entries = ICO_SIZES.map((size) => {
-    const image = render(size);
+    const image = render(WINDOWS, size);
     return { size, data: size >= 256 ? image.png : bmpEntry(image) };
   });
   const header = Buffer.alloc(6 + 16 * entries.length);
@@ -97,7 +113,7 @@ function buildIco() {
 
 function buildIcns() {
   const chunks = ICNS_TYPES.map(([type, size]) => {
-    const png = render(size, size, Math.round(size * MAC_ICON_SHARE)).png;
+    const png = render(MAC, size).png;
     const head = Buffer.alloc(8);
     head.write(type, 0, 'ascii');
     head.writeUInt32BE(png.length + 8, 4);
@@ -114,11 +130,30 @@ function write(relativePath, data) {
   console.log(`wrote resources/${relativePath}`);
 }
 
+function writeAppxAssets() {
+  const dir = path.join(RESOURCES, 'appx');
+  // electron-builder packs every file in this folder, so drop assets of earlier icon versions
+  for (const name of fs.readdirSync(dir)) if (name.endsWith('.png')) fs.rmSync(path.join(dir, name));
+  for (const [name, size] of APPX_SCALED) {
+    for (const scale of APPX_SCALES) {
+      write(path.join('appx', `${name}.scale-${scale}.png`), render(WINDOWS, Math.round((size * scale) / 100)).png);
+    }
+  }
+  // Without the unplated variants Windows puts the app icon on a system plate in the taskbar
+  for (const size of APPX_TARGET_SIZES) {
+    const base = `Square44x44Logo.targetsize-${size}`;
+    write(path.join('appx', `${base}.png`), render(WINDOWS, size).png);
+    write(path.join('appx', `${base}_altform-unplated.png`), render(UNPLATED_DARK_THEME, size).png);
+    write(path.join('appx', `${base}_altform-lightunplated.png`), render(UNPLATED_LIGHT_THEME, size).png);
+  }
+  // The manifest electron-builder writes always names a wide tile; no design for it, so the
+  // square tile sits in its middle
+  write(path.join('appx', 'Wide310x150Logo.png'), render(WINDOWS, 310, 150).png);
+}
+
 write('icon.ico', buildIco());
-write('icon.png', render(1024).png);
+write('icon.png', render(WINDOWS, 1024).png);
 write('icon.icns', buildIcns());
 fs.mkdirSync(path.join(RESOURCES, 'store'), { recursive: true });
-write(path.join('store', 'AppTileIcon-300.png'), render(300).png);
-for (const [name, width, height, artSize] of APPX_TILES) {
-  write(path.join('appx', name), render(width, height, artSize).png);
-}
+write(path.join('store', 'AppTileIcon-300.png'), render(WINDOWS, 300).png);
+writeAppxAssets();

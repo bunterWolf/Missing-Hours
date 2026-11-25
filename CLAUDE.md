@@ -123,7 +123,7 @@ scripts/       # Mock-data generation, screenshots (lib/ shared by both screensh
 | `npm run dist:store` | Build the Microsoft Store package (MSIX/AppX) |
 | `npm run screenshots` | Build, then screenshot the app with sample data in every language and fail on cut-off, wrapping or covered texts (`node scripts/screenshots.js de ja` for some languages; needs a build) |
 | `npm run store-screenshots` | Build, then make the Microsoft Store images (3840 × 2160) and `listing.md` per language from the real app with the demo day, plus the folders for "Import listings" in Partner Center (CSV + 1920 × 1080 images, 4 languages each; `store/partner-center.js`); fails on cut-off texts or titles (`node scripts/store-screenshots.js de` for some languages; needs a build and the demo day's programs installed). Updating the Store listings: `docs/MICROSOFT-STORE.md` "Store-Einträge per Import aktualisieren" — the human picks each folder in Partner Center's file dialog, an agent can't |
-| `npm run icons` | Regenerate all app icons (`.ico`, `.icns`, `.png`, Store tiles, Partner Center tile icon) from `resources/icon-source/icon.svg` |
+| `npm run icons` | Regenerate all app icons (`.ico`, `.icns`, `.png`, Store tiles, Partner Center tile icon) from the master SVGs in `resources/icon-source/` |
 | `npm run release` | Stable release (version, changelog, tag, push → GitHub Actions) |
 | `npm run release:beta` | Beta pre-release from a `beta` branch |
 
