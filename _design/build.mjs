@@ -35,17 +35,19 @@ const source = readFileSync(src, 'utf8').replace(/\r\n/g, '\n');
 
 // 1. Split the design file into its parts.
 const helmet = between(source, '<helmet>', '</helmet>', '<helmet>');
-const css = between(helmet, '<style>', '</style>', 'the <style> block');
+let css = between(helmet, '<style>', '</style>', 'the <style> block');
 let markup = between(source, '</helmet>', '</x-dc>', 'the page markup').trim();
 const scriptTag = source.match(/<script type="text\/x-dc" data-dc-script[^>]*>([\s\S]*?)<\/script>/);
 if (!scriptTag) fail('could not find the data-dc-script block');
 const logic = scriptTag[1].trim();
 
-// 2. Content fixes, each must match exactly as often as expected.
+// 2. Content fixes, each must match exactly as often as expected. `in: 'css'` targets the stylesheet.
 for (const f of fixes) {
-  const n = markup.split(f.find).length - 1;
+  const text = f.in === 'css' ? css : markup;
+  const n = text.split(f.find).length - 1;
   if (n !== f.count) fail(`fix "${f.why}" expected ${f.count} match(es), found ${n}:\n  ${f.find.slice(0, 120)}`);
-  markup = markup.split(f.find).join(f.replace);
+  const out = text.split(f.find).join(f.replace);
+  if (f.in === 'css') css = out; else markup = out;
 }
 
 // 3. Initial values: run the design's renderVals() once, as without motion (the no-JS state).

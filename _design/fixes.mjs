@@ -80,5 +80,18 @@ export const fixes = [
     find: '<div class="keep-ctl"><span class="keep-l" id="ret-l">Try it: keep the last</span><span class="seg" role="group" aria-labelledby="ret-l"><button type="button" class="{{ ret.s7.cls }}" aria-pressed="{{ ret.s7.on }}" onClick="{{ ret.s7.pick }}">7 days</button><button type="button" class="{{ ret.s30.cls }}" aria-pressed="{{ ret.s30.on }}" onClick="{{ ret.s30.pick }}">30 days</button><button type="button" class="{{ ret.s90.cls }}" aria-pressed="{{ ret.s90.on }}" onClick="{{ ret.s90.pick }}">90 days</button></span></div><p class="keep-note" aria-live="polite">{{ ret.note }}</p>',
     replace: '<div class="keep-ctl"><span class="keep-l">Keeps the last 30 days</span></div><p class="keep-note">Older days are deleted for good.</p>',
     count: 1
+  },
+  {
+    why: 'Header scrolls away with the page instead of staying on top (user decision 2026-11-25).',
+    in: 'css',
+    find: '.head{position:sticky;top:0;z-index:20;',
+    replace: '.head{position:relative;z-index:20;',
+    count: 1
+  },
+  {
+    why: 'Hero: name the time-tracking context; "an hour goes missing in every day" alone was unclear (user decision 2026-11-25).',
+    find: 'Somewhere in every day, an hour goes missing.',
+    replace: 'When you fill in your timesheet, an hour is often missing.',
+    count: 1
   }
 ];
