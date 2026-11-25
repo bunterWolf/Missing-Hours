@@ -45,6 +45,13 @@ python -m http.server 8765
 
 Then open http://localhost:8765. Check a phone width and dark mode too.
 
+**Preview to share (private, works on the phone)**
+
+`node _design/preview.mjs` writes `.preview/` (git-ignored) and prints the `files` map. Claude publishes
+`.preview/index.html` with that map to the private artifact https://claude.ai/artifact/KoRzK4VKvM5k6kZcyDa2T6
+(the working branch, currently `site-v2`). Inside the artifact the GitHub release lookup is blocked, so the
+download button shows the fallback version.
+
 **Publish**
 
 ```bash
