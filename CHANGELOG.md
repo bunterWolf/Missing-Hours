@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.2.0](https://github.com/bunterWolf/Missing-Hours/compare/v1.2.0-beta.1...v1.2.0) (2026-11-25)
+
+
+### Features
+
+* new app icon from the icon handoff (Y7.17) ([8b06f17](https://github.com/bunterWolf/Missing-Hours/commit/8b06f175edeedcc8b181280c28804dc12cc7f377))
+
+
+### Bug Fixes
+
+* animate the tracking dot's pulse on the compositor ([a891f81](https://github.com/bunterWolf/Missing-Hours/commit/a891f81c62eec264d0939a523c447a1562d28574))
+* save the activity store less often, compactly and before sleep or shutdown ([7d09d38](https://github.com/bunterWolf/Missing-Hours/commit/7d09d383fd7bd6bc012460565617757c9daf8566))
+
 ## [1.2.0-beta.1](https://github.com/bunterWolf/Missing-Hours/compare/v1.2.0-beta.0...v1.2.0-beta.1) (2026-11-22)
 
 
