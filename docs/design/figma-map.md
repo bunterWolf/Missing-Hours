@@ -179,6 +179,7 @@ Ohne Figma-Vorlage: die **Intervall-Pille** und die **Darstellungs-Zeile** (beid
 | `ui/TrackingDot.css` | `--wm-dot-box-width` / `-box-height` | 16 / 20 px | `84678:838` |
 | | `--wm-dot-size` / `-pulse-size` | 5 / 16 px | `84678:838` |
 | | `--wm-dot-pulse-start-opacity` / `-pulse-duration` | 0.5 / 2s | `84678:838` |
+| | `--wm-dot-pulse-start-scale` | 0.3125 | = `--wm-dot-size` / `-pulse-size` (5 / 16); the pulse grows by `transform: scale`, not width/height — keep in step when one of the sizes changes |
 | `toolbar/Toolbar.css` | `--wm-toolbar-height` | 60 px | `2005:832` |
 | `toolbar/TrackingButton.css` | `--wm-tracking-button-width` | 110 px | `84678:1437` |
 | `toolbar/IntervalPicker.css` | `--wm-interval-option-pad-x` | 9 px | kein Node: Button-Padding 8 + Label 4 − Spur 3, damit das gewählte Label an der Stelle des geschlossenen Buttons bleibt |
