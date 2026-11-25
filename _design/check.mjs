@@ -180,6 +180,78 @@ check('no dangling bindings', async () => {
   return [...paths].filter((p) => get(p) === undefined).map((p) => `binding ${p} has no value in renderVals()`);
 });
 
+const SEO_TITLE = 'Missing Hours – Automatic time tracking for Windows, free and private';
+const SEO_DESC = 'Automatic time tracking for Windows. Missing Hours notes which app and window you work in, so you can fill in your timesheet without guessing. Free, no account, stays on your PC.';
+const FAQ = [
+  'What is automatic time tracking?',
+  'Does Missing Hours record keystrokes or take screenshots?',
+  'Does it work with Toggl, Harvest or Clockify?',
+  'Can my employer see what I do?',
+  'Is it free? Does it run on Mac?'
+];
+const attr = (html, re) => (html.match(re) || [])[1];
+
+check('seo head', () => {
+  const html = read('index.html');
+  const problems = [];
+  if (attr(html, /<title>([^<]*)<\/title>/) !== SEO_TITLE) problems.push('title');
+  if (attr(html, /<meta name="description" content="([^"]*)">/) !== SEO_DESC) problems.push('meta description');
+  if (attr(html, /<link rel="canonical" href="([^"]*)">/) !== 'https://missing-hours.app/') problems.push('canonical');
+  if (attr(html, /<meta property="og:title" content="([^"]*)">/) !== SEO_TITLE) problems.push('og:title');
+  if (attr(html, /<meta property="og:description" content="([^"]*)">/) !== SEO_DESC) problems.push('og:description');
+  if (attr(html, /<meta name="twitter:card" content="([^"]*)">/) !== 'summary_large_image') problems.push('twitter:card');
+  if (attr(html, /<meta property="og:image" content="([^"]*)">/) !== 'https://missing-hours.app/assets/og.png') problems.push('og:image url');
+  if (!exists('assets/og.png')) problems.push('assets/og.png missing');
+  else {
+    const b = fs.readFileSync(path.join(root, 'assets/og.png'));
+    const w = b.readUInt32BE(16), h = b.readUInt32BE(20);
+    if (b.toString('ascii', 1, 4) !== 'PNG' || w !== 1200 || h !== 630) problems.push(`og.png is ${w}x${h}, want a 1200x630 PNG`);
+  }
+  return problems;
+});
+
+check('json-ld', () => {
+  const html = read('index.html');
+  const problems = [];
+  const blocks = [...html.matchAll(/<script type="application\/ld\+json">([\s\S]*?)<\/script>/g)].map((m) => JSON.parse(m[1]));
+  const app = blocks.find((b) => b['@type'] === 'SoftwareApplication');
+  const faq = blocks.find((b) => b['@type'] === 'FAQPage');
+  if (!app) problems.push('no SoftwareApplication');
+  else {
+    if (app.name !== 'Missing Hours' || app.operatingSystem !== 'Windows 10, Windows 11') problems.push('SoftwareApplication name/operatingSystem');
+    if (!app.offers || String(app.offers.price) !== '0') problems.push('SoftwareApplication price');
+    const dl = (html.match(/<a\b[^>]*\bdata-download\b[^>]*>/) || [''])[0].match(/href="([^"]*)"/);
+    if (!dl || app.downloadUrl !== dl[1]) problems.push('SoftwareApplication downloadUrl differs from the download button');
+  }
+  if (!faq) problems.push('no FAQPage');
+  else {
+    const qs = faq.mainEntity.map((q) => q.name);
+    if (qs.join('|') !== FAQ.join('|')) problems.push('FAQPage questions differ from the plan');
+    const faqHtml = (html.match(/<section\b[^>]*id="faq"[^>]*>([\s\S]*?)<\/section>/) || [])[1] || '';
+    const summaries = [...faqHtml.matchAll(/<summary>([\s\S]*?)<\/summary>/g)].map((m) => text(m[1]));
+    const answers = [...faqHtml.matchAll(/<\/summary>([\s\S]*?)<\/details>/g)].map((m) => text(m[1]));
+    if (summaries.join('|') !== qs.join('|')) problems.push('visible FAQ questions differ from FAQPage');
+    faq.mainEntity.forEach((q, i) => { if (q.acceptedAnswer.text !== answers[i]) problems.push(`FAQ answer ${i + 1} differs from the page`); });
+    if ((faqHtml.match(/<details\b/g) || []).length !== FAQ.length) problems.push('FAQ needs one <details> per question');
+  }
+  return problems;
+});
+
+check('robots and sitemap', () => {
+  const problems = [];
+  if (!exists('robots.txt') || !read('robots.txt').includes('Sitemap: https://missing-hours.app/sitemap.xml')) problems.push('robots.txt');
+  if (!exists('sitemap.xml')) return [...problems, 'sitemap.xml missing'];
+  const urls = [...read('sitemap.xml').matchAll(/<loc>https:\/\/missing-hours\.app\/([^<]*)<\/loc>/g)].map((m) => m[1]);
+  if (urls.join('|') !== '|privacy/') problems.push(`sitemap lists ${urls.join(', ')}`);
+  for (const u of urls) if (!exists(u + 'index.html')) problems.push(`sitemap URL /${u} has no page`);
+  return problems;
+});
+
+check('privacy wording', () => {
+  const p = text(read('privacy/index.html'));
+  return p.includes('Microsoft Store') ? [] : ['privacy page should explain the update check for both builds'];
+});
+
 // ---------------------------------------------------------------------------
 let failed = 0;
 for (const { name, fn } of checks) {
