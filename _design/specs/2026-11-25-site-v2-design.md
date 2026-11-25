@@ -42,9 +42,9 @@ remembering. It complements the tool hours are logged in; it doesn't replace it.
 ## Constraints
 
 - GitHub Pages, static files, no build dependencies (Node 18+ only if a script is needed at all).
-- App facts to stay true to (checked against `main`): Windows 10 and 11; starts with Windows (autostart);
+- App facts to stay true to (checked against `main`): Windows 10 and 11; autostart (on by default in the Store build, a switch in Settings for the GitHub build);
   keeps 30 days, fixed; zoom 15/10/5 min; steps back through days; detects breaks/inactivity; GitHub build
-  checks GitHub for updates (electron-updater), the Store build updates via the Store; no account, no server.
+  checks GitHub for updates (electron-updater), the Store build updates via the Store; no account, no server; the app loads Inter from Google Fonts at start (v1.1.0); Mac builds exist on GitHub.
 - The privacy page must stay accurate for whatever the landing page does.
 
 ## Approaches considered
@@ -81,7 +81,7 @@ remembering. It complements the tool hours are logged in; it doesn't replace it.
   10. FAQ (also marked up for Google).
   11. Final CTA "What did you work on last Tuesday? / Next week, you'll know." (kept).
 - Removed: the "Breaks don't count as work" section, the "Running a team?" note.
-- **New logo** (user's icon handoff, 2026-11-25, source folder `Desktop\icons\MissingHours-Icons`): eleven hour
+- **New logo** (user's icon handoff, 2026-11-25, the logo handoff folder): eleven hour
   strokes with the 1 o'clock stroke moved outward in red (`#e5484d`, never as a fill). On the site the free-standing
   logo replaces `assets/icon.svg` everywhere (header, footer, favicon, text pages, 404): `missing-hours-logo-hell.svg`
   on light, `missing-hours-logo-dunkel.svg` on dark, switched by the page theme / `prefers-color-scheme`; the
@@ -89,7 +89,7 @@ remembering. It complements the tool hours are logged in; it doesn't replace it.
   with a dark-mode media query inside, PNG 64 from `logo/` as fallback; `apple-touch-icon` and the OG image use the
   new mark. Lockup: mark left, "Missing Hours" in Inter 600, letter-spacing −0.02em.
 - Real app icons (Outlook, Word, Excel, PowerPoint, a browser, etc.) replace the colored placeholder squares in
-  the app views. The user accepts the trademark risk.
+  the app views. (the user signed off on using them).
 - Previews and versions: v1 is tag `site-v1`. Work happens on branch `site-v2`; every reviewable state is
   published as a private Claude artifact preview at one stable link, compared against the live site. Going live =
   fast-forward `gh-pages` to `site-v2` and push. More variants get their own branch and preview link.
@@ -114,8 +114,7 @@ remembering. It complements the tool hours are logged in; it doesn't replace it.
   the line"). The concept's "add up on their own" wording is dropped. No pick-and-sum demo.
 - **Download and the Store** (my call): CTAs stay the GitHub installer. The Microsoft Store build is in
   certification; a Store button is a separate change once the listing is public. Privacy wording must be true for
-  both builds already: "The only time it goes online is to check for a new version (on GitHub, or through the
-  Microsoft Store if you installed it from there)."
+  both builds already, and name every connection the app makes (update check, Google Fonts).
 - **v1 stays reachable as the git tag `site-v1` only** (my call): no public `/v1/` URL, so no duplicate content.
 - **Icons** (my call): the apps' real, official icons as the user asked, as small optimised SVG/PNG files; Microsoft
   Edge as the browser (Windows default). Downloading them needs the user's OK per file source at build time.

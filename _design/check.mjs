@@ -285,6 +285,25 @@ check('app icons', () => {
   return problems;
 });
 
+// Claims the shipped app (v1.1.0) does not back: it loads its font from Google Fonts, the GitHub build
+// has autostart off by default, the GitHub releases include Mac builds, and IT can read files on a managed PC.
+const FALSE_CLAIMS = [
+  [/only (time it )?goes online/i, 'the app also loads its font from Google Fonts'],
+  [/starts with Windows and/i, 'autostart is off by default in the GitHub build'],
+  [/no Mac version/i, 'the GitHub releases include Mac builds'],
+  [/employer see what I do\?<\/summary><p>No\./i, 'a flat "No": IT can reach files on a managed PC']
+];
+check('app facts', () => {
+  const problems = [];
+  for (const page of ['index.html', 'privacy/index.html'])
+    for (const [re, why] of FALSE_CLAIMS) if (re.test(read(page))) problems.push(`${page}: ${re} (${why})`);
+  if (!/^Disallow: \/_design\/$/m.test(read('robots.txt'))) problems.push('robots.txt should disallow /_design/');
+  for (const f of fs.readdirSync(path.join(root, '_design/specs')).map((n) => `_design/specs/${n}`)
+    .concat(fs.readdirSync(path.join(root, '_design/plans')).map((n) => `_design/plans/${n}`)))
+    if (/trademark risk|Desktop\\/.test(read(f))) problems.push(`${f}: internal note is served publicly under /_design/`);
+  return problems;
+});
+
 // ---------------------------------------------------------------------------
 let failed = 0;
 for (const { name, fn } of checks) {
