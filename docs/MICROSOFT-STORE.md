@@ -172,8 +172,13 @@ npm run dist:store
 
 Das Paket landet in `release/<version>/Missing-Hours-Store-<version>-x64.appx`.
 
-Die Kacheln in `resources/appx/` (StoreLogo 50, Square44x44, Square150x150, Wide310x150) erzeugt
-`npm run icons` aus `resources/icon-source/icon.svg`, nicht von Hand bearbeiten. Für die Store-Einträge im
+Die Bilder in `resources/appx/` erzeugt `npm run icons` aus den SVGs in `resources/icon-source/`, nicht von
+Hand bearbeiten: StoreLogo, Square44x44Logo und Square150x150Logo je in den Skalierungen 100–400
+(`.scale-NNN`), das App-Icon zusätzlich in festen Pixelgrößen 16–256 (`.targetsize-NN`) mit Kachel, ohne
+Kachel mit weißen Strichen (`_altform-unplated`, dunkles Theme) und ohne Kachel mit schwarzen Strichen
+(`_altform-lightunplated`, helles Theme); fehlen die beiden letzten, setzt Windows das Icon in der Taskleiste
+auf eine Systemplatte. Wide310x150Logo gibt es nur einmal (die quadratische Kachel mittig). Weil skalierte
+Bilder dabei sind, erzeugt electron-builder mit `makepri.exe` eine `resources.pri` im Paket. Für die Store-Einträge im
 Partner Center (Logos unter **Store-Einträge**) gilt bei Apps nur das 1:1-App-Kachelsymbol (300 × 300):
 `resources/store/AppTileIcon-300.png`, ebenfalls von `npm run icons`. Box-Art und Poster-Art sind laut Microsoft nur
 für Spiele.

@@ -138,13 +138,17 @@ The build process will:
 
 #### App Icon
 
-All icon files come from one drawing, `resources/icon-source/icon.svg` (square, artwork edge to edge). After changing it, run:
+All icon files come from the master drawings in `resources/icon-source/` (160 × 160 viewBox, each fills
+its canvas): `windows-kachel.svg` (white tile for Windows and the Store), `windows-unplated-hell.svg` /
+`-dunkel.svg` (ticks without a tile for the light / dark taskbar) and `kachel-hell.svg` (macOS tile on Apple's
+icon grid). `kachel-dunkel.svg` and `logo-hell.svg` / `-dunkel.svg` are kept for a later dark macOS icon and the
+website. Icons of 24 px and smaller get 25 % bolder ticks, up to 32 px 12 %. After changing a master, run:
 ```bash
 npm run icons
 ```
 and commit the generated files: `resources/icon.ico` (Windows, 16–256 px), `resources/icon.png`
-(1024 px, window icon outside Windows), `resources/icon.icns` (macOS, artwork scaled to Apple's
-824/1024 icon grid), the Microsoft Store tiles in `resources/appx/` and the Partner Center tile icon in
+(1024 px, window icon outside Windows), `resources/icon.icns` (macOS), the Microsoft Store assets in
+`resources/appx/` (scale and targetsize variants, with tile and without) and the Partner Center tile icon in
 `resources/store/`.
 
 #### Store Images
