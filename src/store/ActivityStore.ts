@@ -105,8 +105,8 @@ class ActivityStore {
   /** Moment of the last system suspend (in memory only); consumed by the first heartbeat afterwards. */
   private suspendedAt: number | null = null;
 
-  /** Fixed autosave interval (5 minutes), independent of the aggregation interval. */
-  private static readonly AUTOSAVE_INTERVAL_MS = 5 * 60 * 1000;
+  /** Fixed autosave interval (10 minutes), independent of the aggregation interval. */
+  private static readonly AUTOSAVE_INTERVAL_MS = 10 * 60 * 1000;
 
   /**
    * Creates an instance of ActivityStore.
@@ -186,13 +186,14 @@ class ActivityStore {
     console.log(`ActivityStore initialized. Aggregation interval: ${this.activityState.getAggregationInterval()} minutes.`);
   }
 
+  // Aggregates only. Saving is left to the 10-minute autosave: each save rewrites the whole store,
+  // and an extra save here would at most shorten a crash's data loss below those 10 minutes.
   private handleIntervalEnd(): void {
       console.log(`[Store] Handling interval end triggered by scheduler.`);
       if (this.isTracking && !this.options.useMockData) {
           if (this.triggerTodaysAggregation()) {
-             this.notifyDataUpdate(this.currentDayKey); 
+             this.notifyDataUpdate(this.currentDayKey);
           }
-          this.saveToDisk();
       } else {
            console.log(`[Store] Skipping interval actions (tracking: ${this.isTracking}, mock: ${this.options.useMockData})`);
       }
@@ -240,7 +241,7 @@ class ActivityStore {
     this.currentDayKey = this.getDateKey(Date.now());
     this.aggregationManager.clearCache(); // Clear cache on start
 
-    // Start scheduler and the fixed 5-minute autosave only if not using mock data
+    // Start scheduler and the fixed 10-minute autosave only if not using mock data
     if (!this.options.useMockData) {
         this.scheduler.start();
         this.startAutoSave();
@@ -250,7 +251,7 @@ class ActivityStore {
   }
 
   /**
-   * Starts the fixed 5-minute autosave timer. Saves the current state to disk
+   * Starts the fixed 10-minute autosave timer. Saves the current state to disk
    * at a constant interval, independent of the configured aggregation interval.
    * Does nothing in mock-data mode or if a timer is already running.
    */
@@ -266,7 +267,7 @@ class ActivityStore {
   }
 
   /**
-   * Stops the fixed 5-minute autosave timer if it is running.
+   * Stops the fixed 10-minute autosave timer if it is running.
    */
   private stopAutoSave(): void {
     if (this.autoSaveTimer) {
@@ -291,7 +292,7 @@ class ActivityStore {
     this.isTracking = false;
     this.suspendedAt = null;
     this.scheduler.pause(); // Pause the scheduler
-    this.stopAutoSave(); // Stop the fixed 5-minute autosave
+    this.stopAutoSave(); // Stop the fixed 10-minute autosave
 
     // Save state only if not using mock data
     if (!this.options.useMockData) {
@@ -306,11 +307,17 @@ class ActivityStore {
    * so the first heartbeat afterwards decides whether the sleep belongs to an absence (see addHeartbeat).
    * Ignored while not tracking, and when `idleMs` (system idle time at the suspend) is below ACTIVE_WINDOW_MS:
    * input right before the sleep ends the absence at the sleep, so there is nothing to convert.
+   * While tracking, it also saves: the PC may not wake up again (battery empty, hard reset), and the
+   * autosave would otherwise lose up to its 10 minutes before the sleep.
    */
   markSuspend(timestamp: number = Date.now(), idleMs: number = Infinity): void {
-    if (this.isTracking && idleMs >= ACTIVE_WINDOW_MS) {
+    if (!this.isTracking) {
+      return;
+    }
+    if (idleMs >= ACTIVE_WINDOW_MS) {
       this.suspendedAt = timestamp;
     }
+    this.saveToDisk();
   }
 
   /**

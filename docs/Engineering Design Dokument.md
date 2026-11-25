@@ -356,8 +356,8 @@ OS Events -> Watcher -> Heartbeat -> ActivityStore-heartbeats -> ActivityStore-a
 
 - Stored as a JSON file inside `app.getPath('userData')`. The location can no longer be changed; older versions could, and a folder saved then in `settings.json` (`activityStoreDirPath`) stays in use so its data is not hidden
 - The app was called Workmory before, so its old data folder is named `Workmory`. On start, `migrateLegacyUserData` (`src/store/UserDataMigration.ts`) copies `settings.json` and `chronflow-activity-store.json` from that folder into the new one, but only while the new folder has neither file; it never overwrites and leaves the old folder as a backup. If copying fails, the app keeps using the old folder so no tracked data is hidden.
-- JSON with 2-space indentation
-- Autosave every 5 minutes
+- Compact JSON without indentation (since `1.2.0`; older indented files still load). Every save rewrites the whole file with all stored days, so indentation would make each write about 70 % larger
+- Saved every 10 minutes while tracking (autosave), when tracking is paused, when the system goes to sleep (`markSuspend`; the PC may not wake up again), on a day change, when the zoom interval changes, on quit and on a Windows shutdown, restart or sign-out (the window's `session-end`; Electron emits no `before-quit` then). The end of an aggregation interval only aggregates and does not save; a crash or power loss while awake loses at most the last 10 minutes
 - Cleanup after 30 days
 
 ## 5. Dependencies
@@ -368,10 +368,10 @@ OS Events -> Watcher -> Heartbeat -> ActivityStore-heartbeats -> ActivityStore-a
 - **Node.js fs/path** for file operations
 
 ## 6. Performance
-- Daily data: ~50-200KB
+- Daily data: up to ~1 MB for a day tracked around the clock (2,880 heartbeats), ~350 KB for a typical working day (measured 2026-11: 5.5 MB for 16 days)
 - Cleanup after 30 days
-- CPU usage: <2%
-- Batching and incremental saves
+- CPU usage: <2%. While the window is visible, the pulsing tracking dot costs most of it; it animates only `transform` and `opacity` (compositor), never width/height, which would relayout and repaint every frame (measured 2026-11: 9.4 s → 3.5 s CPU per minute). A minimized window costs almost nothing
+- No incremental saves: each save writes the whole store (see 4.1)
 
 ## 7. Security & Privacy
 

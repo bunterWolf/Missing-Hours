@@ -164,7 +164,9 @@ export class ActivityPersistence {
                 fs.mkdirSync(dirPath, { recursive: true });
             }
 
-            const jsonData = JSON.stringify(dataToSave, null, 2); // Pretty print JSON
+            // Compact: the whole store (up to 30 days) is rewritten on every save, indentation would add ~70 %.
+            // Older indented files still load, JSON.parse reads both.
+            const jsonData = JSON.stringify(dataToSave);
             fs.writeFileSync(this.dataFilePath, jsonData, 'utf8');
             // console.log(`[Persistence] Activity data saved successfully to ${this.dataFilePath}.`); // Optional success log
         } catch (error) {
