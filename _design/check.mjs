@@ -252,6 +252,39 @@ check('privacy wording', () => {
   return p.includes('Microsoft Store') ? [] : ['privacy page should explain the update check for both builds'];
 });
 
+const APP_ICONS = ['outlook', 'word', 'excel', 'powerpoint', 'edge'];
+const appFor = (title) =>
+  /^(Inbox|Re:)/.test(title) ? 'outlook'
+  : /\.docx$/.test(title) ? 'word'
+  : /\.xlsx$/.test(title) ? 'excel'
+  : /\.pptx$/.test(title) ? 'powerpoint'
+  : 'edge';
+
+check('app icons', () => {
+  const problems = [];
+  for (const app of APP_ICONS) {
+    const p = `assets/app-icons/${app}.svg`;
+    if (!exists(p)) { problems.push(`${p} missing`); continue; }
+    const size = fs.statSync(path.join(root, p)).size;
+    if (size > 10 * 1024) problems.push(`${p} is ${size} bytes (max 10 KB)`);
+  }
+  const h = read('index.html');
+  // Each icon is followed by its block title: <span class="ev-win">Title</span>
+  const ICON = /<(\w+) class="ev-icon"([^>]*)>[\s\S]*?<span class="ev-win">([^<]*)<\/span>/g;
+  const icons = [...h.matchAll(ICON)];
+  if (!icons.length) problems.push('no .ev-icon found');
+  for (const [, tag, attrs, raw] of icons) {
+    const title = text(raw);
+    if (title === 'Inactive') { problems.push('Inactive blocks must not have an icon'); continue; }
+    const src = (attrs.match(/^ src="assets\/app-icons\/(\w+)\.svg" alt="" width="16" height="16"$/) || [])[1];
+    if (tag !== 'img') problems.push(`${title}: .ev-icon is <${tag}>, not <img>`);
+    else if (!src) problems.push(`${title}: .ev-icon <img> lacks the expected src/alt/size`);
+    else if (src !== appFor(title)) problems.push(`${title}: shows ${src}, expected ${appFor(title)}`);
+  }
+  if (icons.length !== (h.match(/class="ev-icon"/g) || []).length) problems.push('an .ev-icon has no block title after it');
+  return problems;
+});
+
 // ---------------------------------------------------------------------------
 let failed = 0;
 for (const { name, fn } of checks) {

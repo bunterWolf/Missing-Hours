@@ -126,7 +126,7 @@ p{text-wrap:pretty}
 .ev--neutral{color:var(--cat-neutral-ink);background:repeating-linear-gradient(135deg,var(--cat-neutral-bg) 0 4px,var(--bg-canvas) 4px 6px)}
 .ev--xs{padding-top:1px;padding-bottom:1px;justify-content:center}
 .ev-row{display:flex;align-items:center;gap:8px;min-width:0}
-.ev-icon{flex:none;width:16px;height:16px;border-radius:4px;background:var(--tink);opacity:.9}
+.ev-icon{flex:none;width:16px;height:16px;object-fit:contain}
 .ev-title{flex:1;min-width:0;display:flex;overflow:hidden;white-space:nowrap}
 .ev-win{overflow:hidden;text-overflow:ellipsis;min-width:0;line-height:20px}
 .ev-dur{flex:none;font-variant-numeric:tabular-nums}
