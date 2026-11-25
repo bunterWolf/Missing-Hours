@@ -98,6 +98,25 @@ check('preview build', () => {
   return problems;
 });
 
+check('new logo', () => {
+  const problems = [];
+  const dark = /<source srcset="[^"]*logo-dark[^"]*\.svg" media="\(prefers-color-scheme: dark\)">\s*<img src="[^"]*logo-light[^"]*\.svg"/g;
+  for (const page of PAGES) {
+    const html = read(page);
+    if (/[/"]icon\.(svg|png)/.test(html)) problems.push(`${page} still references the old icon`);
+    const header = (html.match(/<header[\s\S]*?<\/header>/) || [''])[0];
+    const footer = (html.match(/<footer[\s\S]*?<\/footer>/) || [''])[0];
+    if (!header.match(dark)) problems.push(`${page}: header has no light/dark logo`);
+    if (!footer.match(dark)) problems.push(`${page}: footer has no light/dark logo`);
+    if (!/<link rel="icon" href="[^"]*favicon\.svg" type="image\/svg\+xml">/.test(html)) problems.push(`${page}: no SVG favicon`);
+    if (!/<link rel="apple-touch-icon" href="[^"]*apple-touch-icon\.png">/.test(html)) problems.push(`${page}: no apple-touch-icon`);
+  }
+  const fav = exists('assets/favicon.svg') ? read('assets/favicon.svg') : '';
+  if (!/prefers-color-scheme: ?dark/.test(fav)) problems.push('assets/favicon.svg has no dark-mode style');
+  if (!fav.includes('#e5484d')) problems.push('assets/favicon.svg lost the red hour');
+  return problems;
+});
+
 // ---------------------------------------------------------------------------
 let failed = 0;
 for (const { name, fn } of checks) {
