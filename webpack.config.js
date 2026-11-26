@@ -1,5 +1,25 @@
+const fs = require('fs');
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const { Compilation, sources } = require('webpack');
+
+// Inter is bundled (no font CDN, see src/styles/base.css). Its licence, the SIL Open Font
+// License 1.1, has to travel with the font files, so it is written next to them.
+const INTER_LICENSE = require.resolve('@fontsource/inter/LICENSE');
+
+class InterLicensePlugin {
+  apply(compiler) {
+    compiler.hooks.thisCompilation.tap('InterLicensePlugin', (compilation) => {
+      compilation.hooks.processAssets.tap(
+        { name: 'InterLicensePlugin', stage: Compilation.PROCESS_ASSETS_STAGE_ADDITIONAL },
+        () => {
+          compilation.emitAsset('assets/fonts/Inter-LICENSE.txt', new sources.RawSource(fs.readFileSync(INTER_LICENSE)));
+        }
+      );
+    });
+  }
+}
 
 module.exports = {
   mode: 'development',
@@ -28,8 +48,9 @@ module.exports = {
         use: 'ts-loader',
       },
       {
+        // Extracted to styles.css (not injected <style> tags), so the CSP can allow styles from 'self' only
         test: /\.css$/,
-        use: ['style-loader', 'css-loader']
+        use: [MiniCssExtractPlugin.loader, 'css-loader']
       },
       {
         test: /\.(svg|png)$/,
@@ -44,6 +65,8 @@ module.exports = {
     ]
   },
   plugins: [
+    new MiniCssExtractPlugin({ filename: 'styles.css' }),
+    new InterLicensePlugin(),
     new HtmlWebpackPlugin({
       template: './src/renderer/index.html',
       filename: 'index.html'

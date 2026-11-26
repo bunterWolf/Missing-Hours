@@ -25,7 +25,8 @@ timesheet or bill your hours without ever starting a stopwatch. Everything stays
 - **Day summary**: active, inactive and tracked time at a glance.
 - **Last 30 days**: browse back through previous days; older days are deleted automatically.
 - **Pause with one click** when something is private.
-- **Runs in the background** and starts with Windows.
+- **Runs in the background** and can start with Windows (a setting; the Microsoft Store version starts with
+  Windows by default).
 - **Light, dark or automatic** appearance.
 - **12 languages**: English, German, French, Spanish, Italian, Portuguese (Brazil), Dutch, Polish, Japanese,
   Korean, Simplified and Traditional Chinese; follows the Windows display language, with dates and times as
@@ -37,6 +38,8 @@ timesheet or bill your hours without ever starting a stopwatch. Everything stays
 - All data is stored only on your computer. Missing Hours sends no recorded data anywhere, neither to us nor to
   third parties.
 - No account, no analytics, no telemetry.
+- It goes online only for updates: the installer version asks GitHub for new versions, the Microsoft Store
+  version is updated by the Store. Fonts and icons come from your computer, nothing is loaded from the internet.
 - It sees which window is open, not what you type. No keystrokes, no screenshots.
 - The source code is public, so you can check all of this yourself.
 
@@ -46,7 +49,9 @@ Details in the [privacy policy](PRIVACY.md).
 
 - **Windows 10 and 11**: the installer `Missing-Hours-Setup-<version>-win-x64.exe` from the
   [latest release](https://github.com/bunterWolf/Missing-Hours/releases/latest). It updates itself
-  automatically. A Microsoft Store version is on its way.
+  automatically.
+- **Windows 10 and 11 from the Microsoft Store**: [Missing Hours in the Microsoft Store](https://apps.microsoft.com/detail/9P2JR2B30DG4),
+  updated by the Store.
 - **macOS 10.15 and newer (experimental)**: the release also has ZIP files for Apple silicon (`arm64`) and
   Intel (`x64`). They are not signed, so macOS warns on first start, and the Mac version is less tested than
   the Windows one.
