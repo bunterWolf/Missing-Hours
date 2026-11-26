@@ -1,5 +1,8 @@
-/* Base layer: bundled Inter, reset, page background. Loaded after tokens.css. */
+/* Base layer: bundled Inter, reset, page background. Loaded after tokens.css.
+   Inter comes only from these files, never from a font CDN: the app must not go online at start.
+   400 is the default weight (text without a text style), 500 and 600 the Figma text styles. */
 
+@import '@fontsource/inter/400.css';
 @import '@fontsource/inter/500.css';
 @import '@fontsource/inter/600.css';
 

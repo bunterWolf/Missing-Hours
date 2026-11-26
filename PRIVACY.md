@@ -27,10 +27,20 @@ wie OneDrive oder Dropbox), liegen die Daten weiterhin dort. Für diesen Dienst 
 Missing Hours löscht aufgezeichnete Tage automatisch nach 30 Tagen. Wenn du die Microsoft-Store-Version
 deinstallierst, kann Windows ihre Daten im Standard-Speicherort mit entfernen.
 
-**Updates**
-Die Microsoft-Store-Version wird über den Microsoft Store aktualisiert, es gelten die Datenschutzbestimmungen
-von Microsoft. Die Version von GitHub fragt bei GitHub nach neuen Versionen. Dabei werden nur die üblichen
-technischen Verbindungsdaten (zum Beispiel deine IP-Adresse) an GitHub übertragen, keine aufgezeichneten Daten.
+**Internetverbindungen: nur für Updates**
+Missing Hours geht nur online, um Updates zu bekommen:
+- Die Version von GitHub fragt beim Start und danach alle vier Stunden bei GitHub nach einer neuen Version und
+  lädt sie von dort herunter.
+- Die Microsoft-Store-Version sucht selbst nicht nach Updates. Sie wird über den Microsoft Store aktualisiert,
+  es gelten die Datenschutzbestimmungen von Microsoft.
+
+Dabei werden nur die üblichen technischen Verbindungsdaten (zum Beispiel deine IP-Adresse) übertragen, keine
+aufgezeichneten Daten. Sonst baut die App keine Verbindungen auf: Schriftart und Programmsymbole kommen von
+deinem Computer.
+
+Versionen bis 1.2.0 haben beim Start zusätzlich die Schriftart Inter von Google Fonts geladen. Dabei wurden
+deine IP-Adresse und die üblichen Browserdaten an Google übertragen, keine aufgezeichneten Daten. Neuere
+Versionen bringen die Schriftart selbst mit.
 
 **Website**
 Ein Klick auf www.missing-hours.app in den Einstellungen öffnet die Website in deinem Browser. Die App überträgt
@@ -63,10 +73,18 @@ Dropbox), the data stays there, and that service's terms apply.
 Missing Hours deletes recorded days automatically after 30 days. When you uninstall the Microsoft Store version,
 Windows may also remove its data in the default storage location.
 
-**Updates**
-The Microsoft Store version is updated through the Microsoft Store, under Microsoft's privacy terms. The
-version from GitHub asks GitHub for new versions. Only the usual technical connection data (such as your IP
-address) is sent to GitHub, no recorded data.
+**Internet connections: only for updates**
+Missing Hours goes online only to get updates:
+- The version from GitHub asks GitHub for a new version at start and every four hours after that, and downloads
+  it from there.
+- The Microsoft Store version does not look for updates itself. It is updated through the Microsoft Store,
+  under Microsoft's privacy terms.
+
+Only the usual technical connection data (such as your IP address) is sent, no recorded data. Apart from that,
+the app makes no connections: the font and the program icons come from your computer.
+
+Versions up to 1.2.0 also loaded the font Inter from Google Fonts at start. This sent your IP address and the
+usual browser data to Google, no recorded data. Newer versions include the font.
 
 **Website**
 Clicking www.missing-hours.app in the settings opens the website in your browser. The app sends no data with it.
